@@ -1,0 +1,72 @@
+1. Portada
+
+Nombre del proyecto: AccessLab
+
+Organización / Institución: Universidad Tecnológica de Morelia
+
+Fecha de inicio: 08/09/2025
+
+Responsable de elaborar el acta: Gael Maximiliano Velazquez Barrera
+
+2. Información General
+
+Nombre del proyecto: AccessLab
+
+Asesor Interno del proyecto: 
+
+Asesor Externo del proyecto: Jóse Francisco Carrillo Mastache
+
+Equipo inicial identificado: 
+
+3. Antecedentes / Justificación
+
+¿Qué problema existe actualmente?: 
+
+¿Por qué es necesario el proyecto?:
+
+Beneficios esperados: 
+
+4. Objetivos
+
+Objetivo general:
+
+Objetivos específicos: 
+
+5. Alcance Inicial
+
+Funcionalidades principales:
+
+Exclusiones:
+
+6. Requisitos de Alto Nivel
+
+Requisitos funcionales clave:
+
+Requisitos no funcionales relevantes:
+
+7. Entregables Principales
+
+Documento de análisis (SRS).
+
+Diseño de base de datos.
+
+Sistema funcionando con CRUD de expedientes.
+
+Manual de usuario.
+
+Reporte final del proyecto.
+
+8. Riesgos Iniciales
+
+
+9 Cronograma General
+
+Duración total del proyecto:
+
+Fases principales (Análisis, Diseño, Desarrollo, Pruebas, Despliegue).
+
+10 Aprobaciones
+
+Firma del Asesor Externo e Interno.
+
+Firma del equipo de desarrollo.

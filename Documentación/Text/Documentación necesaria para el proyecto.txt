@@ -1,0 +1,57 @@
+
+1. Definición del Proyecto
+
+1.1 Acta de constitución del proyecto
+1.2 Identificación de stakeholders
+1.3 Visión y objetivos del sistema
+1.4 Alcance inicial del proyecto
+
+2. Análisis de Requisitos
+
+2.1 Especificación de Requisitos de Software (SRS)
+  2.1.1 Requisitos funcionales
+  2.1.2 Requisitos no funcionales
+  2.1.3 Historias de usuario / Casos de uso
+2.2 Modelos de análisis (diagramas de contexto, flujo de datos)
+2.3 Matriz de trazabilidad de requisitos
+
+3. Planificación del Proyecto
+
+3.1 Plan de proyecto (cronograma, hitos, entregables)
+3.2 Plan de gestión de riesgos
+3.3 Plan de comunicación
+3.4 Plan de calidad
+
+4. Diseño del Sistema
+
+4.1 Documento de arquitectura del sistema
+4.2 Diagramas UML (clases, secuencia, actividad, despliegue)
+4.3 Diseño de base de datos (DER, diccionario de datos)
+4.4 Prototipos de interfaz de usuario (wireframes, mockups)
+
+5. Desarrollo
+
+5.1 Estándares de codificación
+5.2 Documentación del código (README, auto-documentación)
+5.3 Registro de versiones (changelog, commits en Git)
+
+6. Pruebas
+
+6.1 Plan de pruebas
+6.2 Casos de prueba
+6.3 Reporte de resultados de pruebas
+6.4 Registro de incidencias
+
+7. Despliegue
+
+7.1 Guía de instalación y despliegue
+7.2 Manual técnico (administradores/desarrolladores)
+7.3 Manual de usuario (usuarios finales)
+
+8. Mantenimiento y Soporte
+
+8.1 Plan de mantenimiento
+8.2 Registro de incidencias y soluciones
+8.3 Documentación de versiones (release notes)
+8.4 Propuesta de mejoras / Roadmap
+

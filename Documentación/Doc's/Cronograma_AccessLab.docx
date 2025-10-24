@@ -1,0 +1,43 @@
+AccessLab - Cronograma Institucional y de Actividades del Equipo
+
+---
+
+Tabla 1: Cronograma Institucional (UTM)
+
+| Semana | Fechas                | Actividad institucional (UTM)                                                                 |
+|--------|-----------------------|---------------------------------------------------------------------------------------------|
+| 1      | 1-5 sep               | Asignación oficial de estadía                                                                |
+| 2      | 8-12 sep              | Entrega de carta de aceptación de la unidad económica                                       |
+| 3      | 8-12 sep              | Autorización de proyecto y solicitud de asesor económico                                    |
+| 4      | 15-19 sep             | Entrega de avance individual de estadía                                                     |
+| 5      | 22-26 sep             | 1ª revisión de reporte de estadía TSU                                                       |
+| 6      | 29 sep - 3 oct        | Retroalimentación de asesores                                                               |
+| 7      | 6-10 oct              | Avance en proyecto y reporte                                                                |
+| 8      | 13-24 oct             | 2ª revisión de reporte de estadía TSU                                                       |
+| 9      | 27-31 oct             | Retroalimentación de asesores                                                               |
+| 10-11  | 3-14 nov              | Prueba del proyecto en la unidad económica                                                  |
+| 12     | 17-21 nov             | 3ª revisión de reporte de estadía TSU                                                       |
+| 13     | 24-28 nov             | Ajustes finales y entregables                                                               |
+| 14     | 1-5 dic               | Validación de reporte técnico por asesores                                                  |
+| 15     | 8-12 dic              | Entrega de documentación final y cierre                                                     |
+
+---
+
+Tabla 2: Cronograma de Actividades del Equipo (AccessLab)
+
+| Semana | Fechas                | Fase                        | Actividad principal                                                                 |
+|--------|-----------------------|-----------------------------|-------------------------------------------------------------------------------------|
+| 1      | 1-5 sep               | Análisis de requisitos      | Reunión inicial, acta de constitución, identificación de stakeholders               |
+| 2      | 8-12 sep              | Análisis de requisitos      | Recopilación y análisis de requisitos, historias de usuario, casos de uso           |
+| 3      | 8-12 sep              | Análisis de requisitos      | Modelos de análisis, matriz de trazabilidad                                         |
+| 4      | 15-19 sep             | Diseño del sistema y BD     | Diseño de arquitectura, diagramas UML                                               |
+| 5      | 22-26 sep             | Diseño del sistema y BD     | Diseño de base de datos, prototipos de interfaz                                     |
+| 6      | 29 sep - 3 oct        | Diseño del sistema y BD     | Ajustes por retroalimentación, validación de diseño                                 |
+| 7      | 6-10 oct              | Desarrollo                  | Inicio de desarrollo backend y frontend                                             |
+| 8      | 13-24 oct             | Desarrollo                  | Desarrollo de módulos principales (backend y frontend)                              |
+| 9      | 27-31 oct             | Desarrollo                  | Integración de módulos, pruebas unitarias                                           |
+| 10-11  | 3-14 nov              | Pruebas y ajustes           | Pruebas de integración, corrección de incidencias                                   |
+| 12     | 17-21 nov             | Pruebas y ajustes           | Pruebas finales, documentación técnica y de usuario                                 |
+| 13     | 24-28 nov             | Despliegue y entrega        | Ajustes finales, preparación de entregables                                         |
+| 14     | 1-5 dic               | Despliegue y entrega        | Instalación, despliegue, validación con asesores                                    |
+| 15     | 8-12 dic              | Despliegue y entrega        | Entrega de documentación final, cierre y roadmap de mejoras                         |

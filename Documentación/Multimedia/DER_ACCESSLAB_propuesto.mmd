@@ -1,0 +1,159 @@
+erDiagram
+    USUARIOS ||--o{ LABORATORIOS : es_tecnico_de
+    USUARIOS ||--o{ BITACORA : crea
+    USUARIOS ||--o{ COMENTARIO : escribe
+    USUARIOS ||--o{ AVISO : publica
+    USUARIOS ||--o{ NOTIFICACION : recibe
+    USUARIOS ||--o{ ASIGNACION_LABORATORIO : asignado
+
+    LABORATORIOS ||--o{ BITACORA : registra
+    LABORATORIOS ||--o{ SOLICITUD : destino
+    LABORATORIOS ||--o{ ASIGNACION_LABORATORIO : contiene
+    LABORATORIOS ||--o{ RESERVA_LABORATORIO : reservado
+
+    BITACORA ||--o{ BITACORA_DETALLE : tiene
+    BITACORA ||--o{ OBSERVACION_BITACORA : observada
+
+    ASIGNACION_LABORATORIO ||--o{ ASIGNACION_HORARIO : horarios
+    PERIODO_ACADEMICO ||--o{ ASIGNACION_LABORATORIO : agrupa
+
+    SOLICITUD ||--o| RESERVA_LABORATORIO : puede_crear
+
+    USUARIOS {
+        int id_usuario PK
+        varchar nombre_completo
+        varchar email
+        varchar contrasena_hash
+        varchar carrera
+        enum rol
+        bit activo
+    }
+
+    LABORATORIOS {
+        int id_laboratorio PK
+        varchar nombre
+        int id_tecnico FK
+        varchar ubicacion
+        text inventario_texto
+        varchar estado
+    }
+
+    BITACORA {
+        int id_bitacora PK
+        date fecha_inicio
+        date fecha_fin
+        varchar materia
+        varchar grupo
+        varchar carrera
+        varchar cuatrimestre
+        tinyint parcial
+        varchar estado
+        int id_usuario FK
+        int id_laboratorio FK
+        int periodo_id FK
+    }
+
+    BITACORA_DETALLE {
+        int id_detalle PK
+        int bitacora_id FK
+        varchar nombre_practica
+        date fecha
+        time hora_entrada
+        time hora_salida
+        decimal horas_sesion
+        varchar estado_equipo
+        bit es_falta
+    }
+
+    OBSERVACION_BITACORA {
+        int id_observacion PK
+        int bitacora_id FK
+        int usuario_id FK
+        text contenido
+        datetime fecha
+        bit es_tercero
+    }
+
+    SOLICITUD {
+        int id_solicitud PK
+        varchar descripcion
+        enum estado
+        enum tipo
+        varchar destino_rol
+        int destino_usuario_id
+        int laboratorio_id
+        date fecha
+        time hora_inicio
+        time hora_fin
+        datetime fecha_creacion
+    }
+
+    RESERVA_LABORATORIO {
+        int id_reserva PK
+        int laboratorio_id FK
+        int solicitante_id FK
+        int solicitud_id FK
+        date fecha
+        time hora_inicio
+        time hora_fin
+        varchar estado
+        int aprobada_por FK
+    }
+
+    ASIGNACION_LABORATORIO {
+        int id_asignacion PK
+        int laboratorio_id FK
+        int usuario_id FK
+        varchar carrera
+        varchar materia
+        int periodo_id FK
+        int creado_por FK
+        datetime fecha_asignacion
+        bit activo
+    }
+
+    ASIGNACION_HORARIO {
+        int id_horario PK
+        int asignacion_id FK
+        enum dia_semana
+        time hora_inicio
+        time hora_fin
+    }
+
+    PERIODO_ACADEMICO {
+        int id_periodo PK
+        varchar nombre
+        date fecha_inicio
+        date fecha_fin
+        varchar estado  // EN_ACTIVIDAD | EN_ASIGNACION
+    }
+
+    AVISO {
+        int id_aviso PK
+        varchar titulo
+        varchar contenido
+        bit es_global
+        int id_usuario FK
+        int laboratorio_id FK
+    }
+
+    COMENTARIO {
+        int id_comentario PK
+        varchar contenido
+        date fecha
+        int id_usuario FK
+        int id_aviso FK
+        bit visible
+    }
+
+    NOTIFICACION {
+        int id_notificacion PK
+        int usuario_id FK
+        varchar tipo
+        varchar titulo
+        varchar mensaje
+        varchar entidad_tipo
+        int entidad_id
+        bit leida
+        datetime fecha_creacion
+    }

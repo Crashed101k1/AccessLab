@@ -1,0 +1,89 @@
+BITACORA DE CAMBIOS EN REQUERIMIENTOS DEL SISTEMA  "ACL"
+
+MODIFICACIÓN EN RF2:
+
+- Antes: " Todos los roles que deseen ingresar a la plataforma deberán hacerlo mediante un usuario y una clave de acceso previamente establecidos. "
+
+- Ahora: " Todos los roles que deseen ingresar a la plataforma deberán hacerlo mediante un usuario y una clave de acceso previamente establecidos con la posibilidad de cambio o recuperación de contraseña ingresando su correo institucional. "
+
+Se agrego la posibilidad de recurar contraseña en caso de olvido o querer cambiarla mediante validación por correo institucional.
+
+
+
+MODIFICACION EN RF5:
+
+- Antes: " El rol técnico cuenta con permisos para editar bitácoras generadas por el rol maestro, gestionar solicitudes de externos, descargar archivos afines a su rol y generar avisos. "
+
+- Ahora: " El rol técnico cuenta con permisos para visualizar bitácoras generadas por el rol maestro, gestionar solicitudes y responderlas, descargar archivos afines a su rol y generar avisos en el 'tablón de avisos'. "
+
+El cambio se debió a que: Se considera que el técnico no debería poder modificar una bitácora de ingreso a un laboratorio que halla sido llenada por algún profesor debido a que podría llevar a una mala interpretación, por ejemplo: cuando se deba llamar la atención a algún maestro por registrarse en la bitácora en un horario indebido.
+
+Por lo que lo mejor es que el técnico solo pueda visualizar las bitácoras para realizar algún reporte si es necesario, además se agrega la posibilidad de responder solicitudes y no solo gestionarlas, ya que aunque esta implícito en la oración es mejor con este formato para mayor claridad.
+
+
+
+MODIFICACIÓN EN RF6:
+
+- Antes: " El rol maestro dentro de la plataforma puede generar bitácoras, descargarlas y realizar observaciones en un apartado destinado para ello. "
+
+- Ahora: "El rol maestro dentro de la plataforma puede generar bitácoras, descargarlas y realizar y editar observaciones en un apartado destinado para ello. (las observaciones editables solo podrán ser las propias de cada usuario)".
+
+Se agrego la posibilidad de que los profesores puedan editar sus propias observaciones.
+
+
+
+MODIFICACION EN RF7:
+
+- Antes: " Desarrollo de un módulo de avisos dentro de la plataforma. "
+
+- Ahora: " Desarrollo de un módulo de avisos dentro de la plataforma en la que el rol de director/subdirector y técnico únicamente podrán dar avisos y el rol de maestro podrá responder a los avisos en una sección de comentarios."
+
+
+
+SE AGREGO RF8:
+
+" El rol de director/subdirector tendrá la posibilidad de agregar nuevos laboratorios, asignarles nombre y técnico encargado. "
+
+
+
+SE AGREGO RF9:
+
+" El tablón de avisos podrá ser visible para todos los roles. "
+
+
+MODIFICACION EN RNF1:
+
+- Antes: " El sistema debe garantizar seguridad en el manejo de información de acceso, de acuerdo con el rol asignado (usuario y contraseña). ".
+
+- Ahora: " El sistema debe garantizar seguridad en el manejo de información de acceso, de acuerdo con el rol asignado (usuario y contraseña con cifrado de tipo hash). ".
+
+Se agrego la especificación clara de cifrado por hash de la contraseña por motivos se seguridad y evitar vulnerabilidades.
+
+
+
+MODIFICACION EN RNF2:
+
+- Antes: " La interfaz debe ser intuitiva y amigable, incluso para usuarios con poca experiencia técnica. ".
+
+- Ahora: " La interfaz debe ser intuitiva y amigable, incluso para usuarios con poca experiencia técnica y con consideración de un tamaño y tipo de fuente legible y de buen tamaño. ".
+
+Se consideraron aspectos importantes como la accesibilidad en el tamalo de la funte y el tipo de letra.
+
+
+
+MODIFICACION EN RNF6:
+
+- Antes: " El sistema debe soportar múltiples usuarios de manera simultánea dentro de la plataforma, sin afectar el tiempo de respuesta. ".
+
+- Ahora: " El sistema debe soportar múltiples usuarios de manera simultánea dentro de la plataforma, sin afectar el tiempo de respuesta con un mínimo de 30 usuarios concurrentes esperados. ".
+
+Se indico un trafico de usuarios esperado en el sistema
+
+
+MODIFICACION EN RNF7:
+
+- Antes: " El sistema debe estar disponible dentro de la red institucional con una disponibilidad mínima del 95%. ".
+
+- Ahora: " El sistema debe estar disponible dentro de la red institucional con una disponibilidad mínima del 95% y con un trigger integrado para respaldo de la información automático. ".
+
+Se valido un trigger para el respado de la información y asi evitar pedidas de la misma.

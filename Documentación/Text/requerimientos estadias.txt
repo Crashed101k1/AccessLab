@@ -1,0 +1,25 @@
+requerimientos
+
+//GENERALES
+*control de acceso. (solo el de director puede registrar un usuario)
+*Comunicación entre usuarios y envió de archivos.
+
+//maestro
+*Formulario de la bitácora / campo de observaciones (técnico/director(no modificables)). 
+*descargar bitácora.
+
+
+// Técnico
+*dejar observación en bitácoras.
+*solicitudes de externos.
+*descargar bitácora.
+*Avisos.
+
+//director 
+*Gestión de Usuarios.
+*funciones totales.
+
+
+**Solicitud externa
+**Avisos
+**Tablón de Avisos
