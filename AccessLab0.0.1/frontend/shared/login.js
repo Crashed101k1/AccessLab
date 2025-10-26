@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Usuario de prueba para admin
         if (rol === 'director' && usuario === 'admin' && password === 'admin123') {
-            showSuccessModal('¡Bienvenido Administrador!', 'admin/HomeAdmin.html');
+            showSuccessModal('¡Bienvenido Administrador!', '../admin/html/HomeAdmin.html');
         } else {
             showMessage('Credenciales incorrectas', 'error');
         }
