@@ -1,0 +1,410 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    /* Degradado de #259593 a blanco suave */
+    background: linear-gradient(135deg, #259593 0%, #f8fafc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Formulario de login */
+.login-form {
+    background: white;
+    border-radius: 20px;
+    padding: 70px 30px 40px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+/* Contenedor del logo */
+.logo-container {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+}
+
+.logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background: white;
+    padding: 15px;
+    object-fit: contain;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Estilos para inputs y select */
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #259593;
+    box-shadow: 0 0 0 3px rgba(37, 149, 147, 0.1);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Select específico */
+.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+.form-select option {
+    padding: 10px;
+}
+
+/* Contenedor de contraseña con ícono */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    padding-right: 45px !important;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #259593;
+}
+
+.eye-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Botón de acceder */
+.btn-acceder {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #259593, #2dd4bf);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-acceder:hover {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 149, 147, 0.3);
+}
+
+.btn-acceder:active {
+    transform: translateY(0);
+}
+
+/* Mensaje de error */
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #c62828;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Nota de diseño */
+.design-note {
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    max-width: 300px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .login-form {
+        padding: 50px 20px 30px 20px;
+    }
+    
+    .logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .logo-container {
+        top: -60px;
+    }
+    
+    .form-input,
+    .form-select {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    
+    .btn-acceder {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 15px;
+    }
+    
+    .footer {
+        font-size: 11px;
+        padding: 12px 0;
+    }
+}
+
+/* Modal elegante */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.4s ease-out;
+    overflow: hidden;
+}
+
+.modal-header {
+    text-align: center;
+    padding: 30px 30px 20px 30px;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+.success-icon {
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    color: #259593;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 20px 30px 30px 30px;
+    text-align: center;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.modal-subtitle {
+    margin-top: 10px !important;
+    color: #666 !important;
+    font-size: 14px !important;
+}
+
+.modal-progress {
+    height: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #259593, #2dd4bf);
+    width: 0%;
+    animation: progressAnimation 2s ease-in-out;
+}
+
+/* Footer elegante transparente */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    padding: 15px 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 100;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-left,
+.footer-right {
+    text-align: center;
+}
+
+.footer-left p,
+.footer-right p {
+    margin: 2px 0;
+    line-height: 1.4;
+}
+
+.footer-left p:first-child,
+.footer-right p:first-child {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes progressAnimation {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.login-form {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Estados de carga */
+.btn-acceder.loading {
+    background: #ccc;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.btn-acceder.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

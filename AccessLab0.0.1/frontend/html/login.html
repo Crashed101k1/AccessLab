@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Iniciar Sesión</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" href="../public/images/AccessLabLogo.png" type="image/png">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="../public/images/AccessLabLogo.png" alt="AccessLab Logo" class="logo">
+            </div>
+            
+            <!-- Formulario de Login -->
+            <form id="loginForm" class="form">
+                <!-- Selector de Rol -->
+                <div class="form-group">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select id="rol" name="rol" class="form-select" required>
+                        <option value="">Selecciona el Rol</option>
+                        <option value="director">Director/Subdirector</option>
+                        <option value="tecnico">Técnico</option>
+                        <option value="maestro">Maestro</option>
+                    </select>
+                </div>
+
+                <!-- Campo Usuario -->
+                <div class="form-group">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input 
+                        type="text" 
+                        id="usuario" 
+                        name="usuario" 
+                        class="form-input" 
+                        placeholder="Ej. Hermelindolindo123"
+                        required
+                    >
+                </div>
+
+                <!-- Campo Contraseña -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="password-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input password-input" 
+                            placeholder="Ej. ••••••••"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path id="eye-path" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle id="eye-circle" cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botón de Acceder -->
+                <button type="submit" class="btn-acceder">Acceder</button>
+            </form>
+
+            <!-- Mensaje de información (para maquetado) -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                Mensaje de información para el maquetado
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer elegante -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 AccessLab</p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-right">
+                <p>Desarrollado por <br> Gael Maximiliano Velázquez Barrera
+                 <br> Jonhatan Gabriel Francisco
+                </p>
+                <p>Sistema de Gestión de Laboratorios</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal elegante para login exitoso -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="success-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#259593" stroke-width="2" fill="none"/>
+                        <path d="m9 12 2 2 4-4" stroke="#259593" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="modal-title">¡Bienvenido!</h2>
+            </div>
+            <div class="modal-body">
+                <p id="welcomeText">Acceso exitoso al sistema AccessLab</p>
+                <p class="modal-subtitle">Redirigiendo al dashboard...</p>
+            </div>
+            <div class="modal-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

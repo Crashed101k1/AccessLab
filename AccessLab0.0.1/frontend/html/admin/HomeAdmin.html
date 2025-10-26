@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Dashboard Administrador</title>
+    <link rel="icon" href="../../public/images/AccessLabLogo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS personalizado para el dashboard de admin -->
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../../public/images/AccessLabLogo.png" alt="AccessLab Logo">
+                <div>
+                    <h1 class="welcome-text">Bienvenido [User]</h1>
+                </div>
+            </div>
+            <div class="header-icons">
+                <button class="header-icon" title="Inicio">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="header-icon" title="Notificaciones" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </button>
+                <button class="header-icon logout-icon" title="Cerrar Sesión" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Cards -->
+    <section class="dashboard-cards">
+        <div class="container">
+            <!-- Primera fila -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="dashboard-card" onclick="navigateTo('bitacoras')">
+                        <div class="card-image-container">
+                            <img src="../../public/images/bitacora.png" alt="Bitácoras" class="card-image">
+                        </div>
+                        <h3 class="card-title">Bitácoras</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="dashboard-card" onclick="navigateTo('laboratorios')">
+                        <div class="card-image-container">
+                            <img src="../../public/images/gestionLaboratorios.png" alt="Gestión de Laboratorios" class="card-image">
+                        </div>
+                        <h3 class="card-title">Gestión de Laboratorios</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="dashboard-card" onclick="navigateTo('usuarios')">
+                        <div class="card-image-container">
+                            <img src="../../public/images/gestionUsuarios.png" alt="Gestión de Usuarios" class="card-image">
+                        </div>
+                        <h3 class="card-title">Gestión de Usuarios</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda fila -->
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6">
+                    <div class="dashboard-card" onclick="navigateTo('avisos')">
+                        <div class="card-image-container">
+                            <img src="../../public/images/tablonAvisos.jpeg" alt="Tablón de avisos" class="card-image">
+                        </div>
+                        <h3 class="card-title">Tablón de avisos</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="dashboard-card" onclick="navigateTo('solicitudes')">
+                        <div class="card-image-container">
+                            <img src="../../public/images/solicitudes.png" alt="Solicitudes" class="card-image">
+                        </div>
+                        <h3 class="card-title">Solicitudes</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón de configuración flotante -->
+    <div class="config-button" onclick="navigateTo('configuracion')" title="Configuración">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-center">
+                <p><strong>AccessLab Todos los Derechos Reservados 2025</strong></p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-logo">
+                <img src="../../public/images/UTM.png" alt="UTM Logo" class="utm-logo">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Función para navegar a diferentes secciones
+        function navigateTo(section) {
+            // Por ahora solo mostramos alertas, después se pueden crear las páginas reales
+            switch(section) {
+                case 'bitacoras':
+                    alert('Navegando a Bitácoras...');
+                    break;
+                case 'laboratorios':
+                    alert('Navegando a Gestión de Laboratorios...');
+                    break;
+                case 'usuarios':
+                    alert('Navegando a Gestión de Usuarios...');
+                    break;
+                case 'avisos':
+                    alert('Navegando a Tablón de Avisos...');
+                    break;
+                case 'solicitudes':
+                    alert('Navegando a Solicitudes...');
+                    break;
+                case 'configuracion':
+                    alert('Navegando a Configuración...');
+                    break;
+                default:
+                    alert('Sección en desarrollo...');
+            }
+        }
+
+        // Función para cerrar sesión
+        function logout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Animación de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

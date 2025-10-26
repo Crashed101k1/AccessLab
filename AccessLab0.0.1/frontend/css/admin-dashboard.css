@@ -1,0 +1,294 @@
+/* Dashboard Admin - AccessLab */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f6f3;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header principal */
+.main-header {
+    background: #cfe4e9;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0;
+    max-width: none;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-section img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.welcome-text {
+    color: #2c3e50;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.user-text {
+    color: #7f8c8d;
+    font-size: 18px;
+}
+
+.header-icons {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.header-icon {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.header-icon:hover {
+    transform: scale(1.1);
+}
+
+.header-icon i {
+    font-size: 35px;
+    color: #2c3e50;
+}
+
+.logout-icon i {
+    color: #ff4757 !important;
+}
+
+.notification-badge {
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cards del dashboard */
+.dashboard-cards {
+    padding: 40px 0;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+    height: 100%;
+    cursor: pointer;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.card-image-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+/* Footer */
+.main-footer {
+    background: #cfe4e9;
+    color: #2c3e50;
+    padding: 25px 25px;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0;
+    max-width: none;
+}
+
+.footer-center {
+    font-size: 14px;
+    flex: 1;
+}
+
+.footer-center p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.footer-logo {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.utm-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Configuración en la esquina */
+.config-button {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background: #34495e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.config-button:hover {
+    transform: scale(1.1);
+    background: #2c3e50;
+}
+
+.config-button i {
+    color: white;
+    font-size: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 20px;
+        width: 100%;
+    }
+    
+    .welcome-text {
+        font-size: 24px;
+    }
+    
+    .logo-section img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-section {
+        gap: 12px;
+    }
+    
+    .header-icon i {
+        font-size: 28px;
+    }
+    
+    .header-icons {
+        gap: 15px;
+    }
+    
+    .footer-content {
+        padding: 0 20px;
+        width: 100%;
+    }
+    
+    .dashboard-cards {
+        padding: 20px 0;
+    }
+    
+    .dashboard-card {
+        padding: 20px;
+        min-height: 200px;
+    }
+    
+    .card-image-container {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 12px;
+    }
+    
+    .card-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .config-button {
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .config-button i {
+        font-size: 20px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
+}
