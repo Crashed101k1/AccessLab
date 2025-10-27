@@ -13,10 +13,10 @@ function navigateTo(section) {
             window.location.href = 'GestionUsuarios.html';
             break;
         case 'avisos':
-            showDevelopmentModal('Tablón de Avisos');
+            window.location.href = 'TablonAvisos.html';
             break;
         case 'solicitudes':
-            showDevelopmentModal('Gestión de Solicitudes');
+            window.location.href = 'solicitudes.html';
             break;
         case 'configuracion':
             window.location.href = 'ConfiguracionAdmin.html';
