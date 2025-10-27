@@ -1,0 +1,1233 @@
+/**
+ * Estilos para la vista de Gestión de Laboratorios
+ * AccessLab - Sistema de gestión de laboratorios
+ */
+
+/* === SECCIÓN DE BÚSQUEDA === */
+.search-section {
+    margin-bottom: 30px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-input-container {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    max-width: 600px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: #138496;
+    transform: translateY(-2px);
+}
+
+.add-lab-container {
+    display: flex;
+    align-items: center;
+}
+
+.add-lab-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.add-lab-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.add-lab-btn i {
+    font-size: 18px;
+}
+
+/* === SECCIÓN DE TABLA === */
+.table-section {
+    margin-top: 20px;
+}
+
+/* Información de resultados */
+.results-info {
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.results-info span {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Contenedor principal con progreso */
+.table-wrapper {
+    position: relative;
+    background: white;
+    border: 2px solid #cfe4e9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.progress-bar-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 8px 8px 0 0;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #17a2b8, #138496);
+    transition: width 0.3s ease;
+    border-radius: 0 0 4px 4px;
+    width: 0%;
+}
+
+/* Contenedor de la tabla con scroll */
+.table-container {
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 600px;
+    position: relative;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Scrollbar personalizado */
+.table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #cfe4e9;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #17a2b8;
+}
+
+.laboratories-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.laboratories-table thead {
+    background: #f8f9fa;
+}
+
+.laboratories-table thead th {
+    padding: 20px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 16px;
+}
+
+.laboratories-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.laboratories-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.laboratories-table tbody td {
+    padding: 16px;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+/* === ESTILOS DE CELDAS === */
+.lab-name {
+    font-weight: 500;
+    color: #495057;
+}
+
+.lab-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.lab-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.lab-location {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.lab-technician {
+    color: #495057;
+    font-weight: 400;
+}
+
+/* === BOTONES DE ACCIÓN === */
+.acciones-cell {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.action-btn i {
+    font-size: 16px;
+}
+
+.edit-btn:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.edit-btn i {
+    color: #007bff;
+}
+
+.refresh-btn:hover {
+    background-color: rgba(23, 162, 184, 0.1);
+}
+
+.refresh-btn i {
+    color: #17a2b8;
+}
+
+/* === ESTADOS DE LABORATORIOS === */
+.lab-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.lab-status.disponible {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.lab-status.ocupado {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.lab-status.mantenimiento {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input-container {
+        max-width: none;
+    }
+    
+    .add-lab-container {
+        justify-content: center;
+    }
+    
+    .laboratories-table {
+        font-size: 14px;
+    }
+    
+    .laboratories-table thead th,
+    .laboratories-table tbody td {
+        padding: 12px 8px;
+    }
+    
+    .search-btn span,
+    .add-lab-btn span {
+        display: none;
+    }
+    
+    .search-btn,
+    .add-lab-btn {
+        padding: 12px;
+    }
+    
+    .action-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .action-btn i {
+        font-size: 14px;
+    }
+    
+    /* Paginación responsive */
+    .pagination-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 10px;
+    }
+    
+    .pagination-controls {
+        order: 2;
+        justify-content: center;
+    }
+    
+    .pagination-info, .items-per-page {
+        order: 1;
+        text-align: center;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .laboratories-table thead th:nth-child(2),
+    .laboratories-table tbody td:nth-child(2) {
+        display: none;
+    }
+    
+    .acciones-cell {
+        padding: 8px 4px;
+    }
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.laboratories-table tbody tr {
+    animation: fadeIn 0.3s ease;
+}
+
+/* === CONTROLES DE PAGINACIÓN === */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    background: white;
+    border: 2px solid #cfe4e9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pagination-info {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-btn {
+    background: white;
+    border: 2px solid #cfe4e9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+    font-size: 14px;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #cfe4e9;
+    border-color: #17a2b8;
+    color: #17a2b8;
+    transform: translateY(-1px);
+}
+
+.pagination-btn:disabled {
+    background: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 4px;
+}
+
+.page-number {
+    background: white;
+    border: 2px solid #cfe4e9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-number:hover {
+    background: #cfe4e9;
+    border-color: #17a2b8;
+    color: #17a2b8;
+    transform: translateY(-1px);
+}
+
+.page-number.active {
+    background: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.page-number.active:hover {
+    background: #138496;
+    border-color: #138496;
+    color: white;
+}
+
+.items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.items-select {
+    padding: 6px 12px;
+    border: 2px solid #cfe4e9;
+    border-radius: 6px;
+    background: white;
+    color: #2c3e50;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.items-select:focus {
+    outline: none;
+    border-color: #17a2b8;
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+/* === ESTILOS DEL MODAL DE EDICIÓN === */
+.edit-lab-form {
+    padding: 0;
+}
+
+.edit-fields-container {
+    padding-right: 20px;
+}
+
+.lab-edit-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.lab-edit-input {
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.lab-edit-input:focus {
+    outline: none;
+    border-color: #17a2b8;
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+.technician-select-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.technician-select-container .lab-edit-input {
+    flex: 1;
+}
+
+.change-technician-btn {
+    padding: 12px 16px;
+    border: 2px solid #17a2b8;
+    border-radius: 8px;
+    background: white;
+    color: #17a2b8;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.change-technician-btn:hover {
+    background: #17a2b8;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.inventory-container {
+    padding-left: 20px;
+    border-left: 2px solid #e9ecef;
+}
+
+.inventory-box {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 4px;
+    background: #f8f9fa;
+}
+
+.inventory-textarea {
+    border: none;
+    background: white;
+    border-radius: 6px;
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.inventory-textarea:focus {
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+/* Modal específico para edición */
+#editLabModal .modal-dialog {
+    max-width: 900px;
+}
+
+#editLabModal .modal-header {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+}
+
+#editLabModal .modal-header .btn-close {
+    filter: invert(1);
+}
+
+#editLabModal .modal-footer {
+    background: #f8f9fa;
+    border-top: 2px solid #e9ecef;
+}
+
+/* Selector de técnico modal */
+#technicianSelectorModal .modal-header {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+}
+
+#technicianSelectorModal .modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* === RESPONSIVE PARA MODAL === */
+@media (max-width: 768px) {
+    .edit-fields-container {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .inventory-container {
+        padding-left: 0;
+        border-left: none;
+        border-top: 2px solid #e9ecef;
+        padding-top: 20px;
+    }
+    
+    .technician-select-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .change-technician-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    #editLabModal .modal-dialog {
+        margin: 10px;
+        max-width: none;
+    }
+}
+
+/* === ESTILOS DEL MODAL DE AGREGAR LABORATORIO === */
+.add-lab-form {
+    padding: 0;
+}
+
+.add-lab-fields-container {
+    padding-right: 20px;
+}
+
+.add-lab-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.add-lab-input {
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.add-lab-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.technician-select-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.technician-select-container .add-lab-input {
+    flex: 1;
+}
+
+.change-technician-btn {
+    padding: 12px 16px;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    background: white;
+    color: #28a745;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.change-technician-btn:hover {
+    background: #28a745;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
+
+/* Modal específico para agregar */
+#addLabModal .modal-dialog {
+    max-width: 800px;
+}
+
+#addLabModal .modal-header {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+}
+
+#addLabModal .modal-header .btn-close {
+    filter: invert(1);
+}
+
+#addLabModal .modal-footer {
+    background: #f8f9fa;
+    border-top: 2px solid #e9ecef;
+}
+
+.add-lab-btn-save {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.add-lab-btn-save:hover {
+    background: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-1px);
+}
+
+.add-lab-btn-save:disabled {
+    background: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.add-lab-btn-cancel {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.add-lab-btn-cancel:hover {
+    background: #5a6268;
+    border-color: #545b62;
+    transform: translateY(-1px);
+}
+
+/* === RESPONSIVE PARA MODAL DE AGREGAR === */
+@media (max-width: 768px) {
+    .add-lab-fields-container {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .inventory-container {
+        padding-left: 0;
+        border-left: none;
+        border-top: 2px solid #e9ecef;
+        padding-top: 20px;
+    }
+    
+    .technician-select-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .change-technician-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    #addLabModal .modal-dialog {
+        margin: 10px;
+        max-width: none;
+    }
+    
+
+}
+
+/* === VALIDACIÓN DE FORMULARIOS === */
+.add-lab-input.invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+
+
+
+
+.field-error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 4px;
+    display: none;
+}
+
+.field-error-message.show {
+    display: block;
+}
+
+/* === UTILIDADES === */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.no-labs-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* === ESTILOS PARA MODAL DE ASIGNACIONES === */
+#labAssignmentsModal .modal-header {
+    background: linear-gradient(135deg, #6f42c1, #5a369b);
+    color: white;
+}
+
+#labAssignmentsModal .modal-header .btn-close {
+    filter: invert(1);
+}
+
+.assignments-container {
+    padding: 0;
+}
+
+.assignments-header {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+.assignments-table {
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.assignments-table thead {
+    background: #f8f9fa;
+}
+
+.assignments-table thead th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 15px;
+    border-top: none;
+}
+
+.assignments-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.assignments-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.assignments-table tbody td {
+    padding: 16px 20px;
+    vertical-align: middle;
+    font-size: 15px;
+    border-top: none;
+}
+
+.professor-name {
+    font-weight: 500;
+    color: #495057;
+}
+
+.professor-career {
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.professor-role {
+    color: #495057;
+    font-weight: 400;
+}
+
+.schedule-btn {
+    background: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.schedule-btn:hover {
+    background: #138496;
+    border-color: #117a8b;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.no-assignments-message {
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+}
+
+.no-assignments-message i {
+    opacity: 0.6;
+}
+
+/* === ESTILOS PARA MODAL DE HORARIOS === */
+.professor-schedule-modal {
+    border: 3px solid #2c3e50;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.professor-info-card {
+    background: #f8f9fa;
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.professor-details {
+    margin-bottom: 35px;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 18px;
+    align-items: baseline;
+}
+
+.info-label {
+    font-weight: 700;
+    font-size: 18px;
+    color: #2c3e50;
+    min-width: 90px;
+    margin-right: 15px;
+}
+
+.info-value {
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 400;
+}
+
+.schedule-section {
+    margin-bottom: 35px;
+}
+
+.schedule-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.schedule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.schedule-item::before {
+    content: "•";
+    color: #2c3e50;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.schedule-day-item {
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.schedule-time-item {
+    font-weight: 400;
+}
+
+.modal-actions {
+    text-align: center;
+}
+
+.btn-accept {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-accept:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-accept:active {
+    transform: translateY(0);
+}
+
+/* === RESPONSIVE PARA MODALES DE ASIGNACIONES === */
+@media (max-width: 768px) {
+    .assignments-table {
+        font-size: 14px;
+    }
+    
+    .assignments-table thead th,
+    .assignments-table tbody td {
+        padding: 12px 8px;
+    }
+    
+    .schedule-btn {
+        padding: 4px 12px;
+        font-size: 12px;
+    }
+    
+    .professor-career {
+        font-size: 13px;
+    }
+    
+    /* Responsive para modal de horarios */
+    .professor-info-card {
+        padding: 25px 20px;
+    }
+    
+    .info-label,
+    .info-value {
+        font-size: 16px;
+    }
+    
+    .schedule-title {
+        font-size: 20px;
+    }
+    
+    .schedule-item {
+        font-size: 16px;
+    }
+    
+    .btn-accept {
+        padding: 10px 30px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .assignments-table thead th:nth-child(2),
+    .assignments-table tbody td:nth-child(2) {
+        display: none;
+    }
+    
+    .professor-info-card {
+        padding: 20px 15px;
+    }
+    
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .info-label {
+        margin-bottom: 5px;
+        margin-right: 0;
+        min-width: auto;
+    }
+    
+    .info-label,
+    .info-value {
+        font-size: 14px;
+    }
+    
+    .schedule-title {
+        font-size: 18px;
+    }
+    
+    .schedule-item {
+        font-size: 14px;
+    }
+}
+
+/* === ESTILOS PARA ESTADO DE LABORATORIO === */
+.lab-inactive {
+    background-color: #f8f9fa;
+    opacity: 0.7;
+}
+
+.lab-inactive .lab-name {
+    opacity: 0.8;
+}
+
+.lab-disabled {
+    color: #6c757d !important;
+    text-decoration: none !important;
+}
+
+.lab-disabled:hover {
+    color: #6c757d !important;
+    text-decoration: none !important;
+}
+
+.lab-status-badge {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.status-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.status-btn:hover {
+    transform: scale(1.1);
+}
+
+.status-btn i {
+    font-size: 16px;
+}
+
+.status-btn.active:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.status-btn.active i {
+    color: #28a745;
+}
+
+.status-btn.inactive:hover {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.status-btn.inactive i {
+    color: #ffc107;
+}
+
+.action-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.action-btn:disabled:hover {
+    background-color: transparent;
+    transform: none !important;
+}
+
+/* === ESTILOS PARA MODAL DE CONFIRMACIÓN === */
+.status-confirmation {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.confirmation-icon {
+    margin-bottom: 20px;
+}
+
+.lab-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #17a2b8;
+    margin: 15px 0;
+}
+
+#confirmStatusModal .modal-header {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: #212529;
+}
+
+#confirmStatusModal .modal-header .btn-close {
+    filter: none;
+}

@@ -1,0 +1,516 @@
+/* Gestión de Usuarios - AccessLab */
+/* Estilos específicos para la vista de gestión de usuarios */
+
+/* Contenedor principal */
+.usuarios-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Layout de dos columnas */
+.usuarios-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    min-height: calc(100vh - 300px);
+}
+
+/* === TABLA DE USUARIOS === */
+.tabla-usuarios-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+    overflow: hidden;
+}
+
+.tabla-wrapper {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.usuarios-table thead {
+    background: #6c757d;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.usuarios-table th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+    border-bottom: 2px solid #5a6268;
+}
+
+.usuarios-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.usuarios-table tbody tr:hover {
+    background: rgba(207, 228, 233, 0.2);
+}
+
+.usuarios-table td {
+    padding: 15px;
+    color: #2c3e50;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.usuario-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.carrera-name {
+    font-weight: 600;
+    color: #34495e;
+    text-align: center;
+}
+
+.rol-badge {
+    text-align: center;
+}
+
+.rol-maestro {
+    background: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.rol-administrador {
+    background: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.rol-tecnico {
+    background: #17a2b8;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.password-field {
+    text-align: center;
+    font-family: monospace;
+    font-size: 18px;
+    color: #6c757d;
+}
+
+.acciones-cell {
+    text-align: center;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    margin: 0 3px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.edit-btn {
+    color: #28a745;
+}
+
+.edit-btn:hover {
+    background: rgba(40, 167, 69, 0.1);
+    color: #1e7e34;
+    transform: scale(1.1);
+}
+
+.edit-btn:active {
+    background: rgba(40, 167, 69, 0.2);
+    transform: scale(0.95);
+}
+
+.refresh-btn {
+    color: #17a2b8;
+}
+
+.refresh-btn:hover {
+    background: rgba(23, 162, 184, 0.1);
+    color: #138496;
+    transform: scale(1.1);
+}
+
+.delete-btn {
+    color: #dc3545;
+}
+
+.delete-btn:hover {
+    background: rgba(220, 53, 69, 0.1);
+    color: #c82333;
+    transform: scale(1.1);
+}
+
+.action-btn i {
+    font-size: 16px;
+}
+
+/* Botón toggle para activar/desactivar usuarios */
+.toggle-btn i {
+    color: #28a745; /* Verde por defecto (activo) */
+}
+
+/* Botón para asignar/ver laboratorios */
+.assign-btn i {
+    color: #007bff; /* Azul para asignación */
+}
+
+.assign-btn:hover i {
+    color: #0056b3;
+}
+
+/* Estilos para usuarios inactivos */
+.user-inactive {
+    opacity: 0.6;
+    background-color: #f8f9fa !important;
+}
+
+.user-inactive .usuario-name {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.user-inactive .status-badge {
+    background-color: #dc3545;
+    color: white;
+}
+
+.user-inactive .status-badge::after {
+    content: " (Inactivo)";
+}
+
+/* === FORMULARIO CREAR USUARIO === */
+.formulario-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+    height: fit-content;
+}
+
+.form-title {
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para modo edición */
+.form-card.edit-mode {
+    border: 2px solid #17a2b8;
+    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.2);
+}
+
+.form-card.edit-mode .form-title {
+    color: #17a2b8;
+    border-bottom-color: #17a2b8;
+}
+
+.form-card.edit-mode .form-title::before {
+    content: "✏️ ";
+    margin-right: 8px;
+}
+
+/* Indicador visual para campos editables */
+.form-card.edit-mode .form-input,
+.form-card.edit-mode .form-select {
+    border-left: 4px solid #17a2b8;
+    background: rgba(23, 162, 184, 0.02);
+}
+
+.form-card.edit-mode .form-input:focus,
+.form-card.edit-mode .form-select:focus {
+    border-left-color: #138496;
+    background: rgba(23, 162, 184, 0.05);
+}
+
+.usuario-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.form-input, .form-select {
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: #17a2b8;
+    box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.2);
+}
+
+.form-input::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Placeholder especial para contraseña en modo edición */
+.form-card.edit-mode #passwordUsuario::placeholder {
+    color: #17a2b8;
+    font-weight: 500;
+}
+
+/* Campo de contraseña con botón de mostrar/ocultar */
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container .form-input {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.password-toggle-btn:hover {
+    color: #17a2b8;
+    transform: scale(1.1);
+}
+
+/* Texto de ayuda para contraseña en modo edición */
+.password-help-text {
+    color: #6c757d;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 5px;
+    display: block;
+    animation: fadeInHelp 0.3s ease-in;
+}
+
+.password-help-text i {
+    color: #17a2b8;
+    margin-right: 6px;
+}
+
+/* Texto de ayuda para carrera en modo edición */
+.carrera-help-text {
+    color: #6c757d;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 5px;
+    display: block;
+    animation: fadeInHelp 0.3s ease-in;
+}
+
+.carrera-help-text i {
+    color: #17a2b8;
+    margin-right: 6px;
+}
+
+@keyframes fadeInHelp {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botones de acción del formulario */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #e9ecef;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-cancel {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-clear {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-clear:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Botón actualizar en modo edición */
+.form-card.edit-mode .btn-save {
+    background: #17a2b8;
+}
+
+.form-card.edit-mode .btn-save:hover {
+    background: #138496;
+    box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1200px) {
+    .usuarios-layout {
+        grid-template-columns: 1fr 350px;
+        gap: 20px;
+    }
+    
+    .usuarios-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .usuarios-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .formulario-container {
+        order: -1;
+    }
+    
+    .form-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .usuarios-container {
+        padding: 10px;
+    }
+    
+    .usuarios-table {
+        font-size: 14px;
+    }
+    
+    .usuarios-table th,
+    .usuarios-table td {
+        padding: 10px 8px;
+    }
+    
+    .form-card {
+        padding: 20px;
+    }
+    
+    .form-title {
+        font-size: 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .usuarios-table {
+        min-width: 600px;
+    }
+    
+    .form-input, .form-select {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .form-label {
+        font-size: 14px;
+    }
+    
+    .action-btn i {
+        font-size: 14px;
+    }
+}

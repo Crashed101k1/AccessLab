@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Gestión de Usuarios</title>
+    <link rel="icon" href="../../public/images/AccessLabLogo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS base de la plantilla -->
+    <link rel="stylesheet" href="../css/plantilla-base.css">
+    <!-- CSS personalizado para Gestión de Usuarios -->
+    <link rel="stylesheet" href="../css/gestion-usuarios.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../../public/images/AccessLabLogo.png" alt="AccessLab Logo">
+                <div>
+                    <h1 class="welcome-text">Gestión de Usuarios</h1>
+                </div>
+            </div>
+            <div class="header-icons">
+                <button class="header-icon" title="Regresar" onclick="goBack()">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+                <button class="header-icon" title="Inicio" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="header-icon" title="Notificaciones" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </button>
+                <button class="header-icon logout-icon" title="Cerrar Sesión" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="usuarios-container">
+            <!-- Layout de dos columnas: Tabla + Formulario -->
+            <div class="usuarios-layout">
+                
+                <!-- Columna Izquierda: Tabla de Usuarios -->
+                <div class="tabla-usuarios-container">
+                    <div class="tabla-wrapper">
+                        <table class="usuarios-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Carrera</th>
+                                    <th>Rol</th>
+                                    <th>Contraseña</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuariosTableBody">
+                                <!-- Ejemplo de usuario -->
+                                <tr data-user-id="user_example_001">
+                                    <td class="usuario-name">Hermelindo B...</td>
+                                    <td class="carrera-name">TI</td>
+                                    <td class="rol-badge">
+                                        <span class="rol-maestro">Maestro</span>
+                                    </td>
+                                    <td class="password-field">*******</td>
+                                    <td class="acciones-cell">
+                                        <button class="action-btn edit-btn" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn toggle-btn" title="Activar/Desactivar Usuario">
+                                            <i class="fas fa-power-off"></i>
+                                        </button>
+                                        <button class="action-btn assign-btn" title="Asignar/Ver Laboratorios">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- Se pueden agregar más usuarios aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Formulario Crear Usuario -->
+                <div class="formulario-container">
+                    <div class="form-card">
+                        <h3 class="form-title" id="formTitle">Crear Usuario</h3>
+                        
+                        <form id="usuarioForm" class="usuario-form">
+                            <!-- Campos ocultos para modo edición -->
+                            <input type="hidden" id="editMode" value="false">
+                            <input type="hidden" id="editingUserId" value="">
+                            
+                            <!-- Campo Nombre -->
+                            <div class="form-group">
+                                <label for="nombreUsuario" class="form-label">Nombre:</label>
+                                <input type="text" 
+                                       id="nombreUsuario" 
+                                       class="form-input" 
+                                       placeholder="Ingresa el nombre completo"
+                                       required>
+                            </div>
+
+                            <!-- Campo Carrera -->
+                            <div class="form-group">
+                                <label for="carreraUsuario" class="form-label">Carrera:</label>
+                                <select id="carreraUsuario" class="form-select" required>
+                                    <option value="">Seleccionar carrera...</option>
+                                    <option value="TI">Tecnologías de la Información</option>
+                                    <option value="IM">Ingeniería en Mecatrónica</option>
+                                    <option value="II">Ingeniería Industrial</option>
+                                    <option value="GA">Gestión Administrativa</option>
+                                    <option value="TC">Tecnologías de la Construcción</option>
+                                </select>
+                            </div>
+
+                            <!-- Campo Rol -->
+                            <div class="form-group">
+                                <label for="rolUsuario" class="form-label">Rol:</label>
+                                <select id="rolUsuario" class="form-select" required>
+                                    <option value="">Seleccionar rol...</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Maestro">Maestro</option>
+                                    <option value="Tecnico">Técnico</option>
+                                </select>
+                            </div>
+
+                            <!-- Campo Contraseña -->
+                            <div class="form-group">
+                                <label for="passwordUsuario" class="form-label">Contraseña:</label>
+                                <div class="password-input-container">
+                                    <input type="password" 
+                                           id="passwordUsuario" 
+                                           class="form-input" 
+                                           placeholder="Ingresa la contraseña"
+                                           required>
+                                    <button type="button" class="password-toggle-btn" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="form-actions" id="formActions">
+                                <button type="button" class="btn btn-cancel" onclick="cancelarFormulario()">
+                                    Cancelar
+                                </button>
+                                <button type="button" class="btn btn-clear" onclick="limpiarFormulario()">
+                                    Limpiar
+                                </button>
+                                <button type="button" class="btn btn-save" id="saveButton" onclick="handleSaveButton()">
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-center">
+                <p><strong>AccessLab Todos los Derechos Reservados 2025</strong></p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-logo">
+                <img src="../../public/images/UTM.png" alt="UTM Logo" class="utm-logo">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de navegación compartido -->
+    <script src="../../shared/navigation-utils.js"></script>
+    <!-- Script específico de Gestión de Usuarios -->
+    <script src="../js/gestion-usuarios.js"></script>
+</body>
+</html>

@@ -19,7 +19,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 30px;
     margin: 0;
     max-width: none;
 }
@@ -103,7 +103,7 @@ body {
     padding: 40px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     border: 2px solid #2c3e50;
-    max-width: 900px;
+    max-width: 1000px;
     width: 100%;
     margin: 0 auto;
 }
@@ -528,7 +528,7 @@ body {
     text-align: center;
     position: relative;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 30px;
     margin: 0;
     max-width: none;
 }
@@ -545,7 +545,7 @@ body {
 
 .footer-logo {
     position: absolute;
-    right: 20px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -642,15 +642,21 @@ body {
         font-size: 16px;
     }
     
-    .footer-logo {
-        position: static;
-        transform: none;
-        margin-top: 10px;
+    .header-content {
+        padding: 0 20px;
     }
     
     .footer-content {
         flex-direction: column;
         gap: 15px;
+        padding: 0 20px;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        position: static;
+        transform: none;
+        margin-top: 10px;
     }
     
     /* Modales responsive */

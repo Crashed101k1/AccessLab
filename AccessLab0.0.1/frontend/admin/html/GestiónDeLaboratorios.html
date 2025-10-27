@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Gestión de Laboratorios</title>
+    <link rel="icon" href="../../public/images/AccessLabLogo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS base de la plantilla -->
+    <link rel="stylesheet" href="../css/plantilla-base.css">
+    <!-- CSS personalizado para gestión de laboratorios -->
+    <link rel="stylesheet" href="../css/gestion-laboratorios.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../../public/images/AccessLabLogo.png" alt="AccessLab Logo">
+                <div>
+                    <h1 class="welcome-text">Gestión de Laboratorios</h1>
+                </div>
+            </div>
+            <div class="header-icons">
+                <button class="header-icon" title="Regresar" onclick="goBack()">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+                <button class="header-icon" title="Inicio" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="header-icon" title="Notificaciones" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </button>
+                <button class="header-icon logout-icon" title="Cerrar Sesión" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Sección de búsqueda y acciones -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-input-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar laboratorios...">
+                        <button class="search-btn" onclick="searchLaboratories()">
+                            <i class="fas fa-search"></i>
+                            <span>Buscar</span>
+                        </button>
+                    </div>
+                    <div class="add-lab-container">
+                        <button class="add-lab-btn" onclick="showAddLabModal()">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Añadir Laboratorio</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de tabla de laboratorios -->
+            <section class="table-section">
+                <div class="container-fluid">
+                    <!-- Información de resultados -->
+                    <div class="results-info">
+                        <span id="resultsCount">Mostrando 0 de 0 resultados</span>
+                    </div>
+
+                    <!-- Contenedor principal con scroll y barra de progreso -->
+                    <div class="table-wrapper">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="scrollProgressBar"></div>
+                        </div>
+                        
+                        <div class="table-container" id="tableContainer">
+                            <table class="laboratories-table">
+                                <thead>
+                                    <tr>
+                                        <th>Laboratorio</th>
+                                        <th>Ubicación</th>
+                                        <th>Técnico a cargo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="laboratoriesTableBody">
+                                    <!-- Los datos se cargan dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Controles de Paginación -->
+                    <div class="pagination-container">
+                        <div class="pagination-info">
+                            <span id="paginationInfo">Página 1 de 1</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="firstPageBtn" onclick="goToPage(1)" title="Primera página">
+                                <i class="fas fa-angle-double-left"></i>
+                            </button>
+                            <button class="pagination-btn" id="prevPageBtn" onclick="previousPage()" title="Página anterior">
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            
+                            <div class="page-numbers" id="pageNumbers">
+                                <!-- Los números de página se generan dinámicamente -->
+                            </div>
+                            
+                            <button class="pagination-btn" id="nextPageBtn" onclick="nextPage()" title="Página siguiente">
+                                <i class="fas fa-angle-right"></i>
+                            </button>
+                            <button class="pagination-btn" id="lastPageBtn" onclick="goToLastPage()" title="Última página">
+                                <i class="fas fa-angle-double-right"></i>
+                            </button>
+                        </div>
+                        <div class="items-per-page">
+                            <label for="itemsPerPage">Elementos por página:</label>
+                            <select id="itemsPerPage" class="items-select" onchange="changeItemsPerPage()">
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-center">
+                <p><strong>AccessLab Todos los Derechos Reservados 2025</strong></p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-logo">
+                <img src="../../public/images/UTM.png" alt="UTM Logo" class="utm-logo">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de navegación compartido -->
+    <script src="../../shared/navigation-utils.js"></script>
+    <!-- Script específico para gestión de laboratorios -->
+    <script src="../js/gestion-laboratorios.js"></script>
+</body>
+</html>
