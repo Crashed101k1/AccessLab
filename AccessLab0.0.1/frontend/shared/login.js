@@ -108,6 +108,7 @@ let velocityX = 2;
 let velocityY = 1.5;
 let colorIndex = 0;
 let animationId = null;
+let isTurboMode = false; // Variable para controlar el modo turbo
 
 // Colores disponibles para el logo
 const logoColors = ['utm-color-1', 'utm-color-2', 'utm-color-3', 'utm-color-4', 'utm-color-5', 'utm-color-6'];
@@ -194,14 +195,17 @@ function checkBoundaryCollisions() {
         changeLogoColor();
         addBounceEffect();
         
-        // Pequeña variación en velocidad para más realismo
-        const speedVariation = 0.1;
-        velocityX += (Math.random() - 0.5) * speedVariation;
-        velocityY += (Math.random() - 0.5) * speedVariation;
-        
-        // Mantener velocidad dentro de límites razonables
-        velocityX = Math.max(-4, Math.min(4, velocityX));
-        velocityY = Math.max(-4, Math.min(4, velocityY));
+        // Solo modificar velocidad si NO está en modo turbo
+        if (!isTurboMode) {
+            // Pequeña variación en velocidad para más realismo
+            const speedVariation = 0.1;
+            velocityX += (Math.random() - 0.5) * speedVariation;
+            velocityY += (Math.random() - 0.5) * speedVariation;
+            
+            // Mantener velocidad dentro de límites razonables
+            velocityX = Math.max(-4, Math.min(4, velocityX));
+            velocityY = Math.max(-4, Math.min(4, velocityY));
+        }
     }
 }
 
@@ -273,33 +277,154 @@ function playBounceSound() {
     // audio.play().catch(e => console.log('Audio no disponible'));
 }
 
-// Easter egg: Triple clic en el logo para efectos especiales
+// Easter egg: 4 clics progresivos en el logo de AccessLab para efectos especiales
 let clickCount = 0;
+let countdownElement = null;
+
 document.addEventListener('click', function(event) {
-    if (event.target.closest('.utm-bouncing-logo')) {
+    // Detectar clic en el logo de AccessLab (el del formulario)
+    if (event.target.closest('.logo-container') || event.target.classList.contains('logo')) {
         clickCount++;
         
-        if (clickCount === 3) {
-            // Efecto especial: velocidad temporal aumentada
-            const originalVelocityX = velocityX;
-            const originalVelocityY = velocityY;
-            
-            velocityX *= 3;
-            velocityY *= 3;
-            
-            utmLogo.style.opacity = '0.8';
-            
-            setTimeout(() => {
-                velocityX = originalVelocityX;
-                velocityY = originalVelocityY;
-                utmLogo.style.opacity = '0.4';
-                clickCount = 0;
-            }, 3000);
+        // Mostrar contador progresivo según el número de clics
+        if (clickCount >= 1 && clickCount <= 3) {
+            showProgressiveNumber(4 - clickCount); // 3, 2, 1
+        } else if (clickCount === 4) {
+            // Cuarto clic: mostrar GO y activar turbo
+            showGoAndActivateTurbo();
         }
         
-        // Resetear contador después de 2 segundos
+        // Resetear contador después de 5 segundos si no se completa
         setTimeout(() => {
-            if (clickCount < 3) clickCount = 0;
-        }, 2000);
+            if (clickCount < 4) {
+                clickCount = 0;
+                if (countdownElement) {
+                    countdownElement.remove();
+                    countdownElement = null;
+                }
+            }
+        }, 5000);
     }
 });
+
+// Función para mostrar número progresivo con cada clic
+function showProgressiveNumber(number) {
+    // Crear o actualizar elemento del contador si no existe
+    if (!countdownElement) {
+        countdownElement = document.createElement('div');
+        countdownElement.className = 'easter-egg-countdown';
+        document.body.appendChild(countdownElement);
+    }
+    
+    // Mostrar el número correspondiente
+    countdownElement.textContent = number;
+    countdownElement.className = 'easter-egg-countdown number-animation';
+    
+    // Efecto de vibración con cada clic
+    document.body.style.animation = 'shake 0.2s ease-in-out';
+    setTimeout(() => {
+        document.body.style.animation = '';
+    }, 200);
+    
+    // Efecto de parpadeo en el logo AccessLab
+    const accessLabLogo = document.querySelector('.logo');
+    if (accessLabLogo) {
+        accessLabLogo.style.animation = 'pulse 0.3s ease-in-out 1';
+        setTimeout(() => {
+            accessLabLogo.style.animation = '';
+        }, 300);
+    }
+}
+
+// Función para mostrar GO y activar el modo turbo
+function showGoAndActivateTurbo() {
+    // Almacenar velocidades originales
+    const originalVelocityX = velocityX;
+    const originalVelocityY = velocityY;
+    
+    // Asegurar que existe el elemento contador
+    if (!countdownElement) {
+        countdownElement = document.createElement('div');
+        countdownElement.className = 'easter-egg-countdown';
+        document.body.appendChild(countdownElement);
+    }
+    
+    // Mostrar "¡GO!" con animación especial
+    countdownElement.textContent = '¡GO!';
+    countdownElement.className = 'easter-egg-countdown go-animation';
+    
+    // Efecto de vibración más fuerte para el GO
+    document.body.style.animation = 'shake 0.3s ease-in-out';
+    setTimeout(() => {
+        document.body.style.animation = '';
+    }, 300);
+    
+    // Activar modo turbo del logo UTM
+    activateTurboMode(originalVelocityX, originalVelocityY);
+    
+    // Remover contador después de la animación GO
+    setTimeout(() => {
+        if (countdownElement) {
+            countdownElement.remove();
+            countdownElement = null;
+        }
+        clickCount = 0;
+    }, 1200);
+}
+
+// Función para activar el modo turbo del logo UTM
+function activateTurboMode(originalVelocityX, originalVelocityY) {
+    // Activar modo turbo
+    isTurboMode = true;
+    
+    // Velocidad súper aumentada
+    velocityX *= 5;
+    velocityY *= 5;
+    
+    // Hacer el logo más visible
+    utmLogo.style.opacity = '0.95';
+    
+    // Agregar efecto de rastro más pronunciado
+    utmLogo.style.filter += ' blur(1px)';
+    
+    // Cambiar colores más rápidamente
+    const fastColorChange = setInterval(() => {
+        changeLogoColor();
+    }, 100);
+    
+    // Efecto épico en el logo AccessLab durante todo el turbo
+    const accessLabLogo = document.querySelector('.logo');
+    if (accessLabLogo) {
+        accessLabLogo.style.animation = 'pulse 0.5s ease-in-out infinite';
+    }
+    
+    // Restaurar después de 15 segundos
+    setTimeout(() => {
+        // Desactivar modo turbo
+        isTurboMode = false;
+        
+        velocityX = originalVelocityX;
+        velocityY = originalVelocityY;
+        utmLogo.style.opacity = '0.4';
+        utmLogo.style.filter = utmLogo.style.filter.replace(' blur(1px)', '');
+        
+        clearInterval(fastColorChange);
+        
+        // Remover animación del logo AccessLab
+        if (accessLabLogo) {
+            accessLabLogo.style.animation = '';
+        }
+    }, 15000);
+}
+
+// Agregar animación de vibración para el efecto de sonido
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-2px) translateY(-1px); }
+        50% { transform: translateX(2px) translateY(1px); }
+        75% { transform: translateX(-1px) translateY(-2px); }
+    }
+`;
+document.head.appendChild(shakeStyle);
