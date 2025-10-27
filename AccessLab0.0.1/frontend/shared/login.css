@@ -14,6 +14,26 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+    overflow: hidden; /* Para evitar barras de scroll por la animación */
+    position: relative;
+}
+
+/* Animación del logo UTM rebotando como DVD screensaver */
+.utm-bouncing-logo {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    z-index: -1; /* Detrás del formulario */
+    opacity: 0.4; /* Más visible pero sin molestar */
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.3));
+}
+
+.utm-bouncing-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Contenedor principal */
@@ -35,6 +55,7 @@ body {
     width: 100%;
     text-align: center;
     position: relative;
+    z-index: 10; /* Por encima del logo rebotando */
 }
 
 /* Contenedor del logo */
@@ -315,7 +336,7 @@ body {
     padding: 15px 0;
     font-size: 12px;
     color: rgba(255, 255, 255, 0.8);
-    z-index: 100;
+    z-index: 100; /* Por encima del logo rebotando */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -407,4 +428,65 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Animaciones del logo UTM rebotando estilo DVD screensaver */
+@keyframes bounceHorizontal {
+    0% { left: -100px; }
+    100% { left: calc(100vw - 100px); }
+}
+
+@keyframes bounceVertical {
+    0% { top: -100px; }
+    100% { top: calc(100vh - 100px); }
+}
+
+/* Colores que cambian al rebotar */
+.utm-color-1 { filter: hue-rotate(0deg) drop-shadow(4px 4px 12px rgba(255,0,0,0.5)) brightness(1.1); }
+.utm-color-2 { filter: hue-rotate(60deg) drop-shadow(4px 4px 12px rgba(0,255,0,0.5)) brightness(1.1); }
+.utm-color-3 { filter: hue-rotate(120deg) drop-shadow(4px 4px 12px rgba(0,0,255,0.5)) brightness(1.1); }
+.utm-color-4 { filter: hue-rotate(180deg) drop-shadow(4px 4px 12px rgba(255,255,0,0.5)) brightness(1.1); }
+.utm-color-5 { filter: hue-rotate(240deg) drop-shadow(4px 4px 12px rgba(255,0,255,0.5)) brightness(1.1); }
+.utm-color-6 { filter: hue-rotate(300deg) drop-shadow(4px 4px 12px rgba(0,255,255,0.5)) brightness(1.1); }
+
+/* Efectos adicionales para más realismo */
+.utm-bouncing-logo.bounce-effect {
+    animation: 
+        bounceScale 0.2s ease-out,
+        bounceGlow 0.3s ease-out;
+}
+
+@keyframes bounceScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounceGlow {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.4; }
+}
+
+/* Efecto de rastro del logo */
+.utm-bouncing-logo::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    opacity: 0.05;
+    border-radius: 50%;
+    animation: trailEffect 0.5s ease-out;
+}
+
+@keyframes trailEffect {
+    0% { 
+        transform: scale(1);
+        opacity: 0.1;
+    }
+    100% { 
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
