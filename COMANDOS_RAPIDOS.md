@@ -4,7 +4,17 @@
 ```bash
 git checkout main
 git pull origin main
-git checkout -b feature/mi-nueva-funcionalidad
+git checkout -b feature/nombre-funcionalidad
+```
+
+## 🌳 CREAR RAMAS POR FUNCIONALIDAD
+```bash
+# Ejemplos para AccessLab:
+git checkout -b feature/user-authentication
+git checkout -b feature/laboratory-management
+git checkout -b feature/admin-dashboard
+git checkout -b bugfix/login-validation
+git checkout -b enhancement/ui-improvements
 ```
 
 ## 💾 GUARDAR TRABAJO (Varias veces al día)
@@ -69,6 +79,24 @@ git status              # Ver estado actual
 git log --oneline -5    # Ver últimos 5 commits
 git branch -a           # Ver todas las ramas
 git remote -v           # Ver repositorios remotos
+```
+
+## 🌳 Gestión de Ramas
+```bash
+# Ver qué ramas existen
+git branch -a
+
+# Ver ramas con último commit
+git for-each-ref --format='%(refname:short) - %(authorname)' refs/remotes
+
+# Cambiar de rama
+git checkout nombre-rama
+
+# Eliminar rama local (después de merge)
+git branch -d feature/rama-terminada
+
+# Eliminar rama remota
+git push origin --delete feature/rama-terminada
 ```
 
 ## 🎯 Plantillas de Mensajes de Commit

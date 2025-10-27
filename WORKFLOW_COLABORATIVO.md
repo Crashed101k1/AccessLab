@@ -42,15 +42,39 @@ git status
 ```
 
 ### Paso 2: Crear rama para tu feature/tarea
+
+## 🌳 ESTRATEGIA DE RAMAS PARA ACCESSLAB (2 DESARROLLADORES)
+
+### Estructura Recomendada:
+```
+main (código en producción)
+├── feature/auth-system (funcionalidad de autenticación)
+├── feature/laboratory-crud (gestión de laboratorios)
+├── feature/dashboard-admin (panel administrativo)
+├── bugfix/login-validation (corrección de bugs)
+└── enhancement/ui-responsive (mejoras de interfaz)
+```
+
+### Comandos para crear ramas:
 ```bash
-# Crear y cambiar a nueva rama
+# Crear y cambiar a nueva rama POR FUNCIONALIDAD (no por desarrollador)
 git checkout -b feature/nombre-descriptivo
 
-# Ejemplos de nombres de ramas:
-# git checkout -b feature/user-authentication
-# git checkout -b bugfix/login-validation
-# git checkout -b enhancement/ui-improvements
+# Ejemplos de nombres de ramas para AccessLab:
+git checkout -b feature/user-authentication
+git checkout -b feature/laboratory-management  
+git checkout -b feature/admin-dashboard
+git checkout -b feature/reports-system
+git checkout -b bugfix/login-validation
+git checkout -b enhancement/ui-improvements
+git checkout -b hotfix/security-patch
 ```
+
+### ⚠️ IMPORTANTE:
+- **NO crear ramas por desarrollador** (dev/juan, dev/maria)
+- **SÍ crear ramas por funcionalidad** (feature/auth-system)
+- Ambos desarrolladores pueden trabajar en ramas diferentes simultáneamente
+- Coordinarse para no trabajar en la misma funcionalidad al mismo tiempo
 
 ---
 
@@ -302,7 +326,40 @@ git checkout -b local-copy origin/feature/rama-compañero
 
 ---
 
-## 📞 Flujo de Comunicación Diario
+## � Coordinación Entre Desarrolladores
+
+### División de Trabajo Sugerida para AccessLab:
+
+#### **Desarrollador A** podría enfocarse en:
+- `feature/backend-api` (APIs y servicios)
+- `feature/user-authentication` (sistema de login/registro)
+- `feature/laboratory-management` (CRUD laboratorios)
+- `bugfix/backend-issues` (correcciones del backend)
+
+#### **Desarrollador B** podría enfocarse en:
+- `feature/frontend-ui` (interfaces de usuario)
+- `feature/admin-dashboard` (panel administrativo)
+- `feature/reports-system` (sistema de reportes)
+- `enhancement/ui-improvements` (mejoras visuales)
+
+### Reglas de Coordinación:
+1. **Comunicar** en qué rama vas a trabajar antes de crearla
+2. **No duplicar** trabajo - revisar ramas activas antes de empezar
+3. **Planificar** semanalmente qué funcionalidades desarrollará cada uno
+4. **Avisar** cuando termines una funcionalidad para que el otro pueda revisarla
+
+### Comando para ver ramas activas:
+```bash
+# Ver todas las ramas (locales y remotas)
+git branch -a
+
+# Ver ramas remotas con último commit
+git for-each-ref --format='%(refname:short) - %(authorname) (%(committerdate))' refs/remotes
+```
+
+---
+
+## �📞 Flujo de Comunicación Diario
 
 ### Mañana (9:00 AM)
 1. Revisar mensajes del compañero
