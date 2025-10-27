@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Sistema de Solicitudes</title>
+    <link rel="icon" href="../../public/images/AccessLabLogo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS base de la plantilla -->
+    <link rel="stylesheet" href="../css/plantilla-base.css">
+    <!-- CSS específico del Sistema de Solicitudes -->
+    <link rel="stylesheet" href="../css/solicitudes.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../../public/images/AccessLabLogo.png" alt="AccessLab Logo">
+                <div>
+                    <h1 class="welcome-text">Listado de Solicitudes</h1>
+                </div>
+            </div>
+            <div class="header-icons">
+                <button class="header-icon" title="Regresar" onclick="goBack()">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+                <button class="header-icon" title="Inicio" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="header-icon" title="Notificaciones" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </button>
+                <button class="header-icon logout-icon" title="Cerrar Sesión" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="content-container">
+            
+            <!-- Navegación por pestañas -->
+            <div class="solicitudes-tabs">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-mis-solicitudes-tab" data-bs-toggle="tab" 
+                                data-bs-target="#nav-mis-solicitudes" type="button" role="tab" 
+                                aria-controls="nav-mis-solicitudes" aria-selected="true">
+                            <i class="fas fa-user-edit me-2"></i>Mis Solicitudes
+                        </button>
+                        <button class="nav-link" id="nav-para-revision-tab" data-bs-toggle="tab" 
+                                data-bs-target="#nav-para-revision" type="button" role="tab" 
+                                aria-controls="nav-para-revision" aria-selected="false">
+                            <i class="fas fa-clipboard-check me-2"></i>Para Revisión
+                        </button>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="tab-content" id="nav-tabContent">
+                
+                <!-- Pestaña: Mis Solicitudes -->
+                <div class="tab-pane fade show active" id="nav-mis-solicitudes" role="tabpanel" 
+                     aria-labelledby="nav-mis-solicitudes-tab">
+                    
+                    <!-- Layout principal dividido en dos paneles -->
+                    <div class="solicitudes-layout" id="mis-solicitudes-layout">
+                
+                <!-- Panel Izquierdo - Lista de Solicitudes -->
+                <div class="solicitudes-sidebar">
+                    <div class="sidebar-header">
+                        <h5 class="sidebar-title">
+                            <i class="fas fa-list"></i>
+                            Solicitudes
+                            <span class="contador-solicitudes" id="contador-solicitudes">0</span>
+                        </h5>
+                        <button class="btn btn-crear-solicitud" id="btn-crear-solicitud" title="Nueva solicitud">
+                            <i class="fas fa-plus"></i>
+                            crear solicitud
+                        </button>
+                    </div>
+                    
+                    <div class="solicitudes-list" id="solicitudes-list">
+                        <!-- Las solicitudes se cargan dinámicamente aquí -->
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando solicitudes...</span>
+                            </div>
+                            <p class="mt-2 text-muted">Cargando solicitudes...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho - Visualizador/Editor de Solicitudes -->
+                <div class="solicitud-viewer">
+                    <div class="viewer-header">
+                        <h5 class="viewer-title">
+                            <i class="fas fa-file-alt"></i>
+                            Seleccionar Solicitud
+                        </h5>
+                        <div class="viewer-actions">
+                            <!-- Acciones dinámicas según el estado -->
+                        </div>
+                    </div>
+                    
+                    <div class="viewer-content" id="viewer-content">
+                        <!-- El contenido se carga dinámicamente aquí -->
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h5>Selecciona una solicitud</h5>
+                            <p>Haz clic en una solicitud de la lista para ver sus detalles completos y realizar las acciones correspondientes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                    </div>
+                    
+                </div>
+                
+                <!-- Pestaña: Para Revisión -->
+                <div class="tab-pane fade" id="nav-para-revision" role="tabpanel" 
+                     aria-labelledby="nav-para-revision-tab">
+                    
+                    <!-- Layout principal dividido en dos paneles -->
+                    <div class="solicitudes-layout" id="para-revision-layout">
+                        
+                        <!-- Panel Izquierdo - Lista de Solicitudes para Revisión -->
+                        <div class="solicitudes-sidebar">
+                            <div class="sidebar-header">
+                                <h5 class="sidebar-title">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    Para Revisión
+                                    <span class="contador-solicitudes" id="contador-revision">0</span>
+                                </h5>
+                                <div class="filtros-revision">
+                                    <select class="form-select form-select-sm" id="filtro-estado-revision">
+                                        <option value="all">Todos los estados</option>
+                                        <option value="pendiente">Pendientes</option>
+                                        <option value="en-proceso">En proceso</option>
+                                        <option value="aprobado">Aprobados</option>
+                                        <option value="rechazado">Rechazados</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="solicitudes-list" id="solicitudes-revision-list">
+                                <!-- Las solicitudes para revisión se cargan dinámicamente aquí -->
+                                <div class="text-center py-4">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Cargando solicitudes...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Cargando solicitudes para revisión...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel Derecho - Visor/Editor de Revisión -->
+                        <div class="solicitud-viewer">
+                            <div class="viewer-header">
+                                <h5 class="viewer-title">
+                                    <i class="fas fa-search"></i>
+                                    Revisar Solicitud
+                                </h5>
+                                <div class="viewer-actions">
+                                    <!-- Acciones dinámicas según el rol y estado -->
+                                </div>
+                            </div>
+                            
+                            <div class="viewer-content" id="viewer-revision-content">
+                                <!-- El contenido de revisión se carga dinámicamente aquí -->
+                                <div class="empty-state">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    <h5>Selecciona una solicitud para revisar</h5>
+                                    <p>Haz clic en una solicitud de la lista para revisar sus detalles y tomar acciones.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-center">
+                <p><strong>AccessLab Todos los Derechos Reservados 2025</strong></p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-logo">
+                <img src="../../public/images/UTM.png" alt="UTM Logo" class="utm-logo">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de navegación compartido -->
+    <script src="../../shared/navigation-utils.js"></script>
+    <!-- Script específico del Sistema de Solicitudes -->
+    <script src="../js/solicitudes.js"></script>
+</body>
+</html>

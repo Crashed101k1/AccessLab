@@ -1,18 +1,161 @@
-# AccessLab Database
+# 🗄️ Base de Datos AccessLab
 
-## Descripción
-Esquemas, scripts y documentación de la base de datos MySQL para AccessLab.
+Esta carpeta contiene todos los archivos relacionados con la base de datos del sistema AccessLab.
 
-## Estructura de Archivos
+## 📁 **Estructura de Archivos**
 
+### **📋 Esquemas de Base de Datos:**
+- `accesslab_schema_mysql_full.sql` - ⚠️ **Esquema original** (versión 1.0)
+- `accesslab_schema_mysql_v2.sql` - ✅ **Esquema actualizado** (versión 2.0)
+
+### **🔄 Migraciones:**
+- `2025-10-27_actualizar_sistema_solicitudes.sql` - **Script de migración** de v1.0 a v2.0
+
+### **✅ Validación y Pruebas:**
+- `validacion_sistema_solicitudes.sql` - **Pruebas completas** del nuevo sistema
+
+### **📚 Documentación:**
+- `ANALISIS_MIGRACION_BD.md` - **Análisis detallado** de cambios realizados
+- `README.md` - Este archivo de documentación
+
+### **🗂️ Otras Carpetas:**
+- `seeds/` - Datos iniciales del sistema
+- `backups/` - Respaldos de la base de datos
+- `procedures/` - Procedimientos almacenados adicionales
+- `migrations/` - Historial de migraciones
+
+---
+
+## 🚀 **Instalación Rápida**
+
+### **Para Base de Datos Nueva (Recomendado):**
+```bash
+mysql -u root -p -e "CREATE DATABASE accesslab;"
+mysql -u root -p accesslab < accesslab_schema_mysql_v2.sql
 ```
-database/
-├── accesslab_schema_mysql_full.sql  # Esquema completo de la BD
-├── migrations/                      # Migraciones de esquema
-├── seeds/                          # Datos de prueba
-├── backups/                        # Respaldos automáticos
-├── procedures/                     # Stored procedures
-└── README.md                       # Este archivo
+
+### **Para Migrar Base Existente:**
+```bash
+# 1. Hacer backup primero
+mysqldump -u root -p accesslab > backup_antes_migracion.sql
+
+# 2. Ejecutar migración
+mysql -u root -p accesslab < 2025-10-27_actualizar_sistema_solicitudes.sql
+
+# 3. Validar migración
+mysql -u root -p accesslab < validacion_sistema_solicitudes.sql
+```
+
+---
+
+## 🔄 **Sistema de Solicitudes v2.0**
+
+### **📊 Principales Mejoras:**
+
+#### **1. Solo 2 Tipos de Solicitudes:**
+- 🏢 **Reserva** - Para reservar laboratorios
+- 🔧 **Soporte** - Para problemas técnicos
+
+#### **2. Campos Específicos por Tipo:**
+
+**📋 Reserva de Laboratorio:**
+- ✅ Fecha y horario de reserva
+- ✅ Número de participantes
+- ✅ Materia y profesor responsable
+- ✅ Enrutamiento a Director/Subdirector
+
+**🛠️ Soporte Técnico:**
+- ✅ Tipo de problema y prioridad
+- ✅ Equipos afectados
+- ✅ Asignación automática de técnico
+- ✅ Enrutamiento directo al técnico del laboratorio
+
+#### **3. Asignación Automática de Técnicos:**
+```sql
+"Laboratorio de Redes"      → Téc. López Martín
+"Laboratorio de Sistemas"   → Téc. García Ruiz  
+"Laboratorio de Electrónica" → Téc. Morales Silva
+"Laboratorio Industrial"    → Téc. Hernández Cruz
+"Laboratorio de Física"     → Téc. Rivera Santos
+```
+
+---
+
+## 📋 **Uso del Procedimiento Almacenado**
+
+### **Crear Solicitud de Reserva:**
+```sql
+CALL sp_crear_solicitud(
+    7,                                    -- id_usuario
+    'Reserva Lab Redes - Práctica CISCO', -- nombre
+    '555-0001',                           -- telefono
+    'Ingeniería en Sistemas',             -- carrera
+    '8vo',                                -- semestre
+    'Reserva',                            -- tipo
+    'Director/Subdirector',               -- destino_rol
+    1,                                    -- laboratorio_id
+    'Práctica de configuración routers',  -- descripcion
+    '2025-02-15',                         -- fecha_reserva
+    '09:00:00',                           -- hora_inicio
+    '11:00:00',                           -- hora_fin
+    25,                                   -- participantes
+    'Redes de Computadoras II',           -- materia
+    'Dr. García Hernández',               -- profesor_responsable
+    NULL, NULL, NULL,                     -- campos de soporte
+    'Se requieren equipos funcionando'     -- observaciones
+);
+```
+
+### **Crear Solicitud de Soporte:**
+```sql
+CALL sp_crear_solicitud(
+    8,                                    -- id_usuario
+    'Problema Switches - Lab Sistemas',   -- nombre
+    '555-0002',                           -- telefono
+    'Ingeniería en Computación',          -- carrera
+    NULL,                                 -- semestre
+    'Soporte',                            -- tipo
+    'Técnico',                            -- destino_rol
+    2,                                    -- laboratorio_id
+    'Switches no responden',              -- descripcion
+    NULL, NULL, NULL, NULL, NULL, NULL,   -- campos de reserva
+    'Conectividad de Red',                -- tipo_problema
+    'Switch Cisco Catalyst 2960 (x3)',   -- equipo_afectado
+    'Alta',                               -- prioridad
+    'Problema desde esta mañana'          -- observaciones
+);
+```
+
+---
+
+## 🔍 **Vista Completa de Solicitudes**
+
+### **Consultar todas las solicitudes:**
+```sql
+SELECT 
+    id_solicitud,
+    nombre_solicitud,
+    solicitante,
+    tipo,
+    estado,
+    laboratorio_nombre,
+    tecnico_asignado,
+    destino_rol,
+    fecha_creacion
+FROM vista_solicitudes_completas
+ORDER BY fecha_creacion DESC;
+```
+
+### **Filtrar por laboratorio:**
+```sql
+SELECT * FROM vista_solicitudes_completas 
+WHERE laboratorio_nombre = 'Laboratorio de Redes';
+```
+
+### **Filtrar por tipo:**
+```sql
+SELECT * FROM vista_solicitudes_completas 
+WHERE tipo = 'Soporte' AND estado = 'pendiente';
 ```
 
 ## Arquitectura de la Base de Datos
