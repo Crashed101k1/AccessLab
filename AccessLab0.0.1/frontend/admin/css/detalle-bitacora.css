@@ -1,0 +1,411 @@
+/* ======================================
+   DETALLE DE BITÁCORA - CSS ESPECÍFICO
+   ====================================== */
+
+/* Contenedor principal */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header de la bitácora */
+.bitacora-header {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    border: 2px solid #e9ecef;
+}
+
+/* Grid de información */
+.bitacora-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.info-item span {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: #212529;
+}
+
+.info-item .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 0.375rem 0.75rem;
+    background-color: #f8f9fa;
+}
+
+/* Opciones de parcial */
+.parcial-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.parcial-options input[type="radio"] {
+    margin-right: 0.3rem;
+}
+
+.parcial-options label {
+    margin-right: 1rem;
+    font-weight: normal;
+}
+
+/* Botón generar PDF */
+.btn-generar-pdf {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-generar-pdf:hover {
+    background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+}
+
+/* Sección de registros */
+.registros-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    border: 2px solid #e9ecef;
+}
+
+/* Tabla de registros */
+.tabla-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.tabla-registros {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabla-registros thead {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+}
+
+.tabla-registros th {
+    padding: 1rem 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.tabla-registros td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.tabla-registros tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.tabla-registros tbody tr:hover {
+    background-color: #e3f2fd;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Estados de los registros */
+.estado-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.estado-badge.completado {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.estado-badge.en-proceso {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.estado-badge.pendiente {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Container de observaciones */
+.observaciones-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+/* Secciones de observaciones */
+.observaciones-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 2px solid #e9ecef;
+}
+
+.observaciones-profesor {
+    border-left: 4px solid #28a745;
+}
+
+.observaciones-revision {
+    border-left: 4px solid #007bff;
+}
+
+.observaciones-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #495057;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.observaciones-content {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    line-height: 1.6;
+    color: #495057;
+    font-style: italic;
+}
+
+/* Formulario de observaciones */
+.observaciones-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.observaciones-textarea {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.observaciones-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.observaciones-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-cancelar:hover {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108,117,125,0.3);
+}
+
+.btn-guardar {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-guardar:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+}
+
+/* Historial de observaciones */
+.historial-observaciones {
+    margin-top: 1.5rem;
+    border-top: 2px solid #f8f9fa;
+    padding-top: 1.5rem;
+}
+
+.observacion-historial {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #007bff;
+}
+
+.observacion-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.observacion-autor {
+    font-weight: 600;
+    color: #495057;
+}
+
+.observacion-fecha {
+    font-style: italic;
+}
+
+.observacion-texto {
+    color: #495057;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Animaciones y efectos */
+.tabla-registros tbody tr {
+    transition: all 0.3s ease;
+}
+
+.observaciones-section {
+    transition: all 0.3s ease;
+}
+
+.observaciones-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Estados de la bitácora */
+.estado-bitacora {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.estado-bitacora.abierta {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.estado-bitacora.cerrada {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .bitacora-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .observaciones-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .parcial-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .btn-generar-pdf {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .tabla-registros {
+        font-size: 0.8rem;
+    }
+    
+    .tabla-registros th,
+    .tabla-registros td {
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding: 1rem;
+    }
+    
+    .bitacora-header,
+    .registros-section,
+    .observaciones-section {
+        padding: 1rem;
+    }
+    
+    .observaciones-actions {
+        flex-direction: column;
+    }
+    
+    .btn-cancelar,
+    .btn-guardar {
+        justify-content: center;
+    }
+}

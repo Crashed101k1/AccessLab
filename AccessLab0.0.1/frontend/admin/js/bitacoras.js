@@ -289,7 +289,14 @@ function renderTable() {
                 <span class="status-badge status-${bitacora.estado}">${bitacora.estado.charAt(0).toUpperCase() + bitacora.estado.slice(1)}</span>
             </td>
             <td class="actions-cell">
-                <a href="#" class="action-link">Ver / Descargar</a>
+                <div class="action-buttons">
+                    <button class="btn-ver-bitacora" onclick="verDetalleBitacora('${bitacora.usuario}', '${bitacora.laboratorio}', '${bitacora.grupo}')" title="Ver detalle de la bitácora">
+                        <i class="fas fa-eye"></i> Ver
+                    </button>
+                    <button class="btn-descargar-bitacora" onclick="descargarBitacora('${bitacora.usuario}', '${bitacora.laboratorio}', '${bitacora.grupo}')" title="Descargar bitácora en PDF">
+                        <i class="fas fa-download"></i> Descargar
+                    </button>
+                </div>
             </td>
         `;
         tableBody.appendChild(row);
@@ -907,3 +914,37 @@ const additionalStyles = `
 `;
 
 document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
+// ======================================
+// FUNCIONES PARA ACCIONES DE BITÁCORA
+// ======================================
+
+function verDetalleBitacora(usuario, laboratorio, grupo) {
+    // Crear parámetros para la URL de detalle
+    const params = new URLSearchParams({
+        profesor: encodeURIComponent(usuario),
+        laboratorio: encodeURIComponent(laboratorio),
+        grupo: encodeURIComponent(grupo)
+    });
+    
+    // Navegar a la vista de detalle
+    window.location.href = `DetalleBitacora.html?${params.toString()}`;
+}
+
+function descargarBitacora(usuario, laboratorio, grupo) {
+    // Mostrar notificación de proceso
+    showNotification(`Generando PDF de bitácora para ${usuario} - ${grupo}...`, 'info');
+    
+    // Simular proceso de descarga
+    setTimeout(() => {
+        showNotification('PDF generado exitosamente', 'success');
+        
+        // Crear enlace de descarga simulado
+        const link = document.createElement('a');
+        link.href = '#'; // En implementación real, sería la URL del PDF
+        link.download = `Bitacora_${usuario.replace(' ', '_')}_${grupo}_${laboratorio.replace(' ', '_')}.pdf`;
+        // link.click(); // Descomentар para activar descarga real
+        
+        console.log(`Descargando bitácora: ${usuario} - ${laboratorio} - ${grupo}`);
+    }, 2000);
+}
