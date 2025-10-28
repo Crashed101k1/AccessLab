@@ -179,14 +179,7 @@
     color: #28a745; /* Verde por defecto (activo) */
 }
 
-/* Botón para asignar/ver laboratorios */
-.assign-btn i {
-    color: #007bff; /* Azul para asignación */
-}
 
-.assign-btn:hover i {
-    color: #0056b3;
-}
 
 /* Estilos para usuarios inactivos */
 .user-inactive {

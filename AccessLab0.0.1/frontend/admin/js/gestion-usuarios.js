@@ -206,9 +206,6 @@ function createUserRow(userData) {
             <button class="action-btn toggle-btn" title="Activar/Desactivar Usuario" onclick="toggleUserStatus(this)">
                 <i class="fas fa-power-off"></i>
             </button>
-            <button class="action-btn assign-btn" title="Asignar/Ver Laboratorios" onclick="manageUserLabs(this)">
-                <i class="fas fa-calendar-alt"></i>
-            </button>
         </td>
     `;
     
@@ -284,128 +281,7 @@ function toggleUserStatus(button) {
     }
 }
 
-// Gestionar laboratorios del usuario (asignar/visualizar)
-function manageUserLabs(button) {
-    const row = button.closest('tr');
-    const nombre = row.querySelector('.usuario-name').textContent;
-    const rolElement = row.querySelector('.rol-badge span');
-    const rol = rolElement.textContent;
-    const userId = row.dataset.userId;
-    
-    // Determinar si es temporada de asignaciones (simulado)
-    const isAssignmentSeason = checkIfAssignmentSeason();
-    
-    if (rol.toLowerCase() === 'maestro') {
-        if (isAssignmentSeason) {
-            showAssignLabsModal(nombre, userId);
-        } else {
-            showViewLabsModal(nombre, userId);
-        }
-    } else {
-        showAlert('Esta función solo está disponible para usuarios con rol de Maestro', 'warning');
-    }
-}
 
-// Verificar si es temporada de asignaciones (función simulada)
-function checkIfAssignmentSeason() {
-    // En una implementación real, esto consultaría al backend
-    // Por ahora simulamos que siempre es temporada de asignación
-    return true;
-}
-
-// Mostrar modal para asignar laboratorios
-function showAssignLabsModal(nombre, userId) {
-    showLabModal(
-        'Asignar Laboratorios y Horarios',
-        nombre,
-        'asignar',
-        `Esta función permite asignar laboratorios y horarios específicos al profesor <strong>${nombre}</strong> durante la temporada de asignaciones.<br><br>
-        <strong>Funcionalidades que incluirá:</strong><br>
-        • Selección de laboratorios disponibles<br>
-        • Configuración de horarios por día<br>
-        • Gestión de materias por laboratorio<br>
-        • Validación de conflictos de horarios<br>
-        • Guardado automático de asignaciones`
-    );
-}
-
-// Mostrar modal para visualizar laboratorios asignados
-function showViewLabsModal(nombre, userId) {
-    showLabModal(
-        'Laboratorios y Horarios Asignados',
-        nombre,
-        'visualizar',
-        `Esta función muestra todos los laboratorios y horarios asignados al profesor <strong>${nombre}</strong>.<br><br>
-        <strong>Información que mostrará:</strong><br>
-        • Laboratorios asignados con sus nombres<br>
-        • Horarios detallados por día de la semana<br>
-        • Materias impartidas en cada laboratorio<br>
-        • Duración de las sesiones<br>
-        • Historial de asignaciones anteriores`
-    );
-}
-
-// Función genérica para mostrar modal de laboratorios
-function showLabModal(title, nombre, action, description) {
-    // Crear modal dinámicamente
-    const modalHtml = `
-        <div class="modal fade" id="labModal" tabindex="-1" aria-labelledby="labModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="labModalLabel">
-                            <i class="fas fa-calendar-alt me-2"></i>${title}
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info mb-3">
-                            <i class="fas fa-info-circle me-2"></i>
-                            <strong>Función en Desarrollo</strong>
-                        </div>
-                        <div class="user-info mb-3">
-                            <h6><i class="fas fa-user me-2"></i>Profesor: ${nombre}</h6>
-                        </div>
-                        <div class="function-description">
-                            <p>${description}</p>
-                        </div>
-                        <div class="development-note mt-4 p-3 bg-light rounded">
-                            <h6><i class="fas fa-code me-2"></i>Estado de Desarrollo:</h6>
-                            <p class="mb-0">Esta funcionalidad está siendo desarrollada y estará disponible en próximas versiones del sistema.</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times me-2"></i>Cerrar
-                        </button>
-                        <button type="button" class="btn btn-primary" disabled>
-                            <i class="fas fa-${action === 'asignar' ? 'plus' : 'eye'} me-2"></i>
-                            ${action === 'asignar' ? 'Asignar Laboratorios' : 'Ver Asignaciones'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Remover modal existente si lo hay
-    const existingModal = document.getElementById('labModal');
-    if (existingModal) {
-        existingModal.remove();
-    }
-    
-    // Agregar modal al DOM
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    
-    // Mostrar modal
-    const modal = new bootstrap.Modal(document.getElementById('labModal'));
-    modal.show();
-    
-    // Limpiar modal al cerrarse
-    document.getElementById('labModal').addEventListener('hidden.bs.modal', function() {
-        this.remove();
-    });
-}
 
 // === FUNCIONES DEL FORMULARIO ===
 
