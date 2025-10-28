@@ -27,8 +27,8 @@ Basada en el mockup proporcionado, incluye:
 - Nombre de la práctica o actividad realizada
 - Fecha de la actividad
 - Horarios de entrada y salida
-- Material de apoyo utilizado
-- Estado de cada registro
+- **Horas de sesión** (calculadas automáticamente)
+- **Estado del equipo** (Aceptable, En mal estado, Anormal)
 
 **💬 Sistema de Observaciones:**
 - **Observaciones del profesor** (solo lectura)
@@ -41,7 +41,9 @@ Basada en el mockup proporcionado, incluye:
 
 ### **🧑‍🏫 Maestro/Profesor:**
 - ❌ **No puede acceder** a la vista detallada de otras bitácoras
-- ✅ Solo puede ver y editar sus propias bitácoras
+- ✅ **Puede llenar sus propias bitácoras** con todos los campos
+- ✅ **Selecciona estado del equipo** (Aceptable, En mal estado, Anormal)
+- ✅ **Registra horas de sesión** y actividades realizadas
 
 ### **🔧 Técnico:**
 - ✅ **Ver bitácoras** de todos los profesores (solo lectura)
@@ -100,22 +102,27 @@ Home Admin → Bitácoras → Lista de bitácoras
 
 ---
 
-## 📊 **Estados de Registros**
+## 📊 **Estados del Equipo**
 
-### **✅ Completado**
-- **Badge verde**: Actividad finalizada exitosamente
-- Horario de entrada y salida registrados
-- Material utilizado documentado
+### **✅ Aceptable**
+- **Badge verde**: Equipos funcionando correctamente
+- Sin problemas detectados durante la sesión
+- Condiciones normales de operación
 
-### **🟡 En Proceso**
-- **Badge amarillo**: Actividad iniciada pero no finalizada
-- Puede mostrar **"En proceso"** en hora de salida
-- Requiere seguimiento en próximas sesiones
+### **❌ En mal estado**
+- **Badge rojo**: Equipos con fallas evidentes
+- Requieren reparación o reemplazo
+- Impactan negativamente en las prácticas
 
-### **❌ Pendiente**
-- **Badge rojo**: Actividad programada pero no iniciada
-- Sin horarios registrados
-- Requiere atención del profesor
+### **🟡 Anormal**
+- **Badge amarillo**: Comportamiento irregular de equipos
+- Funcionan pero con anomalías
+- Requieren revisión técnica preventiva
+
+### **⏱️ Cálculo de Horas de Sesión**
+- **Automático**: Se calcula la diferencia entre hora de entrada y salida
+- **Formato decimal**: Ejemplo: 2.5 horas para 2 horas 30 minutos
+- **Editable por maestros**: Durante el llenado de bitácoras
 
 ---
 

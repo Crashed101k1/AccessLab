@@ -33,9 +33,9 @@ let bitacoraActual = {
             fecha: "2025-01-15",
             horaEntrada: "09:00",
             horaSalida: "11:00",
-            materialUtilizado: "Cables de red, Laptops, Switches CISCO",
-            estado: "completado",
-            observaciones: "Práctica exitosa, todos los equipos funcionando correctamente"
+            horasSesion: 2.0,
+            estadoEquipo: "aceptable",
+            observaciones: "Práctica exitosa, equipos en buen estado de funcionamiento"
         },
         {
             id: 2,
@@ -44,9 +44,9 @@ let bitacoraActual = {
             fecha: "2025-01-22",
             horaEntrada: "14:00",
             horaSalida: "16:00",
-            materialUtilizado: "Equipos de red, Documentación técnica",
-            estado: "en-proceso",
-            observaciones: "Se requiere completar la configuración en la próxima sesión"
+            horasSesion: 2.0,
+            estadoEquipo: "mal-estado",
+            observaciones: "Se detectaron problemas en algunos puertos del switch principal"
         },
         {
             id: 3,
@@ -55,8 +55,8 @@ let bitacoraActual = {
             fecha: "2025-01-29",
             horaEntrada: "09:00",
             horaSalida: "11:00",
-            materialUtilizado: "Routers CISCO, Cables de consola, Laptops",
-            estado: "completado",
+            horasSesion: 2.0,
+            estadoEquipo: "aceptable",
             observaciones: "Configuración básica de routers completada exitosamente"
         },
         {
@@ -66,9 +66,9 @@ let bitacoraActual = {
             fecha: "2025-02-05",
             horaEntrada: "14:00",
             horaSalida: "16:00",
-            materialUtilizado: "Routers, Switches, Software de simulación",
-            estado: "en-proceso",
-            observaciones: "Práctica en desarrollo, falta completar la verificación de conectividad"
+            horasSesion: 2.0,
+            estadoEquipo: "anormal",
+            observaciones: "Router con comportamiento irregular, requiere revisión técnica"
         }
     ],
     historialObservaciones: [
@@ -142,8 +142,8 @@ function cargarBitacoraPorParametros(profesor, laboratorio, grupo) {
                 fecha: "2025-05-15",
                 horaEntrada: "08:00",
                 horaSalida: "10:00",
-                materialUtilizado: "Material básico del laboratorio",
-                estado: "completado",
+                horasSesion: 2.0,
+                estadoEquipo: "aceptable",
                 observaciones: "Práctica inicial completada exitosamente"
             },
             {
@@ -153,8 +153,8 @@ function cargarBitacoraPorParametros(profesor, laboratorio, grupo) {
                 fecha: "2025-05-22",
                 horaEntrada: "08:00",
                 horaSalida: grupo.includes("A") ? "10:00" : null,
-                materialUtilizado: "Equipos especializados",
-                estado: grupo.includes("A") ? "completado" : "en-proceso",
+                horasSesion: grupo.includes("A") ? 2.0 : 0.0,
+                estadoEquipo: grupo.includes("A") ? "aceptable" : "anormal",
                 observaciones: grupo.includes("A") ? "Práctica completada" : "En desarrollo"
             }
         ],
@@ -229,10 +229,10 @@ function cargarRegistrosBitacora() {
             <td>${formatearFecha(registro.fecha)}</td>
             <td>${registro.horaEntrada}</td>
             <td>${registro.horaSalida || 'En proceso'}</td>
-            <td class="text-start">${registro.materialUtilizado}</td>
+            <td>${registro.horasSesion || calcularHorasSesion(registro.horaEntrada, registro.horaSalida)}</td>
             <td>
-                <span class="estado-badge ${registro.estado}">
-                    ${formatearEstadoRegistro(registro.estado)}
+                <span class="estado-equipo ${registro.estadoEquipo}">
+                    ${formatearEstadoEquipo(registro.estadoEquipo)}
                 </span>
             </td>
         </tr>
@@ -451,14 +451,36 @@ function formatearFechaCompleta(fecha) {
     });
 }
 
-function formatearEstadoRegistro(estado) {
+function formatearEstadoEquipo(estado) {
     const estados = {
-        'completado': 'Completado',
-        'en-proceso': 'En Proceso',
-        'pendiente': 'Pendiente',
-        'cancelado': 'Cancelado'
+        'aceptable': 'Aceptable',
+        'mal-estado': 'En mal estado',
+        'anormal': 'Anormal'
     };
     return estados[estado] || estado;
+}
+
+function calcularHorasSesion(horaEntrada, horaSalida) {
+    if (!horaEntrada || !horaSalida) {
+        return '0.0';
+    }
+    
+    // Convertir horas a formato 24h para calcular diferencia
+    const [entradaH, entradaM] = horaEntrada.split(':').map(Number);
+    const [salidaH, salidaM] = horaSalida.split(':').map(Number);
+    
+    const entradaMinutos = entradaH * 60 + entradaM;
+    const salidaMinutos = salidaH * 60 + salidaM;
+    
+    let diferenciaMinutos = salidaMinutos - entradaMinutos;
+    
+    // Manejar caso de sesión que cruza medianoche
+    if (diferenciaMinutos < 0) {
+        diferenciaMinutos += 24 * 60;
+    }
+    
+    const horas = diferenciaMinutos / 60;
+    return horas.toFixed(1);
 }
 
 function mostrarNotificacion(mensaje, tipo) {
