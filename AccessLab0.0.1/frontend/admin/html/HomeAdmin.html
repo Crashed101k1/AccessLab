@@ -39,51 +39,94 @@
 
     <!-- Dashboard Cards -->
     <section class="dashboard-cards">
-        <div class="container">
-            <!-- Primera fila -->
-            <div class="row g-4 mb-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="dashboard-card" onclick="navigateTo('bitacoras')">
-                        <div class="card-image-container">
-                            <img src="../../public/images/bitacora.png" alt="Bitácoras" class="card-image">
+        <div class="container" id="dashboardContainer">
+            <!-- Vista Normal: Todas las opciones -->
+            <div id="normalModeCards">
+                <!-- Primera fila -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="dashboard-card" onclick="navigateTo('bitacoras')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/bitacora.png" alt="Bitácoras" class="card-image">
+                            </div>
+                            <h3 class="card-title">Bitácoras</h3>
                         </div>
-                        <h3 class="card-title">Bitácoras</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="dashboard-card" onclick="navigateTo('laboratorios')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/gestionLaboratorios.png" alt="Gestión de Laboratorios" class="card-image">
+                            </div>
+                            <h3 class="card-title">Gestión de Laboratorios</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="dashboard-card" onclick="navigateTo('usuarios')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/gestionUsuarios.png" alt="Gestión de Usuarios" class="card-image">
+                            </div>
+                            <h3 class="card-title">Gestión de Usuarios</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dashboard-card" onclick="navigateTo('laboratorios')">
-                        <div class="card-image-container">
-                            <img src="../../public/images/gestionLaboratorios.png" alt="Gestión de Laboratorios" class="card-image">
+
+                <!-- Segunda fila -->
+                <div class="row g-4">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="dashboard-card" onclick="navigateTo('avisos')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/tablonAvisos.jpeg" alt="Tablón de avisos" class="card-image">
+                            </div>
+                            <h3 class="card-title">Tablón de avisos</h3>
                         </div>
-                        <h3 class="card-title">Gestión de Laboratorios</h3>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dashboard-card" onclick="navigateTo('usuarios')">
-                        <div class="card-image-container">
-                            <img src="../../public/images/gestionUsuarios.png" alt="Gestión de Usuarios" class="card-image">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="dashboard-card" onclick="navigateTo('solicitudes')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/solicitudes.png" alt="Solicitudes" class="card-image">
+                            </div>
+                            <h3 class="card-title">Solicitudes</h3>
                         </div>
-                        <h3 class="card-title">Gestión de Usuarios</h3>
                     </div>
                 </div>
             </div>
 
-            <!-- Segunda fila -->
-            <div class="row g-4">
-                <div class="col-lg-6 col-md-6">
-                    <div class="dashboard-card" onclick="navigateTo('avisos')">
-                        <div class="card-image-container">
-                            <img src="../../public/images/tablonAvisos.jpeg" alt="Tablón de avisos" class="card-image">
+            <!-- Vista Modo Asignación: Solo opciones limitadas -->
+            <div id="assignmentModeCards" style="display: none;">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="dashboard-card assignment-card" onclick="navigateTo('asignar-laboratorios')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/asignarLaboratorios.png" alt="Asignar Laboratorios" class="card-image">
+                            </div>
+                            <h3 class="card-title">Asignar Laboratorios</h3>
+                            <p class="card-subtitle">Gestión de asignaciones y horarios</p>
                         </div>
-                        <h3 class="card-title">Tablón de avisos</h3>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                        <div class="dashboard-card assignment-card" onclick="navigateTo('usuarios')">
+                            <div class="card-image-container">
+                                <img src="../../public/images/gestionUsuarios.png" alt="Gestión de Usuarios" class="card-image">
+                            </div>
+                            <h3 class="card-title">Gestión de Usuarios</h3>
+                            <p class="card-subtitle">Administrar profesores y técnicos</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="dashboard-card" onclick="navigateTo('solicitudes')">
-                        <div class="card-image-container">
-                            <img src="../../public/images/solicitudes.png" alt="Solicitudes" class="card-image">
+                
+                <!-- Mensaje informativo del modo asignación -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="assignment-info-banner">
+                            <div class="info-content">
+                                <i class="fas fa-info-circle"></i>
+                                <div class="info-text">
+                                    <h6>Modo de Asignación Activo</h6>
+                                    <p>Configura las asignaciones de laboratorios para el próximo periodo académico. 
+                                    Las demás funcionalidades estarán disponibles cuando termine el periodo de asignaciones.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="card-title">Solicitudes</h3>
                     </div>
                 </div>
             </div>
@@ -93,6 +136,17 @@
     <!-- Botón de configuración flotante -->
     <div class="config-button" onclick="navigateTo('configuracion')" title="Configuración">
         <i class="fas fa-cog"></i>
+    </div>
+
+    <!-- Indicador de modo asignación (solo visible en modo asignación) -->
+    <div id="assignmentModeIndicator" class="assignment-indicator" style="display: none;">
+        <div class="assignment-content">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Modo Asignación</span>
+        </div>
+        <button class="exit-assignment-btn" onclick="goToConfiguration()" title="Ir a Configuración para cambiar modo">
+            <i class="fas fa-cog"></i>
+        </button>
     </div>
 
     <!-- Footer -->

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessLab - Asignar Laboratorios</title>
+    <link rel="icon" href="../../public/images/AccessLabLogo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS base de la plantilla -->
+    <link rel="stylesheet" href="../css/plantilla-base.css">
+    <!-- CSS personalizado para Asignar Laboratorios -->
+    <link rel="stylesheet" href="../css/asignar-laboratorios.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="../../public/images/AccessLabLogo.png" alt="AccessLab Logo">
+                <div>
+                    <h1 class="welcome-text">Asignar Laboratorios</h1>
+                    <span class="assignment-mode-badge">Modo Asignación</span>
+                </div>
+            </div>
+            <div class="header-icons">
+                <button class="header-icon" title="Regresar" onclick="goBack()">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+                <button class="header-icon" title="Inicio" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="header-icon" title="Notificaciones" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </button>
+                <button class="header-icon logout-icon" title="Cerrar Sesión" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="assignment-container">
+            
+            <!-- Panel de Control Superior -->
+            <div class="control-panel">
+                <div class="panel-left">
+                    <div class="assignment-status">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div class="status-info">
+                            <h6>Estado de Asignaciones</h6>
+                            <span class="status-text">En Progreso</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-right">
+                    <button class="btn btn-outline-secondary me-2" onclick="showAssignmentSummary()">
+                        <i class="fas fa-chart-pie me-2"></i>Resumen
+                    </button>
+                    <button class="btn btn-success" onclick="showSaveAssignmentsModal()">
+                        <i class="fas fa-save me-2"></i>Guardar Asignaciones
+                    </button>
+                </div>
+            </div>
+
+            <!-- Layout Principal: Lista de Profesores + Panel de Asignación -->
+            <div class="assignment-layout">
+                
+                <!-- Panel Izquierdo: Lista de Profesores -->
+                <div class="teachers-panel">
+                    <div class="panel-header">
+                        <h5><i class="fas fa-chalkboard-teacher me-2"></i>Profesores</h5>
+                        
+                        <!-- Filtros de Búsqueda -->
+                        <div class="filters-container">
+                            <div class="search-container">
+                                <input type="text" id="teacherSearch" class="form-control" placeholder="Buscar por nombre de usuario...">
+                                <i class="fas fa-search search-icon"></i>
+                            </div>
+                            
+                            <div class="filter-row">
+                                <select id="careerFilter" class="form-select">
+                                    <option value="">Todas las carreras</option>
+                                    <option value="Tecnologías de la Información">Tecnologías de la Información</option>
+                                    <option value="Ingeniería en Mecatrónica">Ingeniería en Mecatrónica</option>
+                                    <option value="Gestión Administrativa">Gestión Administrativa</option>
+                                    <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                                    <option value="Tecnologías de la Construcción">Tecnologías de la Construcción</option>
+                                </select>
+                                
+                                <button class="btn btn-outline-secondary btn-sm" onclick="clearFilters()">
+                                    <i class="fas fa-times me-1"></i>Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="teachers-list" id="teachersList">
+                        <!-- Lista de profesores se cargará dinámicamente -->
+                        <div class="teacher-item" data-teacher-id="prof_001">
+                            <div class="teacher-info">
+                                <div class="teacher-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="teacher-details">
+                                    <h6>Prof. Juan Pérez</h6>
+                                    <span class="teacher-career">Tecnologías de la Información</span>
+                                    <div class="assignment-count">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        <span>0 laboratorios asignados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary assign-btn" onclick="selectTeacher('prof_001')">
+                                Asignar
+                            </button>
+                        </div>
+
+                        <div class="teacher-item" data-teacher-id="prof_002">
+                            <div class="teacher-info">
+                                <div class="teacher-avatar assigned">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="teacher-details">
+                                    <h6>Prof. María García</h6>
+                                    <span class="teacher-career">Ingeniería en Mecatrónica</span>
+                                    <div class="assignment-count">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        <span>2 laboratorios asignados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-success assign-btn" onclick="selectTeacher('prof_002')">
+                                Modificar
+                            </button>
+                        </div>
+
+                        <div class="teacher-item" data-teacher-id="prof_003">
+                            <div class="teacher-info">
+                                <div class="teacher-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="teacher-details">
+                                    <h6>Prof. Carlos López</h6>
+                                    <span class="teacher-career">Gestión Administrativa</span>
+                                    <div class="assignment-count">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        <span>0 laboratorios asignados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary assign-btn" onclick="selectTeacher('prof_003')">
+                                Asignar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho: Asignación de Laboratorios -->
+                <div class="assignment-panel">
+                    <div id="emptyState" class="empty-assignment-state">
+                        <i class="fas fa-mouse-pointer fa-3x mb-3"></i>
+                        <h5>Selecciona un Profesor</h5>
+                        <p class="text-muted">Elige un profesor de la lista para gestionar sus asignaciones de laboratorios</p>
+                    </div>
+
+                    <div id="assignmentContent" class="assignment-content" style="display: none;">
+                        <div class="assignment-header">
+                            <div class="selected-teacher-info">
+                                <div class="teacher-avatar-large">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="teacher-data">
+                                    <h5 id="selectedTeacherName">Prof. Seleccionado</h5>
+                                    <span id="selectedTeacherCareer" class="teacher-career">Carrera</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="clearSelection()">
+                                <i class="fas fa-times me-2"></i>Limpiar
+                            </button>
+                        </div>
+
+                        <!-- Laboratorios Disponibles -->
+                        <div class="laboratories-section">
+                            <h6><i class="fas fa-flask me-2"></i>Laboratorios Disponibles</h6>
+                            <div class="laboratories-grid" id="laboratoriesGrid">
+                                <!-- Laboratorios se cargarán dinámicamente -->
+                                <div class="lab-card" data-lab-id="lab_001">
+                                    <div class="lab-info">
+                                        <h6>Laboratorio de Redes</h6>
+                                        <span class="lab-type">Tecnologías de la Información</span>
+                                    </div>
+                                    <div class="lab-status available">
+                                        <i class="fas fa-check-circle"></i>Disponible
+                                    </div>
+                                </div>
+
+                                <div class="lab-card assigned" data-lab-id="lab_002">
+                                    <div class="lab-info">
+                                        <h6>Laboratorio de Automatización</h6>
+                                        <span class="lab-type">Ingeniería en Mecatrónica</span>
+                                    </div>
+                                    <div class="lab-status assigned">
+                                        <i class="fas fa-user-check"></i>Asignado a este profesor
+                                    </div>
+                                </div>
+
+                                <div class="lab-card occupied" data-lab-id="lab_003">
+                                    <div class="lab-info">
+                                        <h6>Laboratorio de Química</h6>
+                                        <span class="lab-type">Tecnologías de la Construcción</span>
+                                    </div>
+                                    <div class="lab-status occupied">
+                                        <i class="fas fa-user-times"></i>Ocupado por otro profesor
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuración de Horarios -->
+                        <div class="schedules-section" id="schedulesSection" style="display: none;">
+                            <h6><i class="fas fa-clock me-2"></i>Configurar Horarios</h6>
+                            <div class="selected-lab-info" id="selectedLabInfo">
+                                <!-- Info del laboratorio seleccionado -->
+                            </div>
+                            
+                            <div class="schedule-grid">
+                                <div class="schedule-day">
+                                    <label class="day-label">Lunes</label>
+                                    <div class="time-slots">
+                                        <select class="form-select" name="monday_start">
+                                            <option value="">Hora inicio</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                        </select>
+                                        <select class="form-select" name="monday_end">
+                                            <option value="">Hora fin</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-day">
+                                    <label class="day-label">Martes</label>
+                                    <div class="time-slots">
+                                        <select class="form-select" name="tuesday_start">
+                                            <option value="">Hora inicio</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                        </select>
+                                        <select class="form-select" name="tuesday_end">
+                                            <option value="">Hora fin</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-day">
+                                    <label class="day-label">Miércoles</label>
+                                    <div class="time-slots">
+                                        <select class="form-select" name="wednesday_start">
+                                            <option value="">Hora inicio</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                        </select>
+                                        <select class="form-select" name="wednesday_end">
+                                            <option value="">Hora fin</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-day">
+                                    <label class="day-label">Jueves</label>
+                                    <div class="time-slots">
+                                        <select class="form-select" name="thursday_start">
+                                            <option value="">Hora inicio</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                        </select>
+                                        <select class="form-select" name="thursday_end">
+                                            <option value="">Hora fin</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-day">
+                                    <label class="day-label">Viernes</label>
+                                    <div class="time-slots">
+                                        <select class="form-select" name="friday_start">
+                                            <option value="">Hora inicio</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                        </select>
+                                        <select class="form-select" name="friday_end">
+                                            <option value="">Hora fin</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="14:00">14:00</option>
+                                            <option value="15:00">15:00</option>
+                                            <option value="16:00">16:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="18:00">18:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="schedule-actions">
+                                <button class="btn btn-secondary me-2" onclick="cancelScheduleConfiguration()">
+                                    <i class="fas fa-times me-2"></i>Cancelar
+                                </button>
+                                <button class="btn btn-success" onclick="saveLabSchedule()">
+                                    <i class="fas fa-save me-2"></i>Guardar Horario
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-center">
+                <p><strong>AccessLab Todos los Derechos Reservados 2025</strong></p>
+                <p>Universidad Tecnológica de Morelia</p>
+            </div>
+            <div class="footer-logo">
+                <img src="../../public/images/UTM.png" alt="UTM Logo" class="utm-logo">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de navegación compartido -->
+    <script src="../../shared/navigation-utils.js"></script>
+    <!-- Script específico de Asignar Laboratorios -->
+    <script src="../js/asignar-laboratorios.js"></script>
+</body>
+</html>

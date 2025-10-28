@@ -8,6 +8,37 @@ let systemInfo = {
     activitiesActive: true // Por defecto las actividades están activas
 };
 
+// === CONSTANTES PARA MODO ASIGNACIÓN ===
+const ASSIGNMENT_MODE_KEY = 'accesslab_assignment_mode';
+const ASSIGNMENT_MODE_DATE_KEY = 'accesslab_assignment_mode_date';
+
+// === FUNCIONES DE MODO ASIGNACIÓN ===
+
+// Verificar si está en modo asignación
+function isAssignmentMode() {
+    return localStorage.getItem(ASSIGNMENT_MODE_KEY) === 'true';
+}
+
+// Activar modo asignación
+function activateAssignmentMode() {
+    localStorage.setItem(ASSIGNMENT_MODE_KEY, 'true');
+    localStorage.setItem(ASSIGNMENT_MODE_DATE_KEY, new Date().toISOString());
+    console.log('Modo Asignación activado desde configuración');
+}
+
+// Desactivar modo asignación
+function deactivateAssignmentMode() {
+    localStorage.removeItem(ASSIGNMENT_MODE_KEY);
+    localStorage.removeItem(ASSIGNMENT_MODE_DATE_KEY);
+    console.log('Modo Asignación desactivado desde configuración');
+}
+
+// Obtener fecha de activación del modo asignación
+function getAssignmentModeDate() {
+    const dateStr = localStorage.getItem(ASSIGNMENT_MODE_DATE_KEY);
+    return dateStr ? new Date(dateStr) : null;
+}
+
 // Función para navegar a diferentes secciones
 // Función para regresar a la página anterior
 function goBack() {
@@ -99,6 +130,19 @@ function confirmTerminateAction() {
     systemInfo.activitiesActive = false;
     updateActivityButton();
     closeTerminateModal();
+    
+    // Activar modo asignación en el sistema
+    activateAssignmentMode();
+    
+    // Mostrar mensaje de confirmación
+    setTimeout(() => {
+        alert('✅ Término de Actividades Confirmado\n\n' +
+              'Se ha activado el Modo de Asignación.\n\n' +
+              '📋 Funcionalidades disponibles:\n' +
+              '• Asignar Laboratorios\n' +
+              '• Gestión de Usuarios\n\n' +
+              'Las demás funciones estarán restringidas hasta el inicio del próximo periodo.');
+    }, 300);
 }
 
 // Funciones para el modal de Iniciar Actividades
@@ -118,6 +162,17 @@ function confirmStartAction() {
     systemInfo.activitiesActive = true;
     updateActivityButton();
     closeStartModal();
+    
+    // Desactivar modo asignación en el sistema
+    deactivateAssignmentMode();
+    
+    // Mostrar mensaje de confirmación
+    setTimeout(() => {
+        alert('✅ Inicio de Actividades Confirmado\n\n' +
+              'Se ha desactivado el Modo de Asignación.\n\n' +
+              '🎓 Todas las funcionalidades del sistema están ahora disponibles.\n\n' +
+              'Los usuarios Maestro y Técnico pueden acceder normalmente a todas las opciones.');
+    }, 300);
 }
 
 // Funciones para el modal de Respaldos
@@ -231,6 +286,9 @@ function updateActivityButton() {
 function initializeConfigPage() {
     console.log('Página de configuración inicializada');
     
+    // Sincronizar estado del sistema con el modo asignación
+    syncSystemStateWithAssignmentMode();
+    
     // Agregar animaciones de entrada
     const configContainer = document.querySelector('.config-container');
     if (configContainer) {
@@ -242,6 +300,25 @@ function initializeConfigPage() {
             configContainer.style.opacity = '1';
             configContainer.style.transform = 'translateY(0)';
         }, 100);
+    }
+}
+
+// Sincronizar estado del sistema con el modo asignación
+function syncSystemStateWithAssignmentMode() {
+    const assignmentModeActive = isAssignmentMode();
+    
+    // Si el modo asignación está activo, las actividades deben estar inactivas
+    if (assignmentModeActive) {
+        systemInfo.activitiesActive = false;
+    }
+    
+    // Actualizar el botón según el estado sincronizado
+    updateActivityButton();
+    
+    // Mostrar información del modo asignación si está activo
+    if (assignmentModeActive) {
+        const activationDate = getAssignmentModeDate();
+        console.log('Modo Asignación detectado, activado el:', activationDate);
     }
 }
 

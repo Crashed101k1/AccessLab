@@ -394,3 +394,184 @@ body {
         font-size: 14px;
     }
 }
+
+/* === ESTILOS PARA MODO ASIGNACIÓN === */
+
+/* Indicador de modo asignación */
+.assignment-indicator {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: white;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.assignment-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.assignment-content i {
+    font-size: 20px;
+}
+
+.assignment-content span {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.exit-assignment-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.exit-assignment-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.exit-assignment-btn i {
+    margin-right: 0;
+}
+
+/* Badge de modo asignación en el header */
+.assignment-badge {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 15px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Cards de modo asignación */
+.assignment-card {
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #3498db, #2980b9) border-box;
+    transition: all 0.3s ease;
+}
+
+.assignment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
+}
+
+.assignment-card .card-subtitle {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Banner informativo del modo asignación */
+.assignment-info-banner {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.info-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.info-content i {
+    color: #3498db;
+    font-size: 24px;
+    margin-top: 2px;
+}
+
+.info-text h6 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.info-text p {
+    color: #6c757d;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6), 0 0 0 10px rgba(243, 156, 18, 0.1);
+    }
+    100% {
+        box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.8);
+    }
+}
+
+/* Estilos informativos para modo asignación */
+.assignment-features {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+/* Responsive para elementos de modo asignación */
+@media (max-width: 768px) {
+    .assignment-indicator {
+        bottom: 80px;
+        right: 20px;
+        min-width: 150px;
+        padding: 12px 15px;
+    }
+    
+    .assignment-content span {
+        font-size: 14px;
+    }
+    
+    .assignment-badge {
+        display: block;
+        margin-left: 0;
+        margin-top: 5px;
+        text-align: center;
+    }
+    
+    .assignment-info-banner {
+        padding: 20px 15px;
+    }
+    
+    .info-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
