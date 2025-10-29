@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Gestión de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="AccessLab0.0.1/frontend/admin/css/gestion-usuarios.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Prueba de Funcionalidad</h2>
+        
+        <!-- Navegación de Pestañas -->
+        <div class="tabs-navigation mb-3">
+            <button class="tab-btn active" id="activosTab" onclick="switchTab('activos')">
+                <i class="fas fa-users me-2"></i>Usuarios Activos
+                <span class="tab-count" id="activosCount">7</span>
+            </button>
+            <button class="tab-btn" id="inactivosTab" onclick="switchTab('inactivos')">
+                <i class="fas fa-user-slash me-2"></i>Usuarios Inactivos
+                <span class="tab-count" id="inactivosCount">5</span>
+            </button>
+            <button class="btn btn-sm btn-warning ms-2" onclick="testAddUser()">
+                <i class="fas fa-plus"></i> Test
+            </button>
+        </div>
+
+        <!-- Contenido de Activos -->
+        <div id="activosContent" class="tab-content">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Carrera</th>
+                            <th>Rol</th>
+                            <th>Contraseña</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuariosActivosTableBody">
+                        <tr data-user-id="user1" data-status="active">
+                            <td class="usuario-name">maria.lopez</td>
+                            <td class="carrera-name">ISC</td>
+                            <td class="rol-badge"><span class="rol-maestro">Maestro</span></td>
+                            <td class="password-field">*******</td>
+                            <td class="acciones-cell">
+                                <button class="action-btn edit-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Contenido de Inactivos -->
+        <div id="inactivosContent" class="tab-content" style="display: none;">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Carrera</th>
+                            <th>Rol</th>
+                            <th>Fecha Baja</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuariosInactivosTableBody">
+                        <tr data-user-id="inactive1" data-status="inactive">
+                            <td class="usuario-name">carlos.torres</td>
+                            <td class="carrera-name">TI</td>
+                            <td class="rol-badge"><span class="rol-estudiante">Estudiante</span></td>
+                            <td class="date-field">2024-01-15</td>
+                            <td class="acciones-cell">
+                                <button class="action-btn view-btn" title="Ver Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="AccessLab0.0.1/frontend/admin/js/gestion-usuarios.js"></script>
+    <script>
+        // Funciones de prueba simples si fallan las del archivo principal
+        function switchTab(tabName) {
+            console.log('Switch tab called:', tabName);
+            
+            const activosContent = document.getElementById('activosContent');
+            const inactivosContent = document.getElementById('inactivosContent');
+            const activosTab = document.getElementById('activosTab');
+            const inactivosTab = document.getElementById('inactivosTab');
+            
+            // Ocultar ambos contenidos
+            if (activosContent) activosContent.style.display = 'none';
+            if (inactivosContent) inactivosContent.style.display = 'none';
+            
+            // Remover active de ambos botones
+            if (activosTab) activosTab.classList.remove('active');
+            if (inactivosTab) inactivosTab.classList.remove('active');
+            
+            // Mostrar el contenido seleccionado
+            if (tabName === 'activos') {
+                if (activosContent) activosContent.style.display = 'block';
+                if (activosTab) activosTab.classList.add('active');
+            } else if (tabName === 'inactivos') {
+                if (inactivosContent) inactivosContent.style.display = 'block';
+                if (inactivosTab) inactivosTab.classList.add('active');
+            }
+        }
+        
+        function testAddUser() {
+            alert('Función testAddUser funcionando!');
+        }
+    </script>
+</body>
+</html>

@@ -4,7 +4,54 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
     loadUsers();
+    setupTabs();
 });
+
+// Configuración simple de pestañas
+function setupTabs() {
+    // Asegurar estado inicial correcto
+    const activosContent = document.getElementById('activosContent');
+    const inactivosContent = document.getElementById('inactivosContent');
+    
+    if (activosContent) activosContent.style.display = 'block';
+    if (inactivosContent) inactivosContent.style.display = 'none';
+    
+    console.log('Pestañas configuradas');
+}
+
+// switchTab se hace globalmente disponible al final del archivo
+
+// Función simple para probar agregar usuario
+function testAddUser() {
+    const newUserId = 'user_' + Date.now();
+    const newUserRow = `
+        <tr data-user-id="${newUserId}" data-status="active">
+            <td class="usuario-name">nuevo.usuario</td>
+            <td class="carrera-name">TI</td>
+            <td class="rol-badge">
+                <span class="rol-maestro">Maestro</span>
+            </td>
+            <td class="password-field">*******</td>
+            <td class="acciones-cell">
+                <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('${newUserId}')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('${newUserId}', 'inactive')">
+                    <i class="fas fa-ban"></i>
+                </button>
+            </td>
+        </tr>
+    `;
+    
+    const activosTable = document.getElementById('usuariosActivosTableBody');
+    if (activosTable) {
+        activosTable.insertAdjacentHTML('beforeend', newUserRow);
+        updateUserCounts();
+        console.log('Usuario de prueba agregado');
+    }
+}
+
+// testAddUser se hace globalmente disponible al final del archivo
 
 // === FUNCIONES DEL FORMULARIO ===
 
@@ -167,8 +214,32 @@ function updateUser(userData) {
 
 // Cargar usuarios (simulado)
 function loadUsers() {
-    // Aquí cargarías los usuarios desde el backend
-    console.log('Cargando usuarios...');
+    // Los usuarios ya están en el HTML, solo verificamos que estén visibles
+    console.log('Usuarios cargados desde HTML');
+    
+    // Contar usuarios para actualizar badges
+    updateUserCounts();
+}
+
+function updateUserCounts() {
+    const activosTable = document.getElementById('usuariosActivosTableBody');
+    const inactivosTable = document.getElementById('usuariosInactivosTableBody');
+    
+    if (activosTable) {
+        const activosCount = activosTable.querySelectorAll('tr').length;
+        const activosCountElement = document.getElementById('activosCount');
+        if (activosCountElement) {
+            activosCountElement.textContent = activosCount;
+        }
+    }
+    
+    if (inactivosTable) {
+        const inactivosCount = inactivosTable.querySelectorAll('tr').length;
+        const inactivosCountElement = document.getElementById('inactivosCount');
+        if (inactivosCountElement) {
+            inactivosCountElement.textContent = inactivosCount;
+        }
+    }
 }
 
 // Agregar usuario a la tabla
@@ -642,5 +713,213 @@ function calculatePasswordStrength(password) {
 // Actualizar indicador de fortaleza
 function updatePasswordStrengthIndicator(strength) {
     // Esta función se puede expandir para mostrar un indicador visual
-    console.log('Password strength:', strength);
 }
+
+// === FUNCIONES DE PESTAÑAS ===
+
+// Cambiar entre pestañas de usuarios activos e inactivos - VERSIÓN SIMPLIFICADA
+function switchTab(tabName) {
+    console.log('Switching to tab:', tabName);
+    
+    // Ocultar ambos contenidos
+    const activosContent = document.getElementById('activosContent');
+    const inactivosContent = document.getElementById('inactivosContent');
+    
+    if (activosContent) activosContent.style.display = 'none';
+    if (inactivosContent) inactivosContent.style.display = 'none';
+    
+    // Remover active de ambos botones
+    const activosTab = document.getElementById('activosTab');
+    const inactivosTab = document.getElementById('inactivosTab');
+    
+    if (activosTab) activosTab.classList.remove('active');
+    if (inactivosTab) inactivosTab.classList.remove('active');
+    
+    // Mostrar el contenido seleccionado
+    if (tabName === 'activos') {
+        if (activosContent) activosContent.style.display = 'block';
+        if (activosTab) activosTab.classList.add('active');
+    } else if (tabName === 'inactivos') {
+        if (inactivosContent) inactivosContent.style.display = 'block';
+        if (inactivosTab) inactivosTab.classList.add('active');
+    }
+    
+    console.log('Tab switched to:', tabName);
+}
+
+// Actualizar contadores de usuarios en las pestañas
+function updateTabCounts() {
+    const activosRows = document.querySelectorAll('#usuariosActivosTableBody tr[data-status="active"]');
+    const inactivosRows = document.querySelectorAll('#usuariosInactivosTableBody tr[data-status="inactive"]');
+    
+    const activosCountElement = document.getElementById('activosCount');
+    const inactivosCountElement = document.getElementById('inactivosCount');
+    
+    if (activosCountElement) {
+        activosCountElement.textContent = activosRows.length;
+    }
+    
+    if (inactivosCountElement) {
+        inactivosCountElement.textContent = inactivosRows.length;
+    }
+    
+    console.log('Contadores actualizados - Activos:', activosRows.length, 'Inactivos:', inactivosRows.length);
+}
+
+// Cambiar estado de usuario entre activo e inactivo
+function toggleUserStatus(userId, newStatus) {
+    const userRow = document.querySelector(`tr[data-user-id="${userId}"]`);
+    if (!userRow) return;
+    
+    if (newStatus === 'inactive') {
+        // Confirmar desactivación
+        if (confirm('¿Está seguro que desea desactivar este usuario?')) {
+            deactivateUser(userId);
+        }
+    } else {
+        // Confirmar reactivación
+        if (confirm('¿Está seguro que desea reactivar este usuario?')) {
+            activateUser(userId);
+        }
+    }
+}
+
+// Desactivar usuario
+function deactivateUser(userId) {
+    const userRow = document.querySelector(`tr[data-user-id="${userId}"]`);
+    if (!userRow) return;
+    
+    // Obtener datos del usuario
+    const userData = {
+        id: userId,
+        name: userRow.querySelector('.usuario-name').textContent,
+        career: userRow.querySelector('.carrera-name').textContent,
+        role: userRow.querySelector('.rol-badge span').textContent,
+        deactivationDate: new Date().toLocaleDateString('es-ES')
+    };
+    
+    // Remover de tabla activos
+    userRow.remove();
+    
+    // Añadir a tabla inactivos
+    addUserToInactiveTable(userData);
+    
+    // Actualizar contadores
+    updateTabCounts();
+    
+    showNotification('Usuario desactivado exitosamente', 'warning');
+}
+
+// Reactivar usuario
+function activateUser(userId) {
+    const userRow = document.querySelector(`tr[data-user-id="${userId}"]`);
+    if (!userRow) return;
+    
+    // Obtener datos del usuario
+    const userData = {
+        id: userId,
+        name: userRow.querySelector('.usuario-name').textContent,
+        career: userRow.querySelector('.carrera-name').textContent,
+        role: userRow.querySelector('.rol-badge span').textContent
+    };
+    
+    // Remover de tabla inactivos
+    userRow.remove();
+    
+    // Añadir a tabla activos
+    addUserToActiveTable(userData);
+    
+    // Actualizar contadores
+    updateTabCounts();
+    
+    showNotification('Usuario reactivado exitosamente', 'success');
+}
+
+// Añadir usuario a tabla de activos
+function addUserToActiveTable(userData) {
+    const tbody = document.getElementById('usuariosActivosTableBody');
+    const row = document.createElement('tr');
+    row.dataset.userId = userData.id;
+    row.dataset.status = 'active';
+    
+    row.innerHTML = `
+        <td class="usuario-name">${userData.name}</td>
+        <td class="carrera-name">${userData.career}</td>
+        <td class="rol-badge">
+            <span class="rol-${userData.role.toLowerCase()}">${userData.role}</span>
+        </td>
+        <td class="password-field">*******</td>
+        <td class="acciones-cell">
+            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('${userData.id}')">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('${userData.id}', 'inactive')">
+                <i class="fas fa-ban"></i>
+            </button>
+        </td>
+    `;
+    
+    tbody.appendChild(row);
+}
+
+// Añadir usuario a tabla de inactivos
+function addUserToInactiveTable(userData) {
+    const tbody = document.getElementById('usuariosInactivosTableBody');
+    const row = document.createElement('tr');
+    row.dataset.userId = userData.id;
+    row.dataset.status = 'inactive';
+    
+    row.innerHTML = `
+        <td class="usuario-name">${userData.name}</td>
+        <td class="carrera-name">${userData.career}</td>
+        <td class="rol-badge">
+            <span class="rol-${userData.role.toLowerCase()}">${userData.role}</span>
+        </td>
+        <td class="date-field">${userData.deactivationDate}</td>
+        <td class="acciones-cell">
+            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('${userData.id}')">
+                <i class="fas fa-eye"></i>
+            </button>
+            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('${userData.id}', 'active')">
+                <i class="fas fa-undo"></i>
+            </button>
+        </td>
+    `;
+    
+    tbody.appendChild(row);
+}
+
+// Ver detalles de usuario inactivo
+function verDetallesUsuario(userId) {
+    // Esta función se puede expandir para mostrar un modal con detalles
+    alert(`Ver detalles del usuario: ${userId}`);
+}
+
+// Mostrar notificación
+function showNotification(message, type = 'info') {
+    // Crear elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Añadir al DOM
+    document.body.appendChild(notification);
+    
+    // Remover después de 3 segundos
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Hacer funciones disponibles globalmente
+window.switchTab = switchTab;
+window.testAddUser = testAddUser;
+window.editarUsuario = editarUsuario;
+window.toggleUserStatus = toggleUserStatus;
+window.verDetallesUsuario = verDetallesUsuario;
+window.updateUserCounts = updateUserCounts;

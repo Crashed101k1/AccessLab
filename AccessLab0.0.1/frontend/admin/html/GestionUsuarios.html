@@ -48,40 +48,250 @@
             <!-- Layout de dos columnas: Tabla + Formulario -->
             <div class="usuarios-layout">
                 
-                <!-- Columna Izquierda: Tabla de Usuarios -->
+                <!-- Columna Izquierda: Tabla de Usuarios con Pestañas -->
                 <div class="tabla-usuarios-container">
-                    <div class="tabla-wrapper">
-                        <table class="usuarios-table">
-                            <thead>
-                                <tr>
-                                    <th>Usuario</th>
-                                    <th>Carrera</th>
-                                    <th>Rol</th>
-                                    <th>Contraseña</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usuariosTableBody">
-                                <!-- Ejemplo de usuario -->
-                                <tr data-user-id="user_example_001">
-                                    <td class="usuario-name">Hermelindo B...</td>
-                                    <td class="carrera-name">TI</td>
-                                    <td class="rol-badge">
-                                        <span class="rol-maestro">Maestro</span>
-                                    </td>
-                                    <td class="password-field">*******</td>
-                                    <td class="acciones-cell">
-                                        <button class="action-btn edit-btn" title="Editar">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="action-btn toggle-btn" title="Activar/Desactivar Usuario">
-                                            <i class="fas fa-power-off"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <!-- Se pueden agregar más usuarios aquí -->
-                            </tbody>
-                        </table>
+                    <!-- Navegación de Pestañas -->
+                    <div class="tabs-navigation">
+                        <button class="tab-btn active" id="activosTab" onclick="switchTab('activos')">
+                            <i class="fas fa-users me-2"></i>Usuarios Activos
+                            <span class="tab-count" id="activosCount">7</span>
+                        </button>
+                        <button class="tab-btn" id="inactivosTab" onclick="switchTab('inactivos')">
+                            <i class="fas fa-user-slash me-2"></i>Usuarios Inactivos
+                            <span class="tab-count" id="inactivosCount">5</span>
+                        </button>
+                    </div>
+
+                    <!-- Contenido de Pestaña Usuarios Activos -->
+                    <div class="tab-content active" id="activosContent">
+                        <div class="tabla-wrapper">
+                            <table class="usuarios-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Carrera</th>
+                                        <th>Rol</th>
+                                        <th>Contraseña</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usuariosActivosTableBody">
+                                    <!-- Usuarios Activos - Ejemplos -->
+                                    <tr data-user-id="user_001" data-status="active">
+                                        <td class="usuario-name">juan.perez</td>
+                                        <td class="carrera-name">TI</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_001')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_001', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_002" data-status="active">
+                                        <td class="usuario-name">maria.garcia</td>
+                                        <td class="carrera-name">IM</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_002')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_002', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_003" data-status="active">
+                                        <td class="usuario-name">admin.sistemas</td>
+                                        <td class="carrera-name">TI</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-administrador">Administrador</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_003')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_003', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_004" data-status="active">
+                                        <td class="usuario-name">ana.martinez</td>
+                                        <td class="carrera-name">II</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_004')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_004', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_005" data-status="active">
+                                        <td class="usuario-name">tech.laboratorio</td>
+                                        <td class="carrera-name">TI</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-tecnico">Técnico</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_005')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_005', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_006" data-status="active">
+                                        <td class="usuario-name">luis.hernandez</td>
+                                        <td class="carrera-name">TC</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_006')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_006', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_007" data-status="active">
+                                        <td class="usuario-name">sofia.rodriguez</td>
+                                        <td class="carrera-name">GA</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="password-field">*******</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn edit-btn" title="Editar" onclick="editarUsuario('user_007')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn deactivate-btn" title="Desactivar Usuario" onclick="toggleUserStatus('user_007', 'inactive')">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contenido de Pestaña Usuarios Inactivos -->
+                    <div class="tab-content" id="inactivosContent">
+                        <div class="tabla-wrapper">
+                            <table class="usuarios-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Carrera</th>
+                                        <th>Rol</th>
+                                        <th>Fecha Desactivación</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usuariosInactivosTableBody">
+                                    <!-- Usuarios Inactivos - Ejemplos -->
+                                    <tr data-user-id="user_101" data-status="inactive">
+                                        <td class="usuario-name">carlos.lopez</td>
+                                        <td class="carrera-name">GA</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-tecnico">Técnico</span>
+                                        </td>
+                                        <td class="date-field">15/10/2025</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('user_101')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('user_101', 'active')">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_102" data-status="inactive">
+                                        <td class="usuario-name">miguel.santos</td>
+                                        <td class="carrera-name">IM</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="date-field">22/09/2025</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('user_102')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('user_102', 'active')">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_103" data-status="inactive">
+                                        <td class="usuario-name">laura.morales</td>
+                                        <td class="carrera-name">II</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="date-field">08/10/2025</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('user_103')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('user_103', 'active')">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_104" data-status="inactive">
+                                        <td class="usuario-name">temp.practicas</td>
+                                        <td class="carrera-name">TC</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-tecnico">Técnico</span>
+                                        </td>
+                                        <td class="date-field">30/08/2025</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('user_104')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('user_104', 'active')">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-user-id="user_105" data-status="inactive">
+                                        <td class="usuario-name">diego.vargas</td>
+                                        <td class="carrera-name">TI</td>
+                                        <td class="rol-badge">
+                                            <span class="rol-maestro">Maestro</span>
+                                        </td>
+                                        <td class="date-field">12/09/2025</td>
+                                        <td class="acciones-cell">
+                                            <button class="action-btn view-btn" title="Ver Detalles" onclick="verDetallesUsuario('user_105')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn activate-btn" title="Reactivar Usuario" onclick="toggleUserStatus('user_105', 'active')">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

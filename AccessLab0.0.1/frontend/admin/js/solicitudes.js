@@ -11,11 +11,145 @@ let tecnicosLaboratorios = {
     "Laboratorio de Física": { nombre: "Téc. Rivera Santos", email: "tecnico.rivera@utm.edu.mx" }
 };
 
-// Datos de prueba
+// Datos de prueba - Solicitudes diversificadas para ambas pestañas
 let solicitudesData = [
+    // === SOLICITUDES PARA "MIS SOLICITUDES" ===
     {
         id: 1,
         nombre: "Reserva Lab Redes - Grupo 7A",
+        tipo: "Reserva",
+        dirigida_a: "Director/Subdirector",
+        solicitante: "Dr. Martínez", // Coincide con usuario actual para aparecer en "Mis Solicitudes"
+        email: "director@utm.edu.mx",
+        telefono: "443-123-4567",
+        carrera: "Ingeniería en Sistemas",
+        semestre: "7mo",
+        laboratorio: "Laboratorio de Redes",
+        fecha_solicitud: "2025-10-29",
+        fecha_reserva: "2025-11-05",
+        hora_inicio: "09:00",
+        hora_fin: "11:00",
+        participantes: 25,
+        estado: "pendiente",
+        descripcion: "Solicito la reserva del laboratorio de redes para realizar prácticas de configuración de switches y routers con el grupo 7A de Ingeniería en Sistemas. La práctica forma parte del proyecto final de la materia Redes de Computadoras.",
+        materia: "Redes de Computadoras",
+        profesor_responsable: "Dr. Martínez",
+        observaciones: "Se requiere acceso a equipos Cisco para configuración de VLAN."
+    },
+    {
+        id: 2,
+        nombre: "Soporte Proyector Aula Magna",
+        tipo: "Soporte",
+        dirigida_a: "Técnico",
+        laboratorio: "Laboratorio de Sistemas",
+        tecnico_asignado: tecnicosLaboratorios["Laboratorio de Sistemas"],
+        solicitante: "Dr. Martínez", // Usuario actual
+        email: "director@utm.edu.mx",
+        telefono: "443-555-0001",
+        carrera: "Dirección",
+        semestre: "N/A",
+        fecha_solicitud: "2025-10-28",
+        prioridad: "Alta",
+        tipo_problema: "Equipos Audiovisuales",
+        equipo_afectado: "Proyector Aula Magna",
+        estado: "en-proceso",
+        descripcion: "El proyector del aula magna presenta problemas de conectividad HDMI. Se requiere revisión urgente para la conferencia de mañana con empresarios locales.",
+        observaciones: "Evento importante con asistencia de 150 personas."
+    },
+    {
+        id: 3,
+        nombre: "Reserva Lab Industrial - Prácticas CNC",
+        tipo: "Reserva",
+        dirigida_a: "Director/Subdirector",
+        solicitante: "Dr. Martínez",
+        email: "director@utm.edu.mx",
+        telefono: "443-555-0001",
+        carrera: "Ingeniería Industrial",
+        semestre: "8vo",
+        laboratorio: "Laboratorio Industrial",
+        fecha_solicitud: "2025-10-27",
+        fecha_reserva: "2025-11-10",
+        hora_inicio: "14:00",
+        hora_fin: "18:00",
+        participantes: 15,
+        estado: "aprobado",
+        descripcion: "Reserva para demostración de maquinaria CNC a estudiantes de último semestre. Incluye programación y manufactura de piezas de prueba.",
+        materia: "Manufactura Avanzada",
+        profesor_responsable: "Dr. Martínez",
+        observaciones: "Requiere supervisor especializado en CNC."
+    },
+
+    // === SOLICITUDES PARA REVISIÓN (DIRIGIDAS AL DIRECTOR) ===
+    {
+        id: 4,
+        nombre: "Reserva Lab Electrónica - Proyecto Titulación",
+        tipo: "Reserva", 
+        dirigida_a: "Director/Subdirector",
+        solicitante: "Ana Patricia Morales",
+        email: "ana.morales@utm.edu.mx",
+        telefono: "443-555-1234",
+        carrera: "Ingeniería Electrónica",
+        semestre: "8vo",
+        laboratorio: "Laboratorio de Electrónica",
+        fecha_solicitud: "2025-10-29",
+        fecha_reserva: "2025-11-15",
+        hora_inicio: "14:00",
+        hora_fin: "18:00",
+        participantes: 4,
+        estado: "pendiente",
+        descripcion: "Solicito la reserva del laboratorio de electrónica para realizar las pruebas finales del proyecto de titulación. Necesitamos acceso a osciloscopios y fuentes de alimentación para validar el funcionamiento del circuito amplificador desarrollado.",
+        materia: "Proyecto de Titulación",
+        profesor_responsable: "Dr. Luis Ramírez",
+        tipo_proyecto: "Desarrollo de circuito amplificador",
+        observaciones: "Proyecto aprobado por la academia, requiere equipos especializados de alta precisión."
+    },
+    {
+        id: 5,
+        nombre: "Reserva Lab Física - Experimentos Óptica",
+        tipo: "Reserva",
+        dirigida_a: "Director/Subdirector",
+        solicitante: "Prof. Ana Herrera",
+        email: "ana.herrera@utm.edu.mx",
+        telefono: "443-234-5678",
+        carrera: "Ingeniería Mecatrónica",
+        semestre: "5to",
+        laboratorio: "Laboratorio de Física",
+        fecha_solicitud: "2025-10-28",
+        fecha_reserva: "2025-11-08",
+        hora_inicio: "16:00",
+        hora_fin: "18:00",
+        participantes: 20,
+        estado: "pendiente",
+        descripcion: "Reserva para realizar experimentos de óptica geométrica y ondulatoria con estudiantes de 5to semestre. Incluye uso de láseres, prismas y rejillas de difracción.",
+        materia: "Física Moderna",
+        profesor_responsable: "Prof. Ana Herrera",
+        observaciones: "Requiere equipo láser especializado y medidas de seguridad."
+    },
+    {
+        id: 6,
+        nombre: "Reserva Emergencia - Examen Extraordinario",
+        tipo: "Reserva",
+        dirigida_a: "Director/Subdirector",
+        solicitante: "Ing. Carlos Vega",
+        email: "carlos.vega@utm.edu.mx",
+        telefono: "443-987-3421",
+        carrera: "Ingeniería en Sistemas",
+        semestre: "6to",
+        laboratorio: "Laboratorio de Sistemas",
+        fecha_solicitud: "2025-10-29",
+        fecha_reserva: "2025-11-02",
+        hora_inicio: "10:00",
+        hora_fin: "12:00",
+        participantes: 8,
+        estado: "pendiente",
+        descripcion: "Solicitud de reserva de emergencia para aplicar examen extraordinario de Programación Avanzada. Los estudiantes requieren acceso a IDEs y compiladores específicos.",
+        materia: "Programación Avanzada",
+        profesor_responsable: "Ing. Carlos Vega",
+        observaciones: "URGENTE - Fecha límite para exámenes extraordinarios. Requiere configuración específica de software."
+    },
+    {
+        id: 7,
+        nombre: "Reserva Lab Redes - Certificación Cisco",
         tipo: "Reserva",
         dirigida_a: "Director/Subdirector",
         solicitante: "María García López",
@@ -24,20 +158,43 @@ let solicitudesData = [
         carrera: "Ingeniería en Sistemas",
         semestre: "7mo",
         laboratorio: "Laboratorio de Redes",
-        fecha_solicitud: "2025-10-25",
-        fecha_reserva: "2025-11-01",
-        hora_inicio: "09:00",
-        hora_fin: "11:00",
-        participantes: 25,
-        estado: "pendiente",
-        descripcion: "Solicito la reserva del laboratorio de redes para realizar prácticas de configuración de switches y routers con el grupo 7A de Ingeniería en Sistemas. La práctica forma parte del proyecto final de la materia Redes de Computadoras.",
-        materia: "Redes de Computadoras",
+        fecha_solicitud: "2025-10-27",
+        fecha_reserva: "2025-11-12",
+        hora_inicio: "08:00",
+        hora_fin: "16:00",
+        participantes: 12,
+        estado: "aprobado",
+        descripcion: "Reserva para taller intensivo de preparación para certificación CCNA. Incluye configuración avanzada de routers, switches y troubleshooting de redes.",
+        materia: "Redes Avanzadas",
         profesor_responsable: "Ing. Roberto Jiménez",
-        observaciones: "Se requiere acceso a equipos Cisco para configuración de VLAN."
+        observaciones: "Taller certificado por Cisco Academy. Requiere equipos específicos y conexión a plataforma Cisco."
+    },
+
+    // === SOLICITUDES DE SOPORTE PARA TÉCNICOS ===
+    {
+        id: 8,
+        nombre: "Mantenimiento Preventivo - Lab Electrónica",
+        tipo: "Soporte",
+        dirigida_a: "Técnico",
+        laboratorio: "Laboratorio de Electrónica",
+        tecnico_asignado: tecnicosLaboratorios["Laboratorio de Electrónica"],
+        solicitante: "Prof. Sandra Ruiz",
+        email: "sandra.ruiz@utm.edu.mx",
+        telefono: "443-567-8901",
+        carrera: "Ingeniería Electrónica",
+        semestre: "N/A",
+        fecha_solicitud: "2025-10-28",
+        prioridad: "Media",
+        tipo_problema: "Mantenimiento Preventivo",
+        equipo_afectado: "Osciloscopios y fuentes de alimentación",
+        estado: "pendiente",
+        descripcion: "Solicito mantenimiento preventivo trimestral de los osciloscopios y fuentes de alimentación del laboratorio. Varios equipos muestran lecturas inconsistentes.",
+        problema_detallado: "Calibración de equipos, limpieza de contactos, verificación de precisión",
+        observaciones: "Mantenimiento programado según calendario. Algunos equipos requieren calibración urgente."
     },
     {
-        id: 2,
-        nombre: "Soporte PC Lab Industrial",
+        id: 9,
+        nombre: "Reparación PC - Estación 07",
         tipo: "Soporte",
         dirigida_a: "Técnico",
         laboratorio: "Laboratorio Industrial",
@@ -47,100 +204,124 @@ let solicitudesData = [
         telefono: "443-987-6543",
         carrera: "Ingeniería Industrial",
         semestre: "6to",
-        fecha_solicitud: "2025-10-24",
+        fecha_solicitud: "2025-10-29",
         prioridad: "Alta",
         tipo_problema: "Mantenimiento de Hardware",
-        equipo_afectado: "PC-Industrial-15",
+        equipo_afectado: "PC-Industrial-07",
         estado: "en-proceso",
-        descripcion: "La computadora del puesto 15 presenta fallos intermitentes y se reinicia constantemente durante las prácticas. Esto afecta el desarrollo normal de las clases y el trabajo de los estudiantes.",
-        problema_detallado: "Pantallas azules frecuentes, lentitud extrema al iniciar programas, reinicios automáticos",
-        impacto: "Afecta a 25 estudiantes del grupo que usa ese laboratorio",
-        observaciones: "El problema se ha reportado en múltiples ocasiones durante las últimas dos semanas."
+        descripcion: "La computadora de la estación 07 presenta pantallas azules constantes y reinicios automáticos durante el uso del software CAD. Afecta el desarrollo de proyectos en AutoCAD y SolidWorks.",
+        problema_detallado: "BSOD frecuentes, memoria RAM posiblemente defectuosa, sobrecalentamiento del procesador",
+        impacto: "Estación crítica para diseño industrial, afecta a 30 estudiantes",
+        observaciones: "Problema reportado desde hace una semana. Requiere diagnóstico completo de hardware."
     },
     {
-        id: 3,
-        nombre: "Reserva Lab Electrónica - Proyecto Final",
-        tipo: "Reserva", 
-        dirigida_a: "Director/Subdirector",
-        solicitante: "Ana Patricia Morales",
-        email: "ana.morales@utm.edu.mx",
-        telefono: "443-555-1234",
-        carrera: "Ingeniería Electrónica",
-        semestre: "8vo",
-        laboratorio: "Laboratorio de Electrónica",
-        fecha_solicitud: "2025-10-23",
-        fecha_reserva: "2025-10-30",
-        hora_inicio: "14:00",
-        hora_fin: "18:00",
-        participantes: 4,
-        estado: "aprobado",
-        descripcion: "Solicito la reserva del laboratorio de electrónica para realizar las pruebas finales del proyecto de titulación. Necesitamos acceso a osciloscopios y fuentes de alimentación para validar el funcionamiento del circuito desarrollado.",
-        materia: "Proyecto de Titulación",
-        profesor_responsable: "Dr. Luis Ramírez",
-        tipo_proyecto: "Desarrollo de circuito amplificador",
-        observaciones: "Proyecto aprobado por la academia, requiere equipos especializados."
-    },
-    {
-        id: 4,
-        nombre: "Soporte Equipos Audiovisuales - Aula Magna",
+        id: 10,
+        nombre: "Actualización Software - Lab Sistemas",
         tipo: "Soporte",
         dirigida_a: "Técnico",
         laboratorio: "Laboratorio de Sistemas",
         tecnico_asignado: tecnicosLaboratorios["Laboratorio de Sistemas"],
+        solicitante: "Ing. Roberto Silva",
+        email: "roberto.silva@utm.edu.mx",
+        telefono: "443-456-7890",
+        carrera: "Ingeniería en Sistemas",
+        semestre: "N/A",
+        fecha_solicitud: "2025-10-26",
+        prioridad: "Baja",
+        tipo_problema: "Mantenimiento de Software",
+        equipo_afectado: "Todas las estaciones del laboratorio",
+        estado: "pendiente",
+        descripcion: "Solicito actualización de IDEs de desarrollo y herramientas de programación para el nuevo semestre. Incluye Visual Studio, IntelliJ, y entornos de bases de datos.",
+        problema_detallado: "Versiones obsoletas de software, falta de licencias actualizadas",
+        observaciones: "Actualización semestral programada. Coordinar con horarios de clases para minimizar interrupciones."
+    },
+    {
+        id: 11,
+        nombre: "Reserva Especial - Visita Empresarial",
+        tipo: "Reserva",
+        dirigida_a: "Director/Subdirector",
         solicitante: "Dr. Martínez",
         email: "director@utm.edu.mx",
         telefono: "443-555-0001",
         carrera: "Dirección",
+        semestre: "N/A",
+        laboratorio: "Laboratorio de Redes",
+        fecha_solicitud: "2025-10-25",
+        fecha_reserva: "2025-11-20",
+        hora_inicio: "10:00",
+        hora_fin: "12:00",
+        participantes: 30,
+        estado: "rechazado",
+        descripcion: "Solicitud para demostración de laboratorios a empresarios del sector tecnológico local. Incluye presentación de proyectos estudiantiles y capacidades institucionales.",
+        materia: "Vinculación Empresarial",
+        profesor_responsable: "Dr. Martínez",
+        observaciones: "Evento institucional de alto impacto para vinculación universidad-empresa."
+    },
+    
+    // === SOLICITUDES ADICIONALES PARA MAYOR VARIEDAD ===
+    {
+        id: 12,
+        nombre: "Instalación Software Especializado",
+        tipo: "Soporte",
+        dirigida_a: "Director/Subdirector", 
+        laboratorio: "Laboratorio de Electrónica",
+        solicitante: "Prof. Elena Torres",
+        email: "elena.torres@utm.edu.mx",
+        telefono: "443-321-6547",
+        carrera: "Ingeniería Electrónica", 
         semestre: "N/A",
         fecha_solicitud: "2025-10-27",
         prioridad: "Media",
+        tipo_problema: "Instalación de Software",
+        equipo_afectado: "Todas las estaciones de trabajo",
         estado: "pendiente",
-        descripcion: "Los equipos audiovisuales del aula magna presentan problemas de conectividad. Se requiere revisión urgente para la presentación de mañana.",
-        tipo_problema: "Equipos Audiovisuales",
-        equipo_afectado: "Proyector y sistema de sonido",
-        observaciones: "Conferencia importante programada para mañana."
+        descripcion: "Solicito autorización e instalación de software de simulación electrónica Proteus ISIS y ARES en todas las estaciones del laboratorio para el próximo período académico.",
+        problema_detallado: "Requiere licencias educativas y configuración específica",
+        observaciones: "Software necesario para nuevas materias del plan de estudios actualizado."
     },
     {
-        id: 5,
-        nombre: "Reserva Lab Física - Experimento Péndulo",
+        id: 13,
+        nombre: "Reserva Lab Mecatrónica - Robótica",
         tipo: "Reserva",
         dirigida_a: "Director/Subdirector",
-        solicitante: "Prof. Ana Herrera",
-        email: "ana.herrera@utm.edu.mx",
-        telefono: "443-234-5678",
+        solicitante: "Ing. Fernando López",
+        email: "fernando.lopez@utm.edu.mx", 
+        telefono: "443-789-1234",
         carrera: "Ingeniería Mecatrónica",
-        semestre: "5to",
-        laboratorio: "Laboratorio de Física",
-        fecha_solicitud: "2025-10-26",
-        fecha_reserva: "2025-11-03",
-        hora_inicio: "14:00",
-        hora_fin: "16:00",
-        participantes: 15,
+        semestre: "6to",
+        laboratorio: "Laboratorio Industrial", 
+        fecha_solicitud: "2025-10-24",
+        fecha_reserva: "2025-11-18",
+        hora_inicio: "09:00",
+        hora_fin: "15:00",
+        participantes: 18,
         estado: "en-proceso",
-        descripcion: "Reserva para realizar experimentos de péndulo simple y compuesto con estudiantes de 5to semestre.",
-        materia: "Física II",
-        profesor_responsable: "Prof. Ana Herrera",
-        observaciones: "Requiere cronómetros de precisión."
+        descripcion: "Reserva para competencia interna de robótica entre equipos de estudiantes. Incluye programación de robots, pruebas de sensores y desarrollo de algoritmos de navegación autónoma.",
+        materia: "Robótica Industrial",
+        profesor_responsable: "Ing. Fernando López",
+        observaciones: "Evento que requiere mesas especiales y circuitos de prueba. Competencia clasificatoria para concurso nacional."
     },
     {
-        id: 6,
-        nombre: "Revisión Anual de Equipos - Lab Redes",
-        tipo: "Soporte",
+        id: 14,
+        nombre: "Reparación Red Local - Lab Física",
+        tipo: "Soporte", 
         dirigida_a: "Técnico",
-        laboratorio: "Laboratorio de Redes",
-        tecnico_asignado: tecnicosLaboratorios["Laboratorio de Redes"],
-        solicitante: "Dr. Martínez",
-        email: "director@utm.edu.mx",
-        telefono: "443-555-0001",
-        carrera: "Dirección",
-        semestre: "N/A",
-        fecha_solicitud: "2025-10-25",
-        prioridad: "Baja",
-        estado: "aprobado",
-        descripcion: "Solicitud de revisión anual de todos los equipos de red del laboratorio principal. Incluir limpieza y actualización de firmware.",
-        tipo_problema: "Mantenimiento Preventivo",
-        equipo_afectado: "Switches, routers y puntos de acceso",
-        observaciones: "Mantenimiento programado según calendario anual."
+        laboratorio: "Laboratorio de Física",
+        tecnico_asignado: tecnicosLaboratorios["Laboratorio de Física"],
+        solicitante: "Dr. Patricia Jiménez",
+        email: "patricia.jimenez@utm.edu.mx",
+        telefono: "443-654-9871",
+        carrera: "Ingeniería Mecatrónica",
+        semestre: "N/A", 
+        fecha_solicitud: "2025-10-28",
+        prioridad: "Alta",
+        tipo_problema: "Conectividad de Red",
+        equipo_afectado: "Switch principal y cableado estructurado",
+        estado: "pendiente",
+        descripcion: "La conectividad de red en el laboratorio de física presenta intermitencias constantes. Los equipos de medición digitales pierden conexión frecuentemente, afectando la adquisición de datos en tiempo real.",
+        problema_detallado: "Caídas de conexión cada 10-15 minutos, ping perdido intermitente",
+        impacto: "Imposibilita uso de software de adquisición de datos",
+        observaciones: "Problema crítico que afecta experimentos con sensores digitales y recolección automática de datos."
     }
 ];
 
@@ -872,6 +1053,16 @@ function getEstadoTexto(estado) {
     return estados[estado] || 'Desconocido';
 }
 
+function formatearEstado(estado) {
+    const estados = {
+        'pendiente': 'Pendiente de Revisión',
+        'en-proceso': 'En Proceso',
+        'aprobado': 'Aprobado ✓',
+        'rechazado': 'Rechazado ✗'
+    };
+    return estados[estado] || 'Estado Desconocido';
+}
+
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `alert alert-${type === 'success' ? 'success' : type === 'info' ? 'info' : 'danger'} notification-toast`;
@@ -1246,28 +1437,61 @@ function agregarBotonDemoRoles() {
     
     document.body.appendChild(botonDemo);
     
-    // Agregar datos de prueba con observaciones
-    if (solicitudesData.length > 0) {
-        // Agregar historial a la primera solicitud
-        solicitudesData[0].historial_observaciones = [
+    // Inicializar datos de ejemplo con historiales
+    inicializarDatosEjemplo();
+}
+
+// Inicializar historiales de observaciones para algunas solicitudes
+function inicializarDatosEjemplo() {
+    // Agregar historial a solicitudes aprobadas
+    const solicitudAprobada = solicitudesData.find(s => s.id === 3);
+    if (solicitudAprobada) {
+        solicitudAprobada.historial_observaciones = [
             {
-                autor: "Dr. Martínez",
-                fecha: "2025-10-26T10:30:00",
-                texto: "Solicitud revisada. El laboratorio está disponible para la fecha solicitada.",
+                autor: "Dr. Martínez", 
+                fecha: "2025-10-28T09:15:00",
+                texto: "Solicitud aprobada. El laboratorio industrial está disponible. Coordinar con técnico para preparación de equipos CNC.",
+                accion: "aprobado"
+            }
+        ];
+    }
+
+    // Agregar historial a solicitud en proceso
+    const solicitudEnProceso = solicitudesData.find(s => s.id === 9);
+    if (solicitudEnProceso) {
+        solicitudEnProceso.historial_observaciones = [
+            {
+                autor: "Téc. Hernández Cruz",
+                fecha: "2025-10-29T11:20:00", 
+                texto: "Problema diagnosticado: memoria RAM defectuosa en slot 2. Se requiere reemplazo de módulo DDR4 8GB. Estimado de reparación: 2 días hábiles.",
                 accion: "en-proceso"
             }
         ];
-        
-        // Agregar historial a la segunda solicitud  
-        if (solicitudesData[1]) {
-            solicitudesData[1].historial_observaciones = [
-                {
-                    autor: "Téc. Hernández Cruz",
-                    fecha: "2025-10-25T14:15:00",
-                    texto: "Problema identificado. Se requieren piezas de repuesto para reparación.",
-                    accion: "en-proceso"
-                }
-            ];
-        }
+    }
+
+    // Agregar historial a solicitud rechazada
+    const solicitudRechazada = solicitudesData.find(s => s.id === 11);
+    if (solicitudRechazada) {
+        solicitudRechazada.historial_observaciones = [
+            {
+                autor: "Dr. Martínez",
+                fecha: "2025-10-26T16:45:00",
+                texto: "Solicitud rechazada debido a conflicto con actividades académicas programadas. El laboratorio tiene clases regulares en el horario solicitado. Favor de reprogramar para horarios disponibles.",
+                accion: "rechazado"
+            }
+        ];
+    }
+
+    // Agregar historial a solicitud de software
+    const solicitudSoftware = solicitudesData.find(s => s.id === 12);
+    if (solicitudSoftware) {
+        solicitudSoftware.historial_observaciones = [
+            {
+                autor: "Dr. Martínez",
+                fecha: "2025-10-28T14:30:00",
+                texto: "Solicitud en revisión. Verificando disponibilidad de licencias educativas con el proveedor. Se requiere cotización actualizada.",
+                accion: "en-proceso"
+            }
+        ];
     }
 }
