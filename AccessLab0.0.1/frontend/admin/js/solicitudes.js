@@ -363,9 +363,6 @@ document.addEventListener('DOMContentLoaded', function() {
         filtroRevision.addEventListener('change', filtrarSolicitudesRevision);
     }
     
-    // Agregar botón demo para cambiar roles (desarrollo)
-    agregarBotonDemoRoles();
-    
     // Inicializar datos de ejemplo
     inicializarDatosEjemplo();
 });
@@ -1163,42 +1160,9 @@ let usuarioActual = {
     email: "director@utm.edu.mx"
 };
 
-// Usuarios de ejemplo para diferentes roles
-const usuariosEjemplo = {
-    "Director": {
-        id: 1,
-        nombre: "Dr. Martínez",
-        email: "director@utm.edu.mx"
-    },
-    "Subdirector": {
-        id: 2,
-        nombre: "Dr. González", 
-        email: "subdirector@utm.edu.mx"
-    },
-    "Técnico": {
-        id: 3,
-        nombre: "Téc. López Martín",
-        email: "tecnico.lopez@utm.edu.mx"
-    },
-    "Maestro": {
-        id: 4,
-        nombre: "Prof. Ana Herrera",
-        email: "ana.herrera@utm.edu.mx"
-    }
-};
+// Usuarios de ejemplo eliminados - Ya no necesarios
 
-// Función para cambiar rol (para demo) - Usa el sistema de permisos
-function cambiarRol(nuevoRol) {
-    // Actualizar datos del usuario según el rol
-    const datosUsuario = usuariosEjemplo[nuevoRol];
-    if (datosUsuario) {
-        usuarioActual.id = datosUsuario.id;
-        usuarioActual.nombre = datosUsuario.nombre;
-        usuarioActual.email = datosUsuario.email;
-    }
-    
-    cambiarRolYReconfigurar(nuevoRol);
-}
+// Función cambiarRol eliminada - Ya no es necesaria para demo
 
 // Cargar solicitudes según las pestañas activas y permisos del rol
 function cargarSolicitudesPorPestañas() {
@@ -1465,38 +1429,6 @@ function filtrarSolicitudesRevision() {
     }
     
     actualizarListaSolicitudes(solicitudesFiltradas, 'solicitudes-revision-list', 'revision');
-}
-
-// Agregar botón demo para cambiar roles (solo para desarrollo)
-function agregarBotonDemoRoles() {
-    const botonDemo = document.createElement('div');
-    botonDemo.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 1000;
-    `;
-    
-    const rolesDisponibles = obtenerRolesDisponibles();
-    const opcionesRoles = rolesDisponibles.map(rol => 
-        `<li><a class="dropdown-item" href="#" onclick="cambiarRol('${rol}')">${rol}</a></li>`
-    ).join('');
-    
-    botonDemo.innerHTML = `
-        <div class="dropdown">
-            <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                <i class="fas fa-user-cog"></i> ${usuarioActual.rol}
-            </button>
-            <ul class="dropdown-menu">
-                ${opcionesRoles}
-            </ul>
-        </div>
-    `;
-    
-    document.body.appendChild(botonDemo);
-    
-    // Inicializar datos de ejemplo con historiales
-    inicializarDatosEjemplo();
 }
 
 // Inicializar historiales de observaciones para algunas solicitudes
