@@ -54,7 +54,7 @@ let solicitudesData = [
         prioridad: "Alta",
         tipo_problema: "Equipos Audiovisuales",
         equipo_afectado: "Proyector Aula Magna",
-        estado: "en-proceso",
+        estado: "pendiente",
         descripcion: "El proyector del aula magna presenta problemas de conectividad HDMI. Se requiere revisión urgente para la conferencia de mañana con empresarios locales.",
         observaciones: "Evento importante con asistencia de 150 personas."
     },
@@ -215,7 +215,7 @@ let solicitudesData = [
         prioridad: "Alta",
         tipo_problema: "Mantenimiento de Hardware",
         equipo_afectado: "PC-Industrial-07",
-        estado: "en-proceso",
+        estado: "pendiente",
         descripcion: "La computadora de la estación 07 presenta pantallas azules constantes y reinicios automáticos durante el uso del software CAD. Afecta el desarrollo de proyectos en AutoCAD y SolidWorks.",
         problema_detallado: "BSOD frecuentes, memoria RAM posiblemente defectuosa, sobrecalentamiento del procesador",
         impacto: "Estación crítica para diseño industrial, afecta a 30 estudiantes",
@@ -304,7 +304,7 @@ let solicitudesData = [
         hora_inicio: "09:00",
         hora_fin: "15:00",
         participantes: 18,
-        estado: "en-proceso",
+        estado: "pendiente",
         descripcion: "Reserva para competencia interna de robótica entre equipos de estudiantes. Incluye programación de robots, pruebas de sensores y desarrollo de algoritmos de navegación autónoma.",
         materia: "Robótica Industrial",
         profesor_responsable: "Ing. Fernando López",
@@ -1094,7 +1094,6 @@ function formatearFecha(fecha) {
 function getEstadoTexto(estado) {
     const estados = {
         'pendiente': 'Pendiente',
-        'en-proceso': 'En Proceso',
         'aprobado': 'Aprobado',
         'rechazado': 'Rechazado'
     };
@@ -1104,7 +1103,6 @@ function getEstadoTexto(estado) {
 function formatearEstado(estado) {
     const estados = {
         'pendiente': 'Pendiente de Revisión',
-        'en-proceso': 'En Proceso',
         'aprobado': 'Aprobado ✓',
         'rechazado': 'Rechazado ✗'
     };
@@ -1393,10 +1391,6 @@ function generarFormularioObservaciones(solicitudId) {
                             onclick="procesarSolicitud(${solicitudId}, 'aprobado')">
                         <i class="fas fa-check"></i> Aprobar
                     </button>
-                    <button type="button" class="btn btn-observacion btn-en-proceso" 
-                            onclick="procesarSolicitud(${solicitudId}, 'en-proceso')">
-                        <i class="fas fa-clock"></i> En Proceso
-                    </button>
                     <button type="button" class="btn btn-observacion btn-rechazar" 
                             onclick="procesarSolicitud(${solicitudId}, 'rechazado')">
                         <i class="fas fa-times"></i> Rechazar
@@ -1451,8 +1445,7 @@ function procesarSolicitud(id, nuevoEstado) {
     // Mostrar notificación
     const acciones = {
         'aprobado': 'aprobada',
-        'rechazado': 'rechazada',
-        'en-proceso': 'marcada como en proceso'
+        'rechazado': 'rechazada'
     };
     
     showNotification(`Solicitud ${acciones[nuevoEstado]} exitosamente`, 'success');
@@ -1521,15 +1514,15 @@ function inicializarDatosEjemplo() {
         ];
     }
 
-    // Agregar historial a solicitud en proceso
-    const solicitudEnProceso = solicitudesData.find(s => s.id === 9);
-    if (solicitudEnProceso) {
-        solicitudEnProceso.historial_observaciones = [
+    // Agregar historial a solicitud en revisión
+    const solicitudRevision = solicitudesData.find(s => s.id === 9);
+    if (solicitudRevision) {
+        solicitudRevision.historial_observaciones = [
             {
                 autor: "Téc. Hernández Cruz",
                 fecha: "2025-10-29T11:20:00", 
-                texto: "Problema diagnosticado: memoria RAM defectuosa en slot 2. Se requiere reemplazo de módulo DDR4 8GB. Estimado de reparación: 2 días hábiles.",
-                accion: "en-proceso"
+                texto: "Problema diagnosticado: memoria RAM defectuosa en slot 2. Se requiere reemplazo de módulo DDR4 8GB. Estimado de reparación: 2 días hábiles. Solicitando autorización para compra de repuesto.",
+                accion: "pendiente"
             }
         ];
     }
@@ -1554,8 +1547,8 @@ function inicializarDatosEjemplo() {
             {
                 autor: "Dr. Martínez",
                 fecha: "2025-10-28T14:30:00",
-                texto: "Solicitud en revisión. Verificando disponibilidad de licencias educativas con el proveedor. Se requiere cotización actualizada.",
-                accion: "en-proceso"
+                texto: "Solicitud en revisión. Verificando disponibilidad de licencias educativas con el proveedor. Se requiere cotización actualizada. Pendiente de aprobación presupuestal.",
+                accion: "pendiente"
             }
         ];
     }
