@@ -508,42 +508,6 @@ function mostrarNotificacion(mensaje, tipo) {
     }, 3000);
 }
 
-// ======================================
-// FUNCIONES DEMO (PARA DESARROLLO)
-// ======================================
-
-function cambiarRol(nuevoRol) {
-    usuarioActual.rol = nuevoRol;
-    verificarPermisos();
-    mostrarNotificacion(`Rol cambiado a: ${nuevoRol}`, 'info');
-}
-
-// Agregar botón demo para cambiar roles (solo para desarrollo)
-document.addEventListener('DOMContentLoaded', function() {
-    const botonDemo = document.createElement('div');
-    botonDemo.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 1000;
-    `;
-    
-    botonDemo.innerHTML = `
-        <div class="dropdown">
-            <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                <i class="fas fa-user-cog"></i> ${usuarioActual.rol}
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Director')">Director</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Subdirector')">Subdirector</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Técnico')">Técnico</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Maestro')">Maestro</a></li>
-            </ul>
-        </div>
-    `;
-    
-    document.body.appendChild(botonDemo);
-});
 
 // ======================================
 // ESTILOS CSS DINÁMICOS PARA NOTIFICACIONES

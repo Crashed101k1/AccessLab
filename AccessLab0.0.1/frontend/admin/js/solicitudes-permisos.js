@@ -165,28 +165,7 @@ function puedeProcesamarSolicitud(solicitud) {
     return false;
 }
 
-// Actualizar usuario y reconfigurar interfaz
-function cambiarRolYReconfigurar(nuevoRol) {
-    usuarioActual.rol = nuevoRol;
-    
-    // Remover indicador de rol si existe
-    const rolIndicator = document.getElementById('rol-indicator');
-    if (rolIndicator) {
-        rolIndicator.remove();
-    }
-    
-    // Reconfigurar toda la interfaz
-    configurarInterfazPorRol();
-    cargarSolicitudesPorPestañas();
-    
-    showNotification(`Rol cambiado a: ${nuevoRol}`, 'info');
-    console.log(`Permisos para ${nuevoRol}:`, PERMISOS_ROL[nuevoRol]);
-}
 
-// Obtener lista de roles disponibles para el selector demo
-function obtenerRolesDisponibles() {
-    return Object.keys(PERMISOS_ROL);
-}
 
 // Exportar funciones para uso en solicitudes.js
 window.PERMISOS_ROL = PERMISOS_ROL;
@@ -194,5 +173,3 @@ window.puedeRealizarAccion = puedeRealizarAccion;
 window.obtenerSolicitudesPorRol = obtenerSolicitudesPorRol;
 window.configurarInterfazPorRol = configurarInterfazPorRol;
 window.puedeProcesamarSolicitud = puedeProcesamarSolicitud;
-window.cambiarRolYReconfigurar = cambiarRolYReconfigurar;
-window.obtenerRolesDisponibles = obtenerRolesDisponibles;
