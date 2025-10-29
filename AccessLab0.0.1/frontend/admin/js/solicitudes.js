@@ -349,6 +349,9 @@ let modoCreacion = false;
 // INICIALIZACIÓN
 // ======================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Configurar interfaz según permisos del rol (debe ir primero)
+    configurarInterfazPorRol();
+    
     // Cargar datos iniciales por pestañas
     cargarSolicitudesPorPestañas();
     showEmptyState();
@@ -362,6 +365,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Agregar botón demo para cambiar roles (desarrollo)
     agregarBotonDemoRoles();
+    
+    // Inicializar datos de ejemplo
+    inicializarDatosEjemplo();
 });
 
 // ======================================
@@ -615,6 +621,12 @@ function generarAccionesEstado(solicitud) {
 // CREAR NUEVA SOLICITUD
 // ======================================
 function showCrearSolicitud() {
+    // Verificar permisos antes de mostrar el formulario
+    if (!puedeRealizarAccion('crear')) {
+        showNotification('No tienes permisos para crear solicitudes', 'error');
+        return;
+    }
+    
     // Limpiar selección
     document.querySelectorAll('.solicitud-item').forEach(item => {
         item.classList.remove('active');
@@ -1145,7 +1157,7 @@ document.head.appendChild(notificationStyles);
 // GESTIÓN DE PESTAÑAS Y ROLES
 // ======================================
 
-// Simulación de usuario actual
+// Simulación de usuario actual - Por defecto Director (solo responde)
 let usuarioActual = {
     id: 1,
     nombre: "Dr. Martínez",
@@ -1153,36 +1165,53 @@ let usuarioActual = {
     email: "director@utm.edu.mx"
 };
 
-// Función para cambiar rol (para demo)
-function cambiarRol(nuevoRol) {
-    usuarioActual.rol = nuevoRol;
-    cargarSolicitudesPorPestañas();
-    showNotification(`Rol cambiado a: ${nuevoRol}`, 'info');
-}
+// Usuarios de ejemplo para diferentes roles
+const usuariosEjemplo = {
+    "Director": {
+        id: 1,
+        nombre: "Dr. Martínez",
+        email: "director@utm.edu.mx"
+    },
+    "Subdirector": {
+        id: 2,
+        nombre: "Dr. González", 
+        email: "subdirector@utm.edu.mx"
+    },
+    "Técnico": {
+        id: 3,
+        nombre: "Téc. López Martín",
+        email: "tecnico.lopez@utm.edu.mx"
+    },
+    "Maestro": {
+        id: 4,
+        nombre: "Prof. Ana Herrera",
+        email: "ana.herrera@utm.edu.mx"
+    }
+};
 
-// Cargar solicitudes según las pestañas activas
-function cargarSolicitudesPorPestañas() {
-    // Pestaña "Mis Solicitudes"
-    const misSolicitudes = solicitudesData.filter(s => 
-        s.solicitante === usuarioActual.nombre || 
-        (s.email && s.email === usuarioActual.email)
-    );
-    
-    // Pestaña "Para Revisión"
-    let paraRevision = [];
-    
-    if (usuarioActual.rol === "Director" || usuarioActual.rol === "Subdirector") {
-        paraRevision = solicitudesData.filter(s => s.dirigida_a === "Director/Subdirector");
-    } else if (usuarioActual.rol === "Técnico") {
-        paraRevision = solicitudesData.filter(s => 
-            s.dirigida_a === "Técnico" && 
-            s.tecnico_asignado?.nombre?.includes(usuarioActual.nombre.split(' ')[1])
-        );
+// Función para cambiar rol (para demo) - Usa el sistema de permisos
+function cambiarRol(nuevoRol) {
+    // Actualizar datos del usuario según el rol
+    const datosUsuario = usuariosEjemplo[nuevoRol];
+    if (datosUsuario) {
+        usuarioActual.id = datosUsuario.id;
+        usuarioActual.nombre = datosUsuario.nombre;
+        usuarioActual.email = datosUsuario.email;
     }
     
+    cambiarRolYReconfigurar(nuevoRol);
+}
+
+// Cargar solicitudes según las pestañas activas y permisos del rol
+function cargarSolicitudesPorPestañas() {
+    const { misSolicitudes, paraRevision } = obtenerSolicitudesPorRol();
+    
     // Actualizar contadores
-    document.getElementById('contador-solicitudes').textContent = misSolicitudes.length;
-    document.getElementById('contador-revision').textContent = paraRevision.length;
+    const contadorSolicitudes = document.getElementById('contador-solicitudes');
+    const contadorRevision = document.getElementById('contador-revision');
+    
+    if (contadorSolicitudes) contadorSolicitudes.textContent = misSolicitudes.length;
+    if (contadorRevision) contadorRevision.textContent = paraRevision.length;
     
     // Cargar listas
     actualizarListaSolicitudes(misSolicitudes, 'solicitudes-list', 'mis');
@@ -1235,7 +1264,7 @@ function actualizarListaSolicitudes(solicitudes, containerId, tipo) {
     `).join('');
 }
 
-// Mostrar detalle de solicitud con opciones según el tipo de vista
+// Mostrar detalle de solicitud con opciones según el tipo de vista y permisos
 function mostrarDetalleSolicitud(id, tipoVista) {
     const solicitud = solicitudesData.find(s => s.id === id);
     if (!solicitud) return;
@@ -1243,10 +1272,8 @@ function mostrarDetalleSolicitud(id, tipoVista) {
     const viewerId = tipoVista === 'mis' ? 'viewer-content' : 'viewer-revision-content';
     const viewer = document.getElementById(viewerId);
     
-    // Determinar si el usuario puede realizar acciones
-    const puedeRevisar = (tipoVista === 'revision') && 
-        ((usuarioActual.rol === "Director" || usuarioActual.rol === "Subdirector") && solicitud.dirigida_a === "Director/Subdirector" ||
-         (usuarioActual.rol === "Técnico" && solicitud.dirigida_a === "Técnico"));
+    // Determinar si el usuario puede realizar acciones usando el sistema de permisos
+    const puedeRevisar = (tipoVista === 'revision') && puedeProcesamarSolicitud(solicitud);
     
     viewer.innerHTML = generarContenidoDetalle(solicitud, puedeRevisar, tipoVista);
 }
@@ -1382,6 +1409,15 @@ function generarFormularioObservaciones(solicitudId) {
 
 // Procesar solicitud con observaciones
 function procesarSolicitud(id, nuevoEstado) {
+    const solicitud = solicitudesData.find(s => s.id === id);
+    if (!solicitud) return;
+    
+    // Verificar permisos antes de procesar
+    if (!puedeProcesamarSolicitud(solicitud)) {
+        showNotification('No tienes permisos para procesar esta solicitud', 'error');
+        return;
+    }
+    
     const textarea = document.getElementById(`observacion-texto-${id}`);
     const observacion = textarea.value.trim();
     
@@ -1389,9 +1425,6 @@ function procesarSolicitud(id, nuevoEstado) {
         showNotification('Debes agregar una observación antes de procesar la solicitud', 'error');
         return;
     }
-    
-    const solicitud = solicitudesData.find(s => s.id === id);
-    if (!solicitud) return;
     
     // Inicializar historial si no existe
     if (!solicitud.historial_observaciones) {
@@ -1429,16 +1462,10 @@ function procesarSolicitud(id, nuevoEstado) {
 function filtrarSolicitudesRevision() {
     const filtro = document.getElementById('filtro-estado-revision').value;
     
-    let solicitudesFiltradas = [];
+    // Obtener solicitudes para revisión según permisos
+    const { paraRevision } = obtenerSolicitudesPorRol();
     
-    if (usuarioActual.rol === "Director" || usuarioActual.rol === "Subdirector") {
-        solicitudesFiltradas = solicitudesData.filter(s => s.dirigida_a === "Director/Subdirector");
-    } else if (usuarioActual.rol === "Técnico") {
-        solicitudesFiltradas = solicitudesData.filter(s => 
-            s.dirigida_a === "Técnico" && 
-            s.tecnico_asignado?.nombre?.includes(usuarioActual.nombre.split(' ')[1])
-        );
-    }
+    let solicitudesFiltradas = paraRevision;
     
     if (filtro !== 'all') {
         solicitudesFiltradas = solicitudesFiltradas.filter(s => s.estado === filtro);
@@ -1457,16 +1484,18 @@ function agregarBotonDemoRoles() {
         z-index: 1000;
     `;
     
+    const rolesDisponibles = obtenerRolesDisponibles();
+    const opcionesRoles = rolesDisponibles.map(rol => 
+        `<li><a class="dropdown-item" href="#" onclick="cambiarRol('${rol}')">${rol}</a></li>`
+    ).join('');
+    
     botonDemo.innerHTML = `
         <div class="dropdown">
             <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
                 <i class="fas fa-user-cog"></i> ${usuarioActual.rol}
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Director')">Director</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Subdirector')">Subdirector</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Técnico')">Técnico</a></li>
-                <li><a class="dropdown-item" href="#" onclick="cambiarRol('Maestro')">Maestro</a></li>
+                ${opcionesRoles}
             </ul>
         </div>
     `;
