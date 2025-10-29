@@ -177,10 +177,6 @@ function mostrarInfoRol() {
         <div style="font-size: 11px; opacity: 0.9;">
             ${permisos?.descripcion || 'Sin permisos definidos'}
         </div>
-        <div style="margin-top: 5px; font-size: 10px;">
-            ${puedeRealizarAccion('crear') ? '✅ Crear' : '❌ Crear'} | 
-            ${puedeRealizarAccion('responder') ? '✅ Responder' : '❌ Responder'}
-        </div>
     `;
 }
 
