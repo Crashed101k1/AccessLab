@@ -30,11 +30,7 @@ function initializeAssignmentPage() {
     // Inicializar datos desde localStorage si existen
     loadAssignmentsFromStorage();
     
-    // Si no hay datos, crear algunos ejemplos para demostrar horarios compartidos
-    if (Object.keys(assignments).length === 0) {
-        createSampleAssignments();
-        showInfoMessage('Se han creado asignaciones de ejemplo para demostrar el sistema de horarios compartidos.');
-    }
+
 }
 
 // === GESTIÓN DE PROFESORES ===
@@ -944,42 +940,7 @@ function showNoResultsMessage() {
     teachersList.innerHTML = noResultsHtml;
 }
 
-// Crear asignaciones de ejemplo para demostrar horarios compartidos
-function createSampleAssignments() {
-    // Ejemplo: maria.garcia tiene horarios en Laboratorio de Automatización
-    assignments['prof_002'] = {
-        'lab_002': {
-            labName: 'Laboratorio de Automatización',
-            labType: 'Ingeniería en Mecatrónica',
-            schedule: {
-                monday: { start: '08:00', end: '09:00' },
-                tuesday: { start: '09:00', end: '11:00' },
-                friday: { start: '07:00', end: '09:00' }
-            },
-            assignedDate: new Date().toISOString(),
-            teacherName: 'maria.garcia'
-        }
-    };
-    
-    // Ejemplo: Crear una asignación en Laboratorio de Redes para mostrar disponibilidad parcial
-    assignments['prof_004'] = {
-        'lab_001': {
-            labName: 'Laboratorio de Redes',
-            labType: 'Tecnologías de la Información',
-            schedule: {
-                wednesday: { start: '10:00', end: '11:00' },
-                thursday: { start: '14:00', end: '16:00' }
-            },
-            assignedDate: new Date().toISOString(),
-            teacherName: 'ana.martinez'
-        }
-    };
-    
-    // Guardar en localStorage
-    saveAssignmentsToStorage();
-    
-    console.log('Asignaciones de ejemplo creadas para demostrar horarios compartidos');
-}
+
 
 // Función para obtener datos de profesores (async para futuras implementaciones)
 async function getTeachersData() {

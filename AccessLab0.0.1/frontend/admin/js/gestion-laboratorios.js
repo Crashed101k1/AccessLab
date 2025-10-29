@@ -71,21 +71,8 @@ function searchLaboratories() {
 function loadLaboratories() {
     console.log('Cargando laboratorios...');
     
-    // Datos de ejemplo simulados
-    allLaboratories = [
-        { id: 'lab_001', name: 'Laboratorio de Redes P1', location: 'Edificio Pesado 1', technician: 'José Francisco Mastache', status: 'active' },
-        { id: 'lab_002', name: 'Laboratorio de Redes P2', location: 'Edificio Pesado 2', technician: 'José Francisco Mastache', status: 'active' },
-        { id: 'lab_003', name: 'Laboratorio de Cómputo A1', location: 'Edificio A', technician: 'María González López', status: 'active' },
-        { id: 'lab_004', name: 'Laboratorio de Cómputo A2', location: 'Edificio A', technician: 'María González López', status: 'inactive' },
-        { id: 'lab_005', name: 'Laboratorio de Mecatrónica', location: 'Edificio Talleres', technician: 'Carlos Hernández Ruiz', status: 'active' },
-        { id: 'lab_006', name: 'Laboratorio de Industrial', location: 'Edificio B', technician: 'Ana Sofía Martín', status: 'active' },
-        { id: 'lab_007', name: 'Laboratorio de Construcción', location: 'Edificio Talleres', technician: 'Roberto Pérez García', status: 'inactive' },
-        { id: 'lab_008', name: 'Laboratorio Multimedia', location: 'Edificio C', technician: 'Lucía Ramírez Torres', status: 'active' },
-        { id: 'lab_009', name: 'Laboratorio de Programación', location: 'Edificio A', technician: 'Diego Morales Vega', status: 'active' },
-        { id: 'lab_010', name: 'Laboratorio de Bases de Datos', location: 'Edificio Pesado 2', technician: 'Carmen Silva López', status: 'active' },
-        { id: 'lab_011', name: 'Laboratorio de Electrónica', location: 'Edificio Talleres', technician: 'Fernando Castro Ruiz', status: 'active' },
-        { id: 'lab_012', name: 'Laboratorio de Automatización', location: 'Edificio B', technician: 'Patricia Jiménez Mora', status: 'inactive' }
-    ];
+    // Array vacío para producción
+    allLaboratories = [];
     
     filteredLaboratories = [...allLaboratories];
     totalItems = filteredLaboratories.length;

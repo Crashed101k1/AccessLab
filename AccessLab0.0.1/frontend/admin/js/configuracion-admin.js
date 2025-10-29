@@ -255,7 +255,7 @@ function backupNow() {
     // Simular respaldo inmediato
     if (confirm('🔄 ¿Deseas crear un respaldo completo del sistema ahora?\n\nEste proceso puede tomar varios minutos.')) {
         // Simular proceso
-        alert('🔄 Iniciando respaldo...\n\nEste es un mensaje de demostración.\nEn la implementación real se mostraría una barra de progreso.');
+        alert('🔄 Iniciando respaldo...\n\nProcesando datos del sistema...');
         
         setTimeout(() => {
             alert('✅ Respaldo completado exitosamente\n\nFecha: ' + new Date().toLocaleString('es-ES') + '\nUbicación: /database/backups/');

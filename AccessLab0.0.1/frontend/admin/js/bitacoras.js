@@ -11,34 +11,8 @@ let filteredBitacoras = [];
 let currentPage = 1;
 let itemsPerPage = 5;
 
-// Datos de ejemplo para las bitácoras
-const sampleBitacoras = [
-    { usuario: "Eliú Rodríguez", laboratorio: "Idiomas A1", materia: "INGLÉS IV", grupo: "5A", carrera: "Gtro.", parcial: "1er", cuatrimestre: "Sep-Dic", estado: "cerrado" },
-    { usuario: "Hermelindo B.", laboratorio: "Redes P2", materia: "Desarrollo de S.", grupo: "3C", carrera: "TI", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "abierto" },
-    { usuario: "Susana Téllez", laboratorio: "Alimentos P1", materia: "Mixología III", grupo: "3A", carrera: "Gtro.", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "validada" },
-    { usuario: "Aldair López", laboratorio: "Redes P2", materia: "Intercom...", grupo: "1B", carrera: "TI", parcial: "1ro", cuatrimestre: "Ene-Abr", estado: "abierto" },
-    { usuario: "María González", laboratorio: "Química A3", materia: "Química Org.", grupo: "2A", carrera: "QI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "cerrado" },
-    { usuario: "Carlos Mendez", laboratorio: "Mecánica M1", materia: "Manufactura", grupo: "4B", carrera: "IM", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Ana Rivera", laboratorio: "Sistemas S1", materia: "Base de Datos", grupo: "6A", carrera: "TI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Pedro Jiménez", laboratorio: "Electrónica E2", materia: "Circuitos", grupo: "3B", carrera: "ME", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Laura Castro", laboratorio: "Alimentos P2", materia: "Nutrición", grupo: "2C", carrera: "Gtro.", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Roberto Silva", laboratorio: "Redes P1", materia: "Redes Avanz.", grupo: "7A", carrera: "TI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Patricia Ruiz", laboratorio: "Idiomas A2", materia: "Francés II", grupo: "4A", carrera: "Gtro.", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Daniel Vega", laboratorio: "Mecánica M2", materia: "Automatiz.", grupo: "5B", carrera: "IM", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Carmen López", laboratorio: "Química A1", materia: "Análisis Quím.", grupo: "3A", carrera: "QI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Francisco Mora", laboratorio: "Sistemas S2", materia: "Programación", grupo: "1A", carrera: "TI", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Isabel Herrera", laboratorio: "Electrónica E1", materia: "Microcontrol.", grupo: "6B", carrera: "ME", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Miguel Torres", laboratorio: "Alimentos P3", materia: "Tecnol. Alim.", grupo: "2B", carrera: "Gtro.", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Gabriela Díaz", laboratorio: "Redes P3", materia: "Seguridad Red", grupo: "8A", carrera: "TI", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Alejandro Cruz", laboratorio: "Mecánica M3", materia: "CAD/CAM", grupo: "4C", carrera: "IM", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Lucía Ramírez", laboratorio: "Química A2", materia: "Fisicoquímica", grupo: "5A", carrera: "QI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Jorge Medina", laboratorio: "Sistemas S3", materia: "Intelig. Artif.", grupo: "7B", carrera: "TI", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Valeria Ortiz", laboratorio: "Electrónica E3", materia: "Telecom.", grupo: "3C", carrera: "ME", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Ricardo Flores", laboratorio: "Alimentos P1", materia: "Conservación", grupo: "6A", carrera: "Gtro.", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" },
-    { usuario: "Mónica Aguilar", laboratorio: "Idiomas A3", materia: "Alemán I", grupo: "1C", carrera: "Gtro.", parcial: "3ro", cuatrimestre: "Ene-Abr", estado: "cerrado" },
-    { usuario: "Eduardo Vargas", laboratorio: "Mecánica M1", materia: "Maquinado", grupo: "8B", carrera: "IM", parcial: "1er", cuatrimestre: "May-Ago", estado: "validada" },
-    { usuario: "Cristina Peña", laboratorio: "Química A3", materia: "Química Anal.", grupo: "2A", carrera: "QI", parcial: "2do", cuatrimestre: "Sep-Dic", estado: "abierto" }
-];
+// Array de bitácoras (vacío para inicio en producción)
+const sampleBitacoras = [];
 
 // Inicializar funcionalidades de bitácoras
 function initializeBitacoras() {
