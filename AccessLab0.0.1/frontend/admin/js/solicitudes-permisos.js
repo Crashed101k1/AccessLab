@@ -89,9 +89,6 @@ function configurarInterfazPorRol() {
     
     // Configurar botón de crear solicitud
     configurarBotonCrear();
-    
-    // Mostrar información del rol actual
-    mostrarInfoRol();
 }
 
 // Configurar pestañas según permisos
@@ -144,41 +141,7 @@ function configurarBotonCrear() {
     }
 }
 
-// Mostrar información del rol actual
-function mostrarInfoRol() {
-    const rol = usuarioActual?.rol || "Maestro";
-    const permisos = PERMISOS_ROL[rol];
-    
-    // Crear o actualizar indicador de rol
-    let rolIndicator = document.getElementById('rol-indicator');
-    if (!rolIndicator) {
-        rolIndicator = document.createElement('div');
-        rolIndicator.id = 'rol-indicator';
-        rolIndicator.style.cssText = `
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            max-width: 250px;
-        `;
-        document.body.appendChild(rolIndicator);
-    }
-    
-    rolIndicator.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 5px;">
-            <i class="fas fa-user-shield"></i> ${rol}
-        </div>
-        <div style="font-size: 11px; opacity: 0.9;">
-            ${permisos?.descripcion || 'Sin permisos definidos'}
-        </div>
-    `;
-}
+// Función eliminada - Ya no se muestra indicador de rol visual
 
 // Validar si puede procesar una solicitud específica
 function puedeProcesamarSolicitud(solicitud) {
@@ -205,6 +168,12 @@ function puedeProcesamarSolicitud(solicitud) {
 // Actualizar usuario y reconfigurar interfaz
 function cambiarRolYReconfigurar(nuevoRol) {
     usuarioActual.rol = nuevoRol;
+    
+    // Remover indicador de rol si existe
+    const rolIndicator = document.getElementById('rol-indicator');
+    if (rolIndicator) {
+        rolIndicator.remove();
+    }
     
     // Reconfigurar toda la interfaz
     configurarInterfazPorRol();
