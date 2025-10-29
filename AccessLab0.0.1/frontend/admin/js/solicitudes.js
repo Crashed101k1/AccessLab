@@ -16,14 +16,14 @@ let solicitudesData = [
     // === SOLICITUDES PARA "MIS SOLICITUDES" ===
     {
         id: 1,
-        nombre: "Reserva Lab Redes - Grupo 7A",
+        nombre: "Reserva Lab Redes - Configuración VLAN",
         tipo: "Reserva",
         dirigida_a: "Director/Subdirector",
         solicitante: "Dr. Martínez", // Coincide con usuario actual para aparecer en "Mis Solicitudes"
         email: "director@utm.edu.mx",
-        telefono: "443-123-4567",
-        carrera: "Ingeniería en Sistemas",
-        semestre: "7mo",
+        telefono: "443-123-4567 Ext. 100",
+        departamento: "Dirección",
+        numero_empleado: "DIR001",
         laboratorio: "Laboratorio de Redes",
         fecha_solicitud: "2025-10-29",
         fecha_reserva: "2025-11-05",
@@ -31,10 +31,12 @@ let solicitudesData = [
         hora_fin: "11:00",
         participantes: 25,
         estado: "pendiente",
-        descripcion: "Solicito la reserva del laboratorio de redes para realizar prácticas de configuración de switches y routers con el grupo 7A de Ingeniería en Sistemas. La práctica forma parte del proyecto final de la materia Redes de Computadoras.",
+        descripcion: "Solicito la reserva del laboratorio de redes para realizar prácticas avanzadas de configuración de VLAN y routing con estudiantes del grupo ISC-7A. La actividad forma parte del proyecto integrador de la materia.",
         materia: "Redes de Computadoras",
-        profesor_responsable: "Dr. Martínez",
-        observaciones: "Se requiere acceso a equipos Cisco para configuración de VLAN."
+        grupo: "ISC-7A",
+        tipo_actividad: "Práctica de Laboratorio",
+        recursos_especificos: "Equipos Cisco (Switches 2960, Routers 2811)",
+        observaciones: "Se requiere configuración previa de equipos y acceso administrativo a switches."
     },
     {
         id: 2,
@@ -58,14 +60,14 @@ let solicitudesData = [
     },
     {
         id: 3,
-        nombre: "Reserva Lab Industrial - Prácticas CNC",
+        nombre: "Reserva Lab Industrial - Demostración CNC",
         tipo: "Reserva",
         dirigida_a: "Director/Subdirector",
         solicitante: "Dr. Martínez",
         email: "director@utm.edu.mx",
-        telefono: "443-555-0001",
-        carrera: "Ingeniería Industrial",
-        semestre: "8vo",
+        telefono: "443-555-0001 Ext. 100",
+        departamento: "Dirección",
+        numero_empleado: "DIR001",
         laboratorio: "Laboratorio Industrial",
         fecha_solicitud: "2025-10-27",
         fecha_reserva: "2025-11-10",
@@ -73,35 +75,38 @@ let solicitudesData = [
         hora_fin: "18:00",
         participantes: 15,
         estado: "aprobado",
-        descripcion: "Reserva para demostración de maquinaria CNC a estudiantes de último semestre. Incluye programación y manufactura de piezas de prueba.",
+        descripcion: "Solicito reserva para demostración especial de maquinaria CNC dirigida a estudiantes de octavo semestre de Ingeniería Industrial. La actividad incluye programación CAD/CAM y manufactura de piezas de prueba.",
         materia: "Manufactura Avanzada",
-        profesor_responsable: "Dr. Martínez",
-        observaciones: "Requiere supervisor especializado en CNC."
+        grupo: "IIN-801",
+        tipo_actividad: "Taller Especializado",
+        recursos_especificos: "Torno CNC, Fresadora CNC, Software CAM",
+        observaciones: "Requiere presencia de técnico especializado y medidas de seguridad reforzadas."
     },
 
     // === SOLICITUDES PARA REVISIÓN (DIRIGIDAS AL DIRECTOR) ===
     {
         id: 4,
-        nombre: "Reserva Lab Electrónica - Proyecto Titulación",
+        nombre: "Reserva Lab Electrónica - Proyectos Titulación",
         tipo: "Reserva", 
         dirigida_a: "Director/Subdirector",
-        solicitante: "Ana Patricia Morales",
-        email: "ana.morales@utm.edu.mx",
-        telefono: "443-555-1234",
-        carrera: "Ingeniería Electrónica",
-        semestre: "8vo",
+        solicitante: "Dr. Luis Ramírez",
+        email: "luis.ramirez@utm.edu.mx",
+        telefono: "443-555-1234 Ext. 205",
+        departamento: "Ingeniería Electrónica",
+        numero_empleado: "ELE003",
         laboratorio: "Laboratorio de Electrónica",
         fecha_solicitud: "2025-10-29",
         fecha_reserva: "2025-11-15",
         hora_inicio: "14:00",
         hora_fin: "18:00",
-        participantes: 4,
+        participantes: 8,
         estado: "pendiente",
-        descripcion: "Solicito la reserva del laboratorio de electrónica para realizar las pruebas finales del proyecto de titulación. Necesitamos acceso a osciloscopios y fuentes de alimentación para validar el funcionamiento del circuito amplificador desarrollado.",
+        descripcion: "Solicito reserva del laboratorio de electrónica para asesorías y validación de proyectos de titulación de estudiantes de 9no semestre. Los estudiantes requieren acceso a equipos especializados para pruebas de circuitos amplificadores y sistemas de control.",
         materia: "Proyecto de Titulación",
-        profesor_responsable: "Dr. Luis Ramírez",
-        tipo_proyecto: "Desarrollo de circuito amplificador",
-        observaciones: "Proyecto aprobado por la academia, requiere equipos especializados de alta precisión."
+        grupo: "ELE-901",
+        tipo_actividad: "Proyecto Final",
+        recursos_especificos: "Osciloscopios digitales, fuentes de alimentación variables, generadores de señal",
+        observaciones: "Sesión de asesoría para 4 equipos de trabajo. Requiere equipos de alta precisión para validación de prototipos."
     },
     {
         id: 5,
@@ -110,9 +115,9 @@ let solicitudesData = [
         dirigida_a: "Director/Subdirector",
         solicitante: "Prof. Ana Herrera",
         email: "ana.herrera@utm.edu.mx",
-        telefono: "443-234-5678",
-        carrera: "Ingeniería Mecatrónica",
-        semestre: "5to",
+        telefono: "443-234-5678 Ext. 301",
+        departamento: "Ciencias Básicas",
+        numero_empleado: "FIS002",
         laboratorio: "Laboratorio de Física",
         fecha_solicitud: "2025-10-28",
         fecha_reserva: "2025-11-08",
@@ -120,10 +125,12 @@ let solicitudesData = [
         hora_fin: "18:00",
         participantes: 20,
         estado: "pendiente",
-        descripcion: "Reserva para realizar experimentos de óptica geométrica y ondulatoria con estudiantes de 5to semestre. Incluye uso de láseres, prismas y rejillas de difracción.",
+        descripcion: "Solicito reserva del laboratorio de física para realizar práctica especializada de óptica geométrica y ondulatoria con estudiantes de Ingeniería Mecatrónica. La práctica incluye experimentos con interferencia, difracción y polarización.",
         materia: "Física Moderna",
-        profesor_responsable: "Prof. Ana Herrera",
-        observaciones: "Requiere equipo láser especializado y medidas de seguridad."
+        grupo: "MEC-501",
+        tipo_actividad: "Práctica de Laboratorio",
+        recursos_especificos: "Láser He-Ne, prismas ópticos, rejillas de difracción, polarizadores",
+        observaciones: "Requiere protocolo de seguridad láser y equipo de protección ocular. Práctica de 2 horas con rotación por estaciones."
     },
     {
         id: 6,
@@ -242,9 +249,9 @@ let solicitudesData = [
         dirigida_a: "Director/Subdirector",
         solicitante: "Dr. Martínez",
         email: "director@utm.edu.mx",
-        telefono: "443-555-0001",
-        carrera: "Dirección",
-        semestre: "N/A",
+        telefono: "443-555-0001 Ext. 100",
+        departamento: "Dirección",
+        numero_empleado: "DIR001",
         laboratorio: "Laboratorio de Redes",
         fecha_solicitud: "2025-10-25",
         fecha_reserva: "2025-11-20",
@@ -252,10 +259,12 @@ let solicitudesData = [
         hora_fin: "12:00",
         participantes: 30,
         estado: "rechazado",
-        descripcion: "Solicitud para demostración de laboratorios a empresarios del sector tecnológico local. Incluye presentación de proyectos estudiantiles y capacidades institucionales.",
+        descripcion: "Solicitud de reserva especial para demostración de capacidades tecnológicas a representantes empresariales del sector TI. El evento incluye presentación de proyectos estudiantiles y equipamiento disponible.",
         materia: "Vinculación Empresarial",
-        profesor_responsable: "Dr. Martínez",
-        observaciones: "Evento institucional de alto impacto para vinculación universidad-empresa."
+        grupo: "N/A",
+        tipo_actividad: "Conferencia",
+        recursos_especificos: "Equipos de red avanzados, proyector, sistema de sonido",
+        observaciones: "Evento institucional para fortalecer vinculación universidad-empresa. Requiere preparación especial de laboratorio."
     },
     
     // === SOLICITUDES ADICIONALES PARA MAYOR VARIEDAD ===
@@ -512,15 +521,23 @@ function generarCamposEspecificos(solicitud) {
             </div>
             <div class="info-field">
                 <div class="info-label">Participantes</div>
-                <p class="info-value">${solicitud.participantes} personas</p>
+                <p class="info-value">${solicitud.participantes} estudiantes</p>
             </div>
             <div class="info-field">
-                <div class="info-label">Materia</div>
+                <div class="info-label">Materia/Asignatura</div>
                 <p class="info-value">${solicitud.materia || 'No especificada'}</p>
             </div>
             <div class="info-field">
-                <div class="info-label">Profesor Responsable</div>
-                <p class="info-value">${solicitud.profesor_responsable || 'No especificado'}</p>
+                <div class="info-label">Grupo</div>
+                <p class="info-value">${solicitud.grupo || 'No especificado'}</p>
+            </div>
+            <div class="info-field">
+                <div class="info-label">Tipo de Actividad</div>
+                <p class="info-value">${solicitud.tipo_actividad || 'No especificado'}</p>
+            </div>
+            <div class="info-field">
+                <div class="info-label">Recursos Específicos</div>
+                <p class="info-value">${solicitud.recursos_especificos || 'No especificado'}</p>
             </div>
         `;
     } else if (solicitud.tipo === "Soporte") {
@@ -555,12 +572,12 @@ function generarCamposEspecificos(solicitud) {
 
     campos += `
             <div class="info-field">
-                <div class="info-label">Carrera</div>
-                <p class="info-value">${solicitud.carrera}</p>
+                <div class="info-label">Departamento</div>
+                <p class="info-value">${solicitud.departamento || solicitud.carrera || 'No especificado'}</p>
             </div>
             <div class="info-field">
-                <div class="info-label">Semestre</div>
-                <p class="info-value">${solicitud.semestre}</p>
+                <div class="info-label">No. Empleado</div>
+                <p class="info-value">${solicitud.numero_empleado || 'No especificado'}</p>
             </div>
         </div>
     `;
@@ -651,38 +668,30 @@ function showCrearSolicitud() {
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Carrera *</label>
-                            <select class="form-select" id="carrera" required>
-                                <option value="">Seleccionar carrera...</option>
+                            <label class="form-label">Departamento/Área *</label>
+                            <select class="form-select" id="departamento" required>
+                                <option value="">Seleccionar departamento...</option>
                                 <option value="Ingeniería en Sistemas">Ingeniería en Sistemas</option>
                                 <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
                                 <option value="Ingeniería Industrial">Ingeniería Industrial</option>
                                 <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+                                <option value="Ciencias Básicas">Ciencias Básicas</option>
+                                <option value="Dirección">Dirección Académica</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Semestre *</label>
-                            <select class="form-select" id="semestre" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="1ro">1er Semestre</option>
-                                <option value="2do">2do Semestre</option>
-                                <option value="3ro">3er Semestre</option>
-                                <option value="4to">4to Semestre</option>
-                                <option value="5to">5to Semestre</option>
-                                <option value="6to">6to Semestre</option>
-                                <option value="7mo">7mo Semestre</option>
-                                <option value="8vo">8vo Semestre</option>
-                                <option value="9no">9no Semestre</option>
-                            </select>
+                            <label class="form-label">Empleado No. *</label>
+                            <input type="text" class="form-control" id="numero-empleado" 
+                                   placeholder="Ej: EMP001" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Teléfono</label>
+                            <label class="form-label">Teléfono Extensión</label>
                             <input type="tel" class="form-control" id="telefono" 
-                                   placeholder="443-123-4567">
+                                   placeholder="443-123-4567 Ext. 101">
                         </div>
                     </div>
                 </div>
@@ -783,16 +792,39 @@ function tipoSolicitudChanged() {
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Materia</label>
+                        <label class="form-label">Materia/Asignatura *</label>
                         <input type="text" class="form-control" id="materia" 
-                               placeholder="Materia relacionada">
+                               placeholder="Ej: Redes de Computadoras" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Profesor Responsable</label>
-                        <input type="text" class="form-control" id="profesor-responsable" 
-                               placeholder="Nombre del profesor">
+                        <label class="form-label">Grupo</label>
+                        <input type="text" class="form-control" id="grupo" 
+                               placeholder="Ej: 7A, ISC-601">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Actividad *</label>
+                        <select class="form-select" id="tipo-actividad" required>
+                            <option value="">Seleccionar actividad...</option>
+                            <option value="Práctica de Laboratorio">Práctica de Laboratorio</option>
+                            <option value="Proyecto Final">Proyecto Final</option>
+                            <option value="Examen Práctico">Examen Práctico</option>
+                            <option value="Taller Especializado">Taller Especializado</option>
+                            <option value="Capacitación">Capacitación</option>
+                            <option value="Conferencia">Conferencia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Recursos Específicos</label>
+                        <input type="text" class="form-control" id="recursos-especificos" 
+                               placeholder="Ej: Equipos Cisco, Osciloscopios">
                     </div>
                 </div>
             </div>
@@ -953,7 +985,11 @@ function procesarNuevaSolicitud() {
         formData.hora_fin = document.getElementById('hora-fin').value;
         formData.participantes = parseInt(document.getElementById('participantes').value);
         formData.materia = document.getElementById('materia').value;
-        formData.profesor_responsable = document.getElementById('profesor-responsable').value;
+        formData.grupo = document.getElementById('grupo').value;
+        formData.tipo_actividad = document.getElementById('tipo-actividad').value;
+        formData.recursos_especificos = document.getElementById('recursos-especificos').value;
+        formData.departamento = document.getElementById('departamento').value;
+        formData.numero_empleado = document.getElementById('numero-empleado').value;
     } else if (tipo === 'Soporte') {
         formData.tipo_problema = document.getElementById('tipo-problema').value;
         formData.equipo_afectado = document.getElementById('equipo-afectado').value;
