@@ -2,14 +2,8 @@
 // SISTEMA DE SOLICITUDES - JAVASCRIPT
 // ======================================
 
-// Datos de técnicos asignados por laboratorio
-let tecnicosLaboratorios = {
-    "Laboratorio de Redes": { nombre: "Téc. López Martín", email: "tecnico.lopez@utm.edu.mx" },
-    "Laboratorio de Sistemas": { nombre: "Téc. García Ruiz", email: "tecnico.garcia@utm.edu.mx" },
-    "Laboratorio de Electrónica": { nombre: "Téc. Morales Silva", email: "tecnico.morales@utm.edu.mx" },
-    "Laboratorio Industrial": { nombre: "Téc. Hernández Cruz", email: "tecnico.hernandez@utm.edu.mx" },
-    "Laboratorio de Física": { nombre: "Téc. Rivera Santos", email: "tecnico.rivera@utm.edu.mx" }
-};
+// Datos de técnicos asignados por laboratorio - se cargará desde base de datos
+let tecnicosLaboratorios = {};
 
 // Datos de prueba - Solicitudes diversificadas para ambas pestañas
 let solicitudesData = [];

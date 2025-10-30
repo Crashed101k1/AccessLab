@@ -94,44 +94,9 @@ function renderTeachersList(teachers) {
 
 // Cargar datos de laboratorios (simulado)
 function loadLaboratoriesData() {
-    // En implementación real, esto cargaría desde el backend
-    window.laboratoriesData = [
-        {
-            id: 'lab_001',
-            name: 'Laboratorio de Redes',
-            type: 'Tecnologías de la Información',
-            capacity: 25,
-            equipment: ['Computadoras', 'Switches', 'Routers']
-        },
-        {
-            id: 'lab_002',
-            name: 'Laboratorio de Automatización',
-            type: 'Ingeniería en Mecatrónica',
-            capacity: 20,
-            equipment: ['PLCs', 'Sensores', 'Actuadores']
-        },
-        {
-            id: 'lab_003',
-            name: 'Laboratorio de Química',
-            type: 'Tecnologías de la Construcción',
-            capacity: 15,
-            equipment: ['Microscopios', 'Reactivos', 'Material de vidrio']
-        },
-        {
-            id: 'lab_004',
-            name: 'Laboratorio de Cómputo Básico',
-            type: 'General',
-            capacity: 30,
-            equipment: ['Computadoras', 'Proyectores', 'Software Office']
-        },
-        {
-            id: 'lab_005',
-            name: 'Laboratorio de Manufactura',
-            type: 'Ingeniería Industrial',
-            capacity: 18,
-            equipment: ['Tornos', 'Fresadoras', 'Herramientas']
-        }
-    ];
+    // En implementación real, esto cargaría desde el backend/base de datos
+    // Array vacío para producción - los laboratorios se cargarán dinámicamente
+    window.laboratoriesData = [];
 }
 
 // === SELECCIÓN DE PROFESORES ===
@@ -944,77 +909,7 @@ function showNoResultsMessage() {
 
 // Función para obtener datos de profesores (async para futuras implementaciones)
 async function getTeachersData() {
-    // Esta función se puede expandir para cargar datos reales
-    return [
-        {
-            id: 'prof_001',
-            username: 'juan.perez',
-            name: 'Juan Pérez',
-            career: 'Tecnologías de la Información',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_002',
-            username: 'maria.garcia',
-            name: 'María García',
-            career: 'Ingeniería en Mecatrónica',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_003',
-            username: 'carlos.lopez',
-            name: 'Carlos López',
-            career: 'Gestión Administrativa',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_004',
-            username: 'ana.martinez',
-            name: 'Ana Martínez',
-            career: 'Ingeniería Industrial',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_005',
-            username: 'luis.hernandez',
-            name: 'Luis Hernández',
-            career: 'Tecnologías de la Construcción',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_006',
-            username: 'sofia.rodriguez',
-            name: 'Sofía Rodríguez',
-            career: 'Tecnologías de la Información',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_007',
-            username: 'miguel.santos',
-            name: 'Miguel Santos',
-            career: 'Ingeniería en Mecatrónica',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_008',
-            username: 'laura.morales',
-            name: 'Laura Morales',
-            career: 'Gestión Administrativa',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_009',
-            username: 'diego.vargas',
-            name: 'Diego Vargas',
-            career: 'Ingeniería Industrial',
-            assignedLabs: []
-        },
-        {
-            id: 'prof_010',
-            username: 'patricia.cruz',
-            name: 'Patricia Cruz',
-            career: 'Tecnologías de la Construcción',
-            assignedLabs: []
-        }
-    ];
+    // Función para cargar datos reales de profesores desde base de datos
+    // En producción, aquí se haría una consulta a la API/base de datos
+    return [];
 }
